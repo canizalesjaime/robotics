@@ -1,0 +1,7 @@
+<launch>
+
+	<include file="$(find cleaning_application)/launch/turtlesim_teleop.launch"/>
+	
+	<node pkg="cleaning_application" type="robot_cleaner" name="robot_cleaner_node" output="screen"/>
+
+</launch>
