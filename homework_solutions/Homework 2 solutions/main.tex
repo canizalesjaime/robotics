@@ -1,0 +1,276 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usetikzlibrary{angles,quotes}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+
+\title{Homework 2 solutions}
+\author{Intro to Robotics}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Frames, translations and rotations}
+Given frames: Frame \{A\} = universe,\\ 
+Frame \{B\} = \{${}^{A}_{B}R_{Z'Y'X'}(45^\circ, 100^\circ, 75^\circ),{}^{A}P_{Borg}=\begin{bmatrix}
+1  \\
+-2 \\
+5
+\end{bmatrix} $\},\\
+Frame \{C\} = \{${}^{B}_{C}R_{Z'Y'X'}(90^\circ, 0^\circ, 15^\circ)= ,{}^{B}P_{Corg}=\begin{bmatrix}
+-4  \\
+4 \\
+4
+\end{bmatrix} $\}\\\\
+Given points: ${}^{A}P_{1}=\begin{bmatrix}
+1  \\
+2 \\
+-3
+\end{bmatrix}$, ${}^{C}P_{2}=\begin{bmatrix}
+-5  \\
+7 \\
+2
+\end{bmatrix}$, ${}^{B}P_{3}=\begin{bmatrix}
+3.14  \\
+-7.77 \\
+2.718
+\end{bmatrix}$\\\\
+1. Find $^C_BT$.\\
+2. Find ${}^{A}P_{2}$.\\
+3. Find ${}^{B}P_{1}$.\\
+4. Find ${}^{C}P_{3}$. \\
+5. Given ${}^{A}P_{1}$ rotate the point by ${}^{A}_{B}R_{Z'Y'X'}(50^\circ, 150^\circ, 200^\circ)$ and translate by vector 
+$\begin{bmatrix}
+-2  \\
+-3  \\
+-4
+\end{bmatrix}.$\\\\
+\textbf{Solution: }
+Transformations available:\\
+${}^A_BT=\begin{bmatrix}
+& & &\\
+^A_BR(45^\circ,100^\circ,75^\circ) & & & {}^AP_{Borg}\\
+0 & 0 & 0 & 1
+\end{bmatrix}=\begin{bmatrix}
+-.12 & .49 & .86 & 1\\
+-.12 & .86 & -.5 & -2\\
+-.98 & -.17 & -.04 & 5\\
+0 & 0 & 0 & 1
+\end{bmatrix}\\
+{}^B_CT=\begin{bmatrix}
+0 & -.97 & .26 & -4\\
+1 & 0 & 0 & 4\\
+0 & .26 & .97 & 4\\
+0 & 0 & 0 & 1 
+\end{bmatrix}$\\\\
+\textbf{1. } ${}^C_BT={}^B_CT^{-1}=\begin{bmatrix}
+{}^B_CR^T & & & -({}^B_CR^T{}^BP_{Corg}) \\
+0 & 0 & 0 & 1
+\end{bmatrix}=\begin{bmatrix}
+0 & 1 & 0 & -4\\
+-.97 & 0 & .26 & -4.9\\
+.26 & 0 & .97 & -2.83\\
+0 & 0 & 0 & 1
+\end{bmatrix}$\\\\
+\textbf{2. }
+$^AP_2={}^A_BT{}^B_CT{}^CP_2=\begin{bmatrix}
+-.12 & .49 & .86 & 1\\
+-.12 & .86 & -.5 & -2\\
+-.98 & -.17 & -.04 & 5\\
+0 & 0 & 0 & 1
+\end{bmatrix}\begin{bmatrix}
+0 & -.97 & .26 & -4\\
+1 & 0 & 0 & 4\\
+0 & .26 & .97 & 4\\
+0 & 0 & 0 & 1 
+\end{bmatrix}\begin{bmatrix}
+-5\\
+7\\
+2
+\end{bmatrix}=\begin{bmatrix}
+8.45\\
+-5.49\\
+14.91\\
+1
+\end{bmatrix}$\\\\
+\textbf{3. }
+$^BP_1={}^B_AT{}^AP_1=\begin{bmatrix}
+-.12 & -.12 & -.98 & 4.8\\
+.49 & .86 & -.17 & 2.06\\
+.86 & -.5 & -.04 & -1.64\\
+0 & 0 & 0 & 1
+\end{bmatrix}\begin{bmatrix}
+1\\
+2\\
+-3\\
+1
+\end{bmatrix}=\begin{bmatrix}
+7.39\\
+4.76\\
+-1.65\\
+1
+\end{bmatrix}$\\\\
+\textbf{4. }
+$^CP_3={}^C_BT{}^BP_3=\begin{bmatrix}
+0 & 1 & 0 & -4\\
+-.97 & 0 & .26 & -4.9\\
+.26 & 0 & .97 & -2.83\\
+0 & 0 & 0 & 1
+\end{bmatrix}\begin{bmatrix}
+3.14\\
+-7.77\\
+2.718\\
+1
+\end{bmatrix}=\begin{bmatrix}
+-11.77\\
+-7.23\\
+.61\\
+1
+\end{bmatrix}$\\\\
+\textbf{5. }
+$^AP_1'=T{}^AP_1$ where $T$ is the transformation matrix: $T=\begin{bmatrix}
+& & &\\
+^A_BR(50^\circ,150^\circ,200^\circ) & & & {}^AP_{Borg}\\
+0 & 0 & 0 & 1
+\end{bmatrix}$\\
+$^AP_1'=T{}^AP_1=\begin{bmatrix}
+-.56 & .61 & -.56 & -2\\
+-.66 & -.74 & -.14 & -3\\
+-.5 & .3 & .81 & -4\\
+0 & 0 & 0 & 1
+\end{bmatrix}\begin{bmatrix}
+1\\
+2\\
+-3\\
+1
+\end{bmatrix}=\begin{bmatrix}
+.36\\
+-4.71\\
+-6.35\\
+1
+\end{bmatrix}$
+
+\section{Solve for angles}
+Given frames: Frame \{A\} = universe,\\ 
+Frame \{B\} = \{${}^{A}_{B}R=\begin{bmatrix}
+.15 & .18 & -.97\\
+.09 & -.98 & -.16 \\
+-.98 & -.06 & -.16
+\end{bmatrix} ,{}^{A}P_{Borg}=\begin{bmatrix}
+2  \\
+4  \\
+-6
+\end{bmatrix} $\}\\\\
+1. Find the eulerian angles for ${}^{A}_{B}R_{Z'Y'X'}$.\\
+2. Solve for the angle between $\begin{bmatrix}
+1\\
+0\\
+0
+\end{bmatrix}$ and $\begin{bmatrix}
+.5 \\
+.5\\
+.71
+\end{bmatrix}$\\\\
+\textbf{Solution: }
+\textbf{1. }
+${}^{A}_{B}R=\begin{bmatrix}
+.15 & .18 & -.97\\
+.09 & -.98 & -.16 \\
+-.98 & -.06 & -.16
+\end{bmatrix}=\begin{bmatrix}
+c\alpha c\beta & s\gamma s\beta c\alpha - c\gamma s\alpha & c\gamma s\beta c\alpha + s\gamma s\alpha\\
+s\alpha c\beta & s\gamma s\beta s\alpha + c\gamma c\alpha & c\gamma s\beta s\alpha - s\gamma c\alpha \\
+-s\beta & s\gamma c\beta & c\gamma c\beta
+\end{bmatrix}=
+\begin{bmatrix}
+r_{11} & r_{12} & r_{13}\\
+r_{21} & r_{22} & r_{23} \\
+r_{31} & r_{32} & r_{33}
+\end{bmatrix}$\\\\
+$\beta_1=-arcsin(r_{31})=-arcsin(-.98)=78.52^{\circ}$\\
+$\beta_2=180^{\circ}-\beta_1=180^{\circ}-78.52^{\circ}=101.48^{\circ}$\\\\
+$\alpha_1=arctan(\frac{r_{21}}{r_{11}})=arctan(\frac{.09}{.15})=30.96^{\circ}$\\
+$\text{since }\frac{r_{11}}{cos(\beta_1)}=\frac{.15}{cos(\beta_1)}=\frac{.15}{cos(\beta_1)} > 0 $ (so no need to add anything)\\
+$\alpha_2=arctan(\frac{r_{21}}{r_{11}})=arctan(\frac{.09}{.15})=30.96^{\circ}, \frac{r_{11}}{cos(\beta_2)}=\frac{.15}{cos(\beta_2)} < 0\text{ and } -90^{\circ} < 30.96^{\circ} < 90^{\circ},
+\text{ we add } 180^{\circ} \text{ to } \alpha_2, \alpha_2=\alpha_1+180=30.96+180=210.96^{\circ}$\\\\
+$\gamma_1=arctan(\frac{r_{32}}{r_{33}})=arctan(\frac{-.06}{-.16})=20.56^{\circ}$\\
+$\text{since }\frac{r_{33}}{cos(\beta_1)}=\frac{-.16}{.2} < 0 \text{ and } -90^{\circ} < 20.56^{\circ} < 90^{\circ},
+\text{ we add } 180^{\circ} \text{ to } \gamma_1, \gamma_1=180^\circ+20.56^{\circ}=200.56^\circ$\\
+$\gamma_2=arctan(\frac{r_{32}}{r_{33}})=arctan(\frac{-.06}{-.16})=20.56^{\circ}, \frac{r_{33}}{cos(\beta_2)}=\frac{-.16}{-.2} > 0$(so no need to add anything)\\\\
+You will always have two sets of possible answers.\\
+Set 1: $(\alpha_1, \beta_1, \gamma_1)=(30.96^{\circ}, 78.52^{\circ}, 200.56^{\circ})$\\
+Set 2: $(\alpha_1, \beta_1, \gamma_1)=(210.96^{\circ}, 101.48^{\circ},20.56^{\circ})$\\\\
+To verify, make sure:\\
+${}^{A}_{B}R=\begin{bmatrix}
+.15 & .18 & -.97\\
+.09 & -.98 & -.16 \\
+-.98 & -.06 & -.16
+\end{bmatrix}=
+\begin{bmatrix}
+c\alpha_1 & -s\alpha_1 & 0\\
+s\alpha_1 & c\alpha_1 & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+c\beta_1 & 0 & s\beta_1\\
+0 & 1 & 0 \\
+-s\beta_1 & 0 & c\beta_1
+\end{bmatrix}
+\begin{bmatrix}
+1 & 0 & 0\\
+0 & c\gamma_1 & -s\gamma_1 \\
+0 & s\gamma_1 & c\gamma_1
+\end{bmatrix}=
+\begin{bmatrix}
+c\alpha_2 & -s\alpha_2 & 0\\
+s\alpha_2 & c\alpha_2 & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+c\beta_2 & 0 & s\beta_2\\
+0 & 1 & 0 \\
+-s\beta_2 & 0 & c\beta_2
+\end{bmatrix}
+\begin{bmatrix}
+1 & 0 & 0\\
+0 & c\gamma_2 & -s\gamma_2 \\
+0 & s\gamma_2 & c\gamma_2
+\end{bmatrix}$\\\\
+\textbf{2. }
+$\theta=arccos(\frac{v_1 \cdot v_2}{|v_1||v_2|})=arccos(\frac{\begin{bmatrix}
+1\\
+0\\
+0
+\end{bmatrix} \cdot \begin{bmatrix}
+.5\\
+.5\\
+.71
+\end{bmatrix}}{\sqrt{1^2+0^2+0^2}\sqrt{.5^2+.5^2+.71^2}})=60.01^\circ$
+
+\section{Complex}
+1. rotate the 2d vector $P_{1}=\begin{bmatrix}
+8  \\
+-2 
+\end{bmatrix}$ by $110^{\circ}$ using a complex rotation. \\\\
+\textbf{Solution: }
+\textbf{1. }
+$v_r=e^{\theta i}v=(cos(\theta)+sin(\theta)i)v; let v = P_1 = \begin{bmatrix}
+8\\
+-2
+\end{bmatrix}$\\
+$(cos(\theta)+sin(\theta)i)v=(cos(110^\circ)+sin(110^\circ)i)(8-2i)=-.34+.94i)(8-2i)=-2.72+.68i+7.52i+1.88=-.84+8.2i=(-.84,8.2i)$\\\\
+$v_r=\begin{bmatrix}
+-.84\\
+8.2
+\end{bmatrix}$
+
+\section{Coding Portion}
+\textbf{1.) } Modify your frame class from homework 1, to also create 3d frames then check your answers for part 1.\\
+\textbf{2.) } Write a function that takes a rotation matrix as input and solves for the angles in $R_{z'y'x'}(\alpha,\beta,\gamma)$\\
+\textbf{3.) } Write a function to solve for the angle between two 3d vectors.\\\\
+\textbf{ALL CODE AVAILABLE ON BLACKBOARD}
+\end{document}

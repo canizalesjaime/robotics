@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\title{ROS Instructions}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+
+\section{Website Server Ros Setup}
+\textbf{1.} Create an account on theconstructsim.com\\\\
+\textbf{2.} In the left hand column, click on my "rosjects" then click on create "new rosject".\\\\
+\textbf{3.} Name your rosject whatever you would like but make sure to select ros distro as "Ros melodic".\\\\
+\textbf{4.} There will be a tool bar at the bottom of the screen when you open your project. From this tool bar you will be using the following: Web shell, Code editor, grapical tools.
+
+\section{Environment Setup}
+\textbf{1.} Create a folder name catkin\_ws. Create a sub-folder inside of catkin\_ws named src. catkin\_ws will be your local working environment for ros.\\\\
+\textbf{2.} Run the command \emph{cd $\sim$/catkin\_ws} followed by \emph{catkin\_make}. The command catkin\_make converts a regular folder into a ros repository.\\\\
+\textbf{3.} Every time you open a web shell or new tabs in web shell run \emph{source $\sim$/catkin\_ws/devel/setup.bash}. This command sets your working environment in the current shell to the repo catkin\_ws. Otherwise you will be running from its installation working environment. 
+
+\section{Creating ros packages}
+\textbf{1.} A ros package is a small standalone ros project created inside of your ros repository.\\\\
+\textbf{2.}  Run \emph{cd $\sim$/catkin\_ws/src} followed by, \emph{catkin\_create\_pkg [name of package] [depend1] [depend2] ...}\\
+An example(Do it!): \emph{catkin\_create\_pkg talk\_listen std\_msgs roscpp rospy}\\\\
+\textbf{3.} After creating a package make sure to execute steps 2 and 3 from section Environment Setup.
+
+\section{First Example}
+\textbf{1.} On blackboard under course materials you will find a folder called ros\_examples, and inside this folder another folder called talk\_listen\_stuff. Copy the files "listener.py" and "talker.py" into $\sim$/catkin\_ws/src/talk\_listen/src.\\\\
+\textbf{2.} Make sure files are executable by running \emph{chmod +x  $\sim$/catkin\_ws/src/talk\_listen/src/listener.py} and \emph{chmod +x  $\sim$/catkin\_ws/src/talk\_listen/src/talker.py}\\\\
+\textbf{3.} In your current shell run the command \emph{roscore}, this will set up a ros master node that will manage all future nodes.\\\\
+\textbf{4.} open a new tab in your web shell, run \emph{source $\sim$/catkin\_ws/devel/setup.bash} followed by \emph{rosrun talk\_listen listener.py}\\\\
+\textbf{5.} open a third tab in your web shell, run \emph{source $\sim$/catkin\_ws/devel/setup.bash} followed by \emph{rosrun talk\_listen talker.py}\\\\
+\textbf{6.} The steps in this section should result in basic stdout output in the terminal where you ran the listener node (\emph{rosrun talk\_listen listener.py}). Congrats you just ran your first ros system!
+
+\section{More}
+Moving forward you will just need to create two more packages for the homework(run these in $\sim$/catkin\_ws/src):\\\\
+1. \emph{catkin\_create\_pkg turtle\_motion std\_msgs roscpp rospy}\\\\
+2. \emph{catkin\_create\_pkg learn\_tf2 tf2 tf2\_ros roscpp rospy turtlesim}\\\\
+Use the examples in ros\_examples(on blackboard) to test these projects out.
+
+\end{document}

@@ -1,0 +1,82 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\title{Homework 2}
+\author{Intro to Robotics}
+\date{Due Date: March 31st, 2023}
+
+\begin{document}
+
+\maketitle
+\section{Frames, translations and rotations}
+Given frames: Frame \{A\} = universe,\\ 
+Frame \{B\} = \{${}^{A}_{B}R_{Z'Y'X'}(45^\circ, 100^\circ, 75^\circ),{}^{A}P_{Borg}=\begin{bmatrix}
+1  \\
+-2 \\
+5
+\end{bmatrix} $\},\\
+Frame \{C\} = \{${}^{B}_{C}R_{Z'Y'X'}(90^\circ, 0^\circ, 15^\circ)= ,{}^{B}P_{Corg}=\begin{bmatrix}
+-4  \\
+4 \\
+4
+\end{bmatrix} $\}\\\\
+Given points: ${}^{A}P_{1}=\begin{bmatrix}
+1  \\
+2 \\
+-3
+\end{bmatrix}$, ${}^{C}P_{2}=\begin{bmatrix}
+-5  \\
+7 \\
+2
+\end{bmatrix}$, ${}^{B}P_{3}=\begin{bmatrix}
+3.14  \\
+-7.77 \\
+2.718
+\end{bmatrix}$\\\\
+1. Find $^C_BT$.\\
+2. Find ${}^{A}P_{2}$.\\
+3. Find ${}^{B}P_{1}$.\\
+4. Find ${}^{C}P_{3}$. \\
+5. Given ${}^{A}P_{1}$ rotate the point by ${}^{A}_{B}R_{Z'Y'X'}(50^\circ, 150^\circ, 200^\circ)$ and translate by vector 
+$\begin{bmatrix}
+-2  \\
+-3  \\
+-4
+\end{bmatrix}.$
+
+\section{Solve for angles}
+Given frames: Frame \{A\} = universe,\\ 
+Frame \{B\} = \{${}^{A}_{B}R=\begin{bmatrix}
+.15 & .18 & -.97\\
+.09 & -.98 & -.16 \\
+-.98 & -.06 & -.16
+\end{bmatrix} ,{}^{A}P_{Borg}=\begin{bmatrix}
+2  \\
+4  \\
+-6
+\end{bmatrix} $\}\\\\
+1. Find the eulerian angles for ${}^{A}_{B}R_{Z'Y'X'}$.\\
+2. Solve for the angle between $\begin{bmatrix}
+1\\
+0\\
+0
+\end{bmatrix}$ and $\begin{bmatrix}
+.5 \\
+.5\\
+.71
+\end{bmatrix}$
+
+
+\section{Complex}
+1. rotate the 2d vector $P_{1}=\begin{bmatrix}
+8  \\
+-2 
+\end{bmatrix}$ by $110^{\circ}$ using a complex rotation. \\
+
+\section{Coding Portion}
+\textbf{1.) } Modify your frame class from homework 1, to also create 3d frames then check your answers for part 1.\\
+\textbf{2.) } Write a function that takes a rotation matrix as input and solves for the angles in $R_{z'y'x'}(\alpha,\beta,\gamma)$\\
+\textbf{3.) } Write a function to solve for the angle between two 3d vectors.\\
+
+\end{document}
