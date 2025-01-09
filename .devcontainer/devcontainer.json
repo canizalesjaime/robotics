@@ -1,6 +1,7 @@
 {
+    "name": "Ros-Setup",
     "build" : {
-        "dockerfile": "../docker_ros/Dockerfile"
+        "dockerfile": "./dockerfile_foxy_ros2"
     },
     "containerEnv": {
         "DISPLAY": "host.docker.internal:0.0",
@@ -9,6 +10,6 @@
       
       "runArgs":["--net=host"],
 
-    "workspaceMount": "source=/c/Users/Jaime/source/repos/apollo_detection_systems,target=/root/catkin_ws/src/apollo_detection_systems,type=bind",
-    "workspaceFolder" : "/root/catkin_ws/src/apollo_detection_systems"
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+    "workspaceFolder" : "/workspace"
 }
