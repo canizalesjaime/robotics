@@ -3,10 +3,10 @@ import time
 
 chip = gpiod.Chip('/dev/gpiochip0')
 
-in1_line = chip.get_line(17)#PIN NUM
-in2_line = chip.get_line(27)#PIN NUM
-in3_line = chip.get_line(23)#PIN NUM
-in4_line = chip.get_line(24)#PIN NUM
+in1_line = chip.get_line(17)
+in2_line = chip.get_line(27)
+in3_line = chip.get_line(23)
+in4_line = chip.get_line(24)
 
 in1_line.request(consumer='motor_control', type=gpiod.LINE_REQ_DIR_OUT)
 in2_line.request(consumer='motor_control', type=gpiod.LINE_REQ_DIR_OUT)
@@ -33,16 +33,17 @@ def motor_stop():
 
 try:
     while True:
-        char=input("enter 'a' for forward or 'z' for backwards")
-        if char=='a':
+        char = input("Enter 'a' for forward, 'z' for backward, 'x' to stop: ")
+        if char == 'a':
             motor_forward()
-        elif char=='z':
+        elif char == 'z':
             motor_backward()
-        
-        
+        elif char == 'x':
+            motor_stop()
+
 except KeyboardInterrupt:
     motor_stop()
-    time.sleep(2)
+    time.sleep(1)
     print("Program stopped.")
 
 finally:
