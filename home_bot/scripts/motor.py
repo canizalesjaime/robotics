@@ -3,33 +3,38 @@ import time
 
 chip = gpiod.Chip('/dev/gpiochip0')
 
+# set right motor from behind robot
 in1_line = chip.get_line(17)
 in2_line = chip.get_line(27)
-in3_line = chip.get_line(23)
-in4_line = chip.get_line(24)
-# motor1_enableA = chip.get_line(4)#PIN NUM
-# motor1_enableB = chip.get_line(26)#PIN NUM
-
+motor1_enableA = chip.get_line(4)
 in1_line.request(consumer='motor_control', type=gpiod.LINE_REQ_DIR_OUT)
 in2_line.request(consumer='motor_control', type=gpiod.LINE_REQ_DIR_OUT)
+motor1_enableA.request(consumer='motor_control', type=gpiod.LINE_REQ_DIR_OUT)
+motor1_enableA.set_value(1)
+
+#set left motor from behind robot
+in3_line = chip.get_line(23)
+in4_line = chip.get_line(24)
+motor1_enableB = chip.get_line(26)
 in3_line.request(consumer='motor_control', type=gpiod.LINE_REQ_DIR_OUT)
 in4_line.request(consumer='motor_control', type=gpiod.LINE_REQ_DIR_OUT)
-# motor1_enableA.request(consumer='motor_control', type=gpiod.LINE_REQ_DIR_OUT)
-# motor1_enableB.request(consumer='motor_control', type=gpiod.LINE_REQ_DIR_OUT)
+motor1_enableB.request(consumer='motor_control', type=gpiod.LINE_REQ_DIR_OUT)
+motor1_enableB.set_value(1)
 
-# motor1_enableA.set_value(1)
-# motor1_enableB.set_value(1)
-
-def motor_forward():
+def motor_right_forward():
     in1_line.set_value(1)
-    in3_line.set_value(1)
     in2_line.set_value(0)
+
+def motor_left_forward():
+    in3_line.set_value(1)
     in4_line.set_value(0)
 
-def motor_backward():
+def motor_right_backward():
     in1_line.set_value(0)
-    in3_line.set_value(0)
     in2_line.set_value(1)
+
+def motor_left_backward():
+    in3_line.set_value(0)
     in4_line.set_value(1)
 
 def motor_stop():
@@ -37,28 +42,31 @@ def motor_stop():
     in2_line.set_value(0)
     in3_line.set_value(0)
     in4_line.set_value(0)
-    # motor1_enableA.set_value(0)
-    # motor1_enableB.set_value(0)
 
 try:
     while True:
         char = input("Enter 'a' for forward, 'z' for backward, 'x' to stop: ")
         if char == 'a':
-            motor_forward()
+            motor_right_forward()
+            motor_left_forward()
         elif char == 'z':
-            motor_backward()
+            motor_right_backward()
+            motor_left_backward()
         elif char == 'x':
             motor_stop()
 
 except KeyboardInterrupt:
     motor_stop()
+    motor1_enableA.set_value(0)
+    motor1_enableB.set_value(0)
     time.sleep(1)
     print("Program stopped.")
 
 finally:
     in1_line.release()
     in2_line.release()
+    motor1_enableA.release()
     in3_line.release()
     in4_line.release()
-    # motor1_enableA.release()
-    # motor1_enableB.release()
+    motor1_enableB.release()
+
