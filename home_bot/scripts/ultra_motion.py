@@ -25,10 +25,10 @@ motor1_enableA.set_value(1)
 motor1_enableB.set_value(1)
 
 # Motor control functions
-def motor_right_forward(): in1_line.set_value(1); in2_line.set_value(0)
-def motor_left_forward(): in3_line.set_value(1); in4_line.set_value(0)
-def motor_right_backward(): in1_line.set_value(0); in2_line.set_value(1)
-def motor_left_backward(): in3_line.set_value(0); in4_line.set_value(1)
+def motor_right_backward(): in1_line.set_value(1); in2_line.set_value(0)
+def motor_left_backward(): in3_line.set_value(1); in4_line.set_value(0)
+def motor_right_forward(): in1_line.set_value(0); in2_line.set_value(1)
+def motor_left_forward(): in3_line.set_value(0); in4_line.set_value(1)
 def motor_stop():
     in1_line.set_value(0); in2_line.set_value(0)
     in3_line.set_value(0); in4_line.set_value(0)
@@ -65,7 +65,7 @@ def distance_monitor():
         dist = get_distance()
         print(f"Distance: {dist:.2f} in")
         with action_lock:
-            if current_action == 'forward' and dist <= 2.0:
+            if current_action == 'forward' and dist <= 8.0:
                 print("Obstacle detected! Stopping.")
                 motor_stop()
                 current_action = None
