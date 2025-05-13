@@ -5,7 +5,6 @@
 * segmentation
 * stereo_camera
 * screws for perf board
-* fix battery connection(keeps falling)
 * arm ?
 * ultrasound slam
 * ros open source
