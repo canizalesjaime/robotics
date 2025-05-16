@@ -3,6 +3,7 @@ import gpiod
 import time
 import threading
 import sys
+import keyboard
 
 # Set pins
 TRIG = 5
@@ -75,7 +76,22 @@ def distance_monitor():
 monitor_thread = threading.Thread(target=distance_monitor, daemon=True)
 monitor_thread.start()
 
-try:
+
+def keep_moving():
+    print("Moving")
+    while True:
+        dist = get_distance()
+        if dist <= 8.0:
+            print(f"Obstacle detected! Stopping. {dist:.2f} in")
+            motor_stop()
+        else:
+            motor_right_forward()
+            motor_left_forward()
+
+        time.sleep(0.2)
+
+
+def input_control():
     print("Controls: 'a' = forward, 'z' = backward, 'x' = stop, Ctrl+C to exit.")
     while True:
         char = input("Command: ").lower()
@@ -94,6 +110,44 @@ try:
             else:
                 print("Invalid command.")
         time.sleep(0.1)
+
+
+def input_control_hold():
+    print("Hold 'a' to move forward, 'z' to move backward. Press 'x' to stop. Ctrl+C to exit.")
+    global current_action
+
+    while True:
+        with action_lock:
+            if keyboard.is_pressed('a'):
+                if current_action != 'forward':
+                    print("Moving forward")
+                    motor_right_forward()
+                    motor_left_forward()
+                    current_action = 'forward'
+            elif keyboard.is_pressed('z'):
+                if current_action != 'backward':
+                    print("Moving backward")
+                    motor_right_backward()
+                    motor_left_backward()
+                    current_action = 'backward'
+            elif keyboard.is_pressed('x'):
+                if current_action is not None:
+                    print("Stopping")
+                    motor_stop()
+                    current_action = None
+            else:
+                # If no key is being pressed and motor is moving, stop it
+                if current_action is not None:
+                    print("Key released. Stopping.")
+                    motor_stop()
+                    current_action = None
+
+        time.sleep(0.05)  # check keys every 50ms
+
+
+
+try:
+    input_control_hold()
 
 except KeyboardInterrupt:
     print("\nExiting...")
