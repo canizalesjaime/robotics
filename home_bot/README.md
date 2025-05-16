@@ -8,3 +8,4 @@
 * ultrasound slam
 * ros open source
 * raspberry pi screen
+* do something with other raspberry pi
