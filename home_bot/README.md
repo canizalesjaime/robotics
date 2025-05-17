@@ -9,4 +9,5 @@
 * ros open source
 * raspberry pi screen
 * do something with other raspberry pi
-* flutter app 
+* flutter app
+* connect infared 
