@@ -10,4 +10,6 @@
 * raspberry pi screen
 * do something with other raspberry pi
 * flutter app
-* connect infared 
+* connect infared sensor to follow motion
+* arduino opta
+* learn a load balancing algo
