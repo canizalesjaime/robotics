@@ -5,15 +5,15 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
 from robot_controller import RobotController
-from yolo_node import YoloNode
+#from yolo_node import YoloNode
 from mpu6050_node import Mpu6050Node
-from small_arm import SmallArmNode
+from big_arm import BigArmNode
 
 app = FastAPI()
 robot = RobotController()
-yolo_node = YoloNode()
+#yolo_node = YoloNode()
 accelerometer = Mpu6050Node()
-arm = SmallArmNode()
+arm = BigArmNode()
 
 app.add_middleware(
     CORSMiddleware,
@@ -34,12 +34,12 @@ class ArmAngles(BaseModel):
     elbow: int
     gripper: int
 
-@app.get("/camera")
-def camera():
-    return StreamingResponse(
-        yolo_node.mjpeg_stream(),
-        media_type="multipart/x-mixed-replace; boundary=frame"
-    )
+# @app.get("/camera")
+# def camera():
+#     return StreamingResponse(
+#         yolo_node.mjpeg_stream(),
+#         media_type="multipart/x-mixed-replace; boundary=frame"
+#     )
 
 @app.post("/command")
 def send_command(cmd: Command):
