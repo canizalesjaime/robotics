@@ -33,6 +33,7 @@ class BigArmNode():
 
         for serv in self.SERVO_ANGLES:
             self.set_servo_angle(serv,90)
+            time.sleep(1)
 
 
     def set_servo_angle(self,channel, angle):
@@ -105,8 +106,8 @@ def main():
         
 
         while True:
-            joint=int(input("Enter joint: (0-wirst roll, 1-gripper, 3-wrist pitch, 4-elbow, 5-shoulder, 7-base"))
-            angle=int(input("Enter angle(20-160)"))
+            joint=int(input("Enter joint: (0-wirst roll, 1-gripper, 3-wrist pitch, 4-elbow, 5-shoulder, 7-base: "))
+            angle=int(input("Enter angle(20-160): "))
             node.set_angle(joint,angle)
 
     finally:
