@@ -2,9 +2,7 @@
 # right-hand rule. Z is thumb, Y is toward VCC
 # gyroscrope computes the change in angular velocity
 # accelerometer computes acceleration(rate of change in velocity)
-# 
-# ADD TO WEBSITE 
- 
+
 from mpu6050 import mpu6050
 import math
 
@@ -28,38 +26,24 @@ class Mpu6050Node():
         accel = self.sensor.get_accel_data()
         gyro = self.sensor.get_gyro_data()
         temp = self.sensor.get_temp()
-
-        # print("Accelerometer data:", accel)
-        # print("Gyroscope data:", gyro)
-        # print("Temp:", temp)
         roll, pitch = self.get_roll_pitch(accel)
-        # print(f"Roll: {roll:.2f}°, Pitch: {pitch:.2f}°")
 
-       
-
-        # print("linear_acceleration.x: ", accel['x'] * 9.80665)  # g to m/s^2
-        # print("linear_acceleration.y: ", accel['y'] * 9.80665)
-        # print("linear_acceleration.z: ", accel['z'] * 9.80665)
-
-        # print("angular_velocity.x: ", math.radians(gyro['x']))  # deg/s to rad/s
-        # print("angular_velocity.y: ", math.radians(gyro['y']))
-        # print("angular_velocity.z: ", math.radians(gyro['z']))
-
-        # Optionally set covariance if known (identity = unknown)
-        # linear_acceleration_covariance[0] = -1.0
-        # angular_velocity_covariance[0] = -1.0
-
-        # Publish temperature
-        # print("Temperature: ", temp)
-        return {"x": roll, "y":pitch, "z":temp}
+        return {"roll": roll, "pitch":pitch, "temp":temp, 
+                "lin_accel.x": accel['x'] * 9.80665,
+                "lin_accel.y": accel['y'] * 9.80665,
+                "lin_accel.z": accel['z'] * 9.80665, 
+                "ang_vel.x": math.radians(gyro['x']),
+                "ang_vel.y": math.radians(gyro['y']),
+                "ang_vel.z": math.radians(gyro['z'])
+                }
         
 
-def main(args=None):
+def main():
     try:
         node = Mpu6050Node()
         while(True):
             node.sensor_data()
     except KeyboardInterrupt:
         pass
-#    finally:
+
 #main()

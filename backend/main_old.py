@@ -18,13 +18,13 @@ import atexit
 
 from robot_controller import RobotController
 from mpu6050_node import Mpu6050Node
-from small_arm import SmallArmNode
+from arm import ArmNode
 from lunar import LunarNode
 
 app = FastAPI()
 robot = RobotController()
 accelerometer = Mpu6050Node()
-arm = SmallArmNode()
+arm = ArmNode()
 lidar = LunarNode()
 
 app.add_middleware(
