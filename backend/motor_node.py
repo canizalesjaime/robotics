@@ -1,5 +1,7 @@
-#PWM is used here to control motor speed. Duty cycle(speed) is the percentage of time high per cycle.
-# When high is on motor is on if high is low motor is off.
+# PWM is used to control motor speed. Duty cycle(speed) is the percentage of 
+# time high per cycle. If high -> motor on if low motor -> off.
+# The more time the the signal is high during a cycle the faster the speed.
+
 import gpiod
 import lgpio as GPIO
 
@@ -15,7 +17,7 @@ class MotorNode():
         self.drivers_enable_pin_map ={"driverA_enA":12,"driverB_enB":13}
 
         self.stby = self.chip.get_line(25)
-        self.stby.request(consumer='motor_control', type=gpiod.LINE_REQ_DIR_OUT)
+        self.stby.request(consumer='motor_control',type=gpiod.LINE_REQ_DIR_OUT)
         self.stby.set_value(1)
 
         for name, line in self.drivers_input_map.items():

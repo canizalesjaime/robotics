@@ -31,9 +31,7 @@ class RobotController():
             time.sleep(0.2)
     
     def set_speed(self, speed):
-        speed = max(0, min(100, speed))  # clamp safety
         print(f"Setting speed to {speed}")
-
         with self.lock:
             self.motor.set_speed(speed)
 
