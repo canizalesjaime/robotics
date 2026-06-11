@@ -1,18 +1,17 @@
 # To Do (CONVERT THIS TO DOCUMENTATION)
-1. homebot: urdf file, fix tennis navigation, refactor new code to ros2 with urdf files using dht tables for frames, segmentation, stereo camera, lidar slam for 3d stuff. Make the base rotate, at the same time as being able to receive other commands to arm and wheels.
+1. homebot: urdf file, fix tennis navigation, refactor new code to ros2 with urdf files using dht tables for frames, stereo camera, lidar slam for 3d stuff. Make the base rotate, at the same time as being able to receive other commands to arm and wheels.
 2. House keeping: database for objects seen with dates(web dev course), automate git push for ci/cd, aws?
 3. using pytorch course make an unsupervised grasping model, use jetson orin(check out study material on nvidia(test with olama))
 4. try networking between computer, arm, and homebot use ros_ip. Look into networking and firewalls and other security features.    
 
 
-# later
-1. tmux and neovim for better performance outside vscode
-2. touch keyboard app for kubuntu
-3. contribute to ros open source
-4. add flutter app
-5. autocad or freecad for designing: drone, pcb board
+# later maybe
+1. contribute to ros open source
+2. add flutter app
+3. autocad or freecad for designing: drone, pcb board
 
-## steps to start
+
+# steps to start
 1. cd /workspaces/homebot/ros2_ws && colcon build && source install/setup.bash
 2. ros2 run robot_control \<executable_name\>
 3. ros2 launch robot_control \<executable_name\>
