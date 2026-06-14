@@ -5,7 +5,8 @@ Integrated LiDAR for obstacle avoidance, a camera with YOLOv8n for real-time obj
 live video with detection overlays and accelerometer data. Implemented using 
 react and tailwind css to design the frontend and fast api to interact with
 the backend.
-
+* <img src="./content/images/plexi_bot.JPG" width ="200" >
+* [video](./content/videos/arm_plexi_bot.mp4)
 
 # System Design
 
@@ -18,6 +19,10 @@ another dockerfile sets up dependencies on raspberry pi 5 to run backend.<br>
 ## Hardware
 * stl files used for 3D printing robot base included in [freecad_files](./free_cad_files)
 * pcb board power by a 7.4V LiPo battery 2200mAh, buck converter to 5V to power raspberry pi 5, 7.4V used to power all the motors(4 servo, 2 tt motors)
+* The robotic arm shown in was 3D printed using a model created by [FABRI_CREATOR](https://cults3d.com/en/users/FABRI_CREATOR).  
+STL file available here: [Mini Robotic Arm on Cults3D](https://cults3d.com/en/3d-model/gadget/mini-robotic-arm)  
+Licensed under Cults PU (Personal Use) – No commercial use or AI applications.
+
 
 ### Peripheral Sensors, Motor Drivers Used on Raspberry pi 5
 #### Ultrasonic HCSR04
@@ -114,4 +119,9 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 5. make a better physical build (hdmi exposed)    
 6. add flutter app
 7. autocad or freecad for designing: drone version, pcb board
-8. Add robot image here
+
+
+## Credits
+The robotic arm shown in [this video](./content/videos/arm_plexi_bot.mp4) was 3D printed using a model created by [FABRI_CREATOR](https://cults3d.com/en/users/FABRI_CREATOR).  
+STL file available here: [Mini Robotic Arm on Cults3D](https://cults3d.com/en/3d-model/gadget/mini-robotic-arm)  
+Licensed under Cults PU (Personal Use) – No commercial use or AI applications.
