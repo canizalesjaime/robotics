@@ -22,10 +22,15 @@ from arm import ArmNode
 from lunar import LunarNode
 
 app = FastAPI()
-robot = RobotController()
-accelerometer = Mpu6050Node()
-arm = ArmNode()
+
+#inputs
 lidar = LunarNode()
+accelerometer = Mpu6050Node()
+
+#outputs
+robot = RobotController()
+arm = ArmNode()
+
 
 app.add_middleware(
     CORSMiddleware,
