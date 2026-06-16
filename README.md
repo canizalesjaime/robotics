@@ -112,7 +112,8 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 
 
 # To Do
-1. homebot: slam/urdf file use dht table for frames,  Make the base rotate, at the same time as being able to receive other commands to arm and wheels, stereo camera, fix tennis navigation
+1. homebot: slam/urdf file use dht table for frames,  Make the base rotate, at the same time as being able to receive other commands to arm and wheels, stereo camera, fix tennis navigation,
+you need main to become a ros node, where you press buttons on the web interface, and those commands get published to the motor node to move the robot
 2. House keeping: database for objects seen with dates(web dev course), automate git push for ci/cd, aws?
 3. using pytorch course make an unsupervised grasping model, use jetson orin(check out study material on nvidia(test with olama))
 4. try networking between computer, arm, and homebot use ros_ip. Look into networking and firewalls and other security features.
