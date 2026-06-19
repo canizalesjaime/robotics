@@ -1,7 +1,6 @@
 #uvicorn main:app --host 0.0.0.0 --port 8000
 from ultralytics import YOLO
 import cv2
-import time
 import sys
 from pathlib import Path
 
@@ -21,7 +20,6 @@ from mpu6050_node import Mpu6050Node
 from arm import ArmNode
 from lunar import LunarNode
 
-app = FastAPI()
 
 #inputs
 lidar = LunarNode()
@@ -31,7 +29,7 @@ accelerometer = Mpu6050Node()
 robot = RobotController()
 arm = ArmNode()
 
-
+app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # tighten later
