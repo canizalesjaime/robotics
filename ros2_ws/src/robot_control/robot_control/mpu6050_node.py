@@ -1,7 +1,8 @@
+#sudo apt install ros-${ROS_DISTRO}-tf-transformations
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Imu, Temperature
-from std_msgs.msg import Header
+from tf_transformations import quaternion_from_euler
 from .....backend.mpu6050_node import Mpu6050Node
 
 class Mpu6050Ros(Node):
@@ -21,6 +22,14 @@ class Mpu6050Ros(Node):
         imu_msg = Imu()
         imu_msg.header.stamp = self.get_clock().now().to_msg()
         imu_msg.header.frame_id = "imu_link"
+
+        yaw=0
+        qx, qy, qz, qw = quaternion_from_euler(data["roll"],data["pitch"],yaw)
+
+        imu_msg.orientation.x = qx
+        imu_msg.orientation.y = qy
+        imu_msg.orientation.z = qz
+        imu_msg.orientation.w = qw 
 
         imu_msg.linear_acceleration.x = data["lin_accel.x"]
         imu_msg.linear_acceleration.y = data["lin_accel.y"]

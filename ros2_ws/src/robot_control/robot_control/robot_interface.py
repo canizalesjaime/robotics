@@ -1,3 +1,6 @@
+# should I separate, ros2 and fastapi?
+# post:publish, get:subscribe
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
@@ -7,7 +10,9 @@ import threading
 
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import String, Float32
+from std_msgs.msg import String, Float32, Int32
+from sensor_msgs.msg import Imu, Temperature
+from tf_transformations import euler_from_quaternion
 
 
 app = FastAPI()
@@ -38,44 +43,49 @@ class RobotInterface(Node):
         super().__init__('robot_interface_node')
         #tt motor
         self.cmd_pub = self.create_publisher(String, 'cmd_motor', 10)
+        self.speed_pub = self.create_publisher(Int32, 'cmd_speed', 10)
+        # servo motors for arm
+        self.arm_pub = self.create_publisher(Int32, 'cmd_arm', 10)
 
         # lidar
-        self.create_subscription(Float32, 'distance', self.distance_callback, 10)
+        self.create_subscription(Float32,'distance',self.distance_callback,10)
+        # accelerometer: mpu6050
+        self.create_subscription(Imu,'imu/data_raw',self.imu_callback,10)
 
         self.distance = None
-        self.current_command = None
+        self.imu = None
         
 
     def distance_callback(self, msg):
         self.distance=msg.data
-        print(msg.data)
 
+    def imu_callback(self, msg):
+        self.imu = msg
+    
+
+@app.get("/accelerometer")
+def get_accelerometer_data():
+    roll, pitch, yaw = euler_from_quaternion([bridge.imu.x,bridge.imu.y,bridge.imu.z,bridge.imu.w])
+    return {"x":roll,"y":pitch,"z":0} # roll(x), pitch(y),temp(z)
+
+@app.get("/lidar")
+def get_lidar_data():
+    distance = bridge.distance
+    return {"distance": distance,"strength": -1}
 
 @app.post("/command")
 def send_command(cmd: Command):
-    robot.command(cmd.action)
+    cmd_map = {"forward": "f", "backward":"b", "left":"l", "right":"r", 
+               "rotate_left":"rl", "rotate_right":"rr", "stop":"s"}
+
+    if cmd.action in cmd_map:
+        bridge.cmd_pub.publish(cmd[cmd.action])
     return {"ok": True}
 
 @app.post("/speed")
 def set_speed(spd: Speed):
-    robot.set_speed(spd.speed)
+    bridge.speed_pub.publish(spd.speed)
     return {"ok": True, "speed": spd.speed}
-
-@app.get("/status")
-def get_status():
-    return robot.status()
-
-@app.get("/accelerometer")
-def get_accelerometer_data():
-    return accelerometer.sensor_data()
-
-@app.get("/lidar")
-def get_lidar_data():
-    distance, strength = lidar.get_distance()
-    return {
-        "distance": distance,
-        "strength": strength
-    }
 
 @app.post("/set_angles")
 def set_angles(angs: ArmAngles):
@@ -90,11 +100,6 @@ def rotate_base():
 def stop_base():
     arm.stop_base()
     return {"status": "stopped"}
-
-
-@app.on_event("shutdown")
-def shutdown():
-    robot.shutdown()
 
 
 def ros_spin():
