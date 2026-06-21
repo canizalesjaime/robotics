@@ -23,7 +23,7 @@ class ArmNode():
         self.i2c = busio.I2C(board.SCL, board.SDA)
         self.pca = PCA9685(self.i2c)
         self.pca.frequency = 50
-        #self.rotating = False
+        self.rotating = False
         self.SERVO_ANGLES={} #{"joint name:[pca channel, current angle]"}
     
         if not big_arm:
@@ -72,10 +72,11 @@ class ArmNode():
             time.sleep(delay)
 
 
-    # def rotate_loop(self):
-    #     while self.rotating:
-    #         self.move_smooth(0,170)
-    #         self.move_smooth(0,10)
+    def rotate_loop(self):
+        self.rotating=not self.rotating
+        while self.rotating:
+            self.move_smooth(0,170)
+            self.move_smooth(0,10)
                 
 
     # def stop_base(self):

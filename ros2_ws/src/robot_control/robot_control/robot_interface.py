@@ -1,5 +1,6 @@
 # should I separate, ros2 and fastapi?
 # post:publish, get:subscribe
+import math
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -11,7 +12,7 @@ import threading
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String, Float32, Int32
-from sensor_msgs.msg import Imu, Temperature
+from sensor_msgs.msg import Imu, Temperature, JointState
 from tf_transformations import euler_from_quaternion
 
 
@@ -45,7 +46,8 @@ class RobotInterface(Node):
         self.cmd_pub = self.create_publisher(String, 'cmd_motor', 10)
         self.speed_pub = self.create_publisher(Int32, 'cmd_speed', 10)
         # servo motors for arm
-        self.arm_pub = self.create_publisher(Int32, 'cmd_arm', 10)
+        self.arm_pub = self.create_publisher(JointState, 'cmd_arm', 10)
+        self.base_pub = self.create_publisher(Int32, 'cmd_base', 10)
 
         # lidar
         self.create_subscription(Float32,'distance',self.distance_callback,10)
@@ -89,17 +91,25 @@ def set_speed(spd: Speed):
 
 @app.post("/set_angles")
 def set_angles(angs: ArmAngles):
-    arm.set_angles_api([angs.base,angs.shoulder,angs.elbow,angs.gripper])
+    arm_msg = JointState()
 
-@app.get("/rotate_base")
+    arm_msg.name = ["base","shoulder","elbow","gripper"]
+
+    arm_msg.position = [math.radians(angs.base),math.radians(angs.shoulder),
+                        math.radians(angs.elbow),math.radians(angs.gripper)]
+
+    bridge.arm_pub.publish(arm_msg)
+    
+
+@app.post("/rotate_base")
 def rotate_base():
-    arm.rotate_base()
+    bridge.base_pub.publish(1)
     return {"status": "rotating"}
 
-@app.get("/stop_base")
-def stop_base():
-    arm.stop_base()
-    return {"status": "stopped"}
+# @app.get("/stop_base")
+# def stop_base():
+#     arm.stop_base()
+#     return {"status": "stopped"}
 
 
 def ros_spin():
