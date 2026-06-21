@@ -2,7 +2,8 @@
 import math
 import rclpy
 from rclpy.node import Node
-from sensor_msgs.msg import JointState, Int32
+from std_msgs.msg import Bool
+from sensor_msgs.msg import JointState
 from .....backend.arm import ArmNode 
 
 class ArmRos(Node):
@@ -10,7 +11,7 @@ class ArmRos(Node):
         super().__init__('arm_ros')
         self.angle_sub = self.create_subscription(JointState,'cmd_arm',
                                                   self.angle_callback, 10)
-        self.base_sub = self.create_subscription(Int32,'cmd_base',
+        self.base_sub = self.create_subscription(Bool,'cmd_base',
                                                  self.base_callback, 10)
         self.arm = ArmNode()
           
@@ -19,7 +20,7 @@ class ArmRos(Node):
         self.arm.set_angles_api(angles)
 
     def angle_callback(self, msg):
-       self.arm.rotate_loop()
+       self.arm.rotate_base(msg.data)
 
     def destroy_node(self):
         super().destroy_node()

@@ -72,8 +72,8 @@ class ArmNode():
             time.sleep(delay)
 
 
-    def rotate_loop(self):
-        self.rotating=not self.rotating
+    def rotate_base(self, val):
+        self.rotating=val
         while self.rotating:
             self.move_smooth(0,170)
             self.move_smooth(0,10)

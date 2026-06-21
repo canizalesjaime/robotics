@@ -11,7 +11,7 @@ import threading
 
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import String, Float32, Int32
+from std_msgs.msg import String, Float32, Bool
 from sensor_msgs.msg import Imu, Temperature, JointState
 from tf_transformations import euler_from_quaternion
 
@@ -47,7 +47,7 @@ class RobotInterface(Node):
         self.speed_pub = self.create_publisher(Int32, 'cmd_speed', 10)
         # servo motors for arm
         self.arm_pub = self.create_publisher(JointState, 'cmd_arm', 10)
-        self.base_pub = self.create_publisher(Int32, 'cmd_base', 10)
+        self.base_pub = self.create_publisher(Bool, 'cmd_base', 10)
 
         # lidar
         self.create_subscription(Float32,'distance',self.distance_callback,10)
@@ -103,13 +103,13 @@ def set_angles(angs: ArmAngles):
 
 @app.post("/rotate_base")
 def rotate_base():
-    bridge.base_pub.publish(1)
+    bridge.base_pub.publish(True)
     return {"status": "rotating"}
 
-# @app.get("/stop_base")
-# def stop_base():
-#     arm.stop_base()
-#     return {"status": "stopped"}
+@app.get("/stop_base")
+def stop_base():
+    bridge.base_pub.publish(False)
+    return {"status": "rotating"}
 
 
 def ros_spin():
