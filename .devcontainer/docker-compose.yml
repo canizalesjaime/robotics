@@ -1,0 +1,9 @@
+services:
+  nvim:
+    build: .
+    stdin_open: true
+    tty: true
+    volumes:
+      - ..:/workspace
+      - ~/.config/nvim:/root/.config/nvim
+    working_dir: /workspace

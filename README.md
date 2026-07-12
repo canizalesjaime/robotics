@@ -120,6 +120,7 @@ you need main to become a ros node, where you press buttons on the web interface
 5. make a better physical build (hdmi exposed)    
 6. add flutter app
 7. autocad or freecad for designing: drone version, pcb board
+8. neovim an tmux for efficient setup 
 
 
 ## Credits
