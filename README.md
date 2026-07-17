@@ -118,7 +118,7 @@ uvicorn main:app --host 0.0.0.0 --port 8000
   - stereo camera
   - fix tennis navigation
   - you need main to become a ros node, where you press buttons on the web interface, and those commands get published to the motor node to move the robot
-  - add neovim an tmux for efficient setup to humble_pi as well as any other dependencies to get it all working inside this docker
+  - add neovim an tmux for efficient setup to humble_pi as well as any other dependencies to get it all working inside docker and ci
   - make a better physical build (hdmi exposed, wall power still not working)  
 2. using pytorch course make an unsupervised grasping model, use jetson orin(check out study material on nvidia(test with olama))
 3. try networking between computer, arm, and homebot use ros_ip. Look into networking and firewalls and other security features.   
