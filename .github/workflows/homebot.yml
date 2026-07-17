@@ -44,6 +44,7 @@ jobs:
           cd /workspaces/homebot/ros2_ws
           colcon build
           source install/setup.bash
+          "
 
     - name: Start backend
       run: |
