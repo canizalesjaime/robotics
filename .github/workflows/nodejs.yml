@@ -1,0 +1,49 @@
+name: Node.js CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Build frontend
+      run: |
+        cd robot-dashboard
+        npm install
+        nohup npm run dev > backend.log 2>&1 &
+
+    - name: Build backend
+      run: |
+        cd backend
+  
+
+# to consider later maybe
+#   deploy:
+#     runs-on: ubuntu-latest
+#     needs: build
+
+#     steps:
+#     - name: Checkout repository
+#       uses: actions/checkout@v3
+    
+# - name: Import tables to database
+#   run: |
+#     docker exec my-app-container bash -c "
+#     chmod +x /workspace/start.sh &&
+#     /workspace/start.sh"
+
+    
