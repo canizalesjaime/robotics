@@ -5,6 +5,7 @@ const links = [
   { to: "/", label: "Motion Control" },
   { to: "/arm", label: "Arm Control" },
   { to: "/sensors", label: "Sensors Data" },
+  { to: "/aboutme", label: "About Me" },
 ];
 
 export default function Navbar() {

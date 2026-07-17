@@ -5,15 +5,15 @@ Integrated LiDAR for obstacle avoidance, a camera with YOLOv8n for real-time obj
 live video with detection overlays and accelerometer data. Implemented using 
 react and tailwind css to design the frontend and fast api to interact with
 the backend.
-* <img src="./content/images/plexi_bot.JPG" width ="200" >
-* [video](./content/videos/arm_plexi_bot.mp4)
+* <img src="./robot-dashboard/public/plexi_bot.JPG" width ="200" >
+* [video](./robot-dashboard/public/arm_plexi_bot.mp4)
 
 # System Design
 
 ## Software architecture
 Main creates an object for each peripheral device which has a class defined: motor wheels, arm, accelerometer, camera, and lidar. Depending on feedback from frontend or physical sensors, call relevant method to determine output. One dockerfile sets up frontend for use on your computer, and
 another dockerfile sets up dependencies on raspberry pi 5 to run backend.<br>
-<img src="./content/images/software_architecture.png" width ="500" >
+<img src="./robot-dashboard/public/software_architecture.png" width ="500" >
 
 
 ## Hardware
@@ -126,8 +126,10 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 5. autocad or freecad for designing: drone version, pcb board
 
 
+[CODE LINK](https://github.com/canizalesjaime/homebot)
+
 
 ## Credits
-The robotic arm shown in [this video](./content/videos/arm_plexi_bot.mp4) was 3D printed using a model created by [FABRI_CREATOR](https://cults3d.com/en/users/FABRI_CREATOR).  
+The robotic arm shown in the video above, is 3D printed using a model created by [FABRI_CREATOR](https://cults3d.com/en/users/FABRI_CREATOR).  
 STL file available here: [Mini Robotic Arm on Cults3D](https://cults3d.com/en/3d-model/gadget/mini-robotic-arm)  
 Licensed under Cults PU (Personal Use) – No commercial use or AI applications.

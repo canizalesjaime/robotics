@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import MotionControl from "./pages/MotionControl";
 import ArmControl from "./pages/ArmControl";
 import Sensors from "./pages/Sensors";
+import AboutMe from "./pages/AboutMe";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
           <Route path="/" element={<MotionControl />} />
           <Route path="/arm" element={<ArmControl />} />
           <Route path="/sensors" element={<Sensors />} />
+          <Route path="/aboutme" element={<AboutMe />} />
         </Routes>
       </main>
     </div>

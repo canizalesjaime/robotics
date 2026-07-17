@@ -1,0 +1,60 @@
+.markdown {
+  max-width: 900px;
+  margin: auto;
+  line-height: 1.6;
+  font-size: 18px;
+}
+
+.markdown h1 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.markdown h2 {
+  font-size: 30px;
+  margin-top: 40px;
+}
+
+.markdown p {
+  margin: 15px 0;
+}
+
+.markdown img {
+  display: block;
+  margin: 20px auto;
+  max-width: 100%;
+}
+
+.markdown code {
+  background: #f4f4f4;
+  padding: 3px 6px;
+  border-radius: 5px;
+}
+
+.markdown pre {
+  background: #1e1e1e;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+.markdown blockquote {
+  border-left: 4px solid #888;
+  padding-left: 15px;
+  color: #666;
+}
+
+.markdown ul {
+  list-style-type: disc;
+  padding-left: 30px;
+}
+
+.markdown ol {
+  list-style-type: decimal;
+  padding-left: 30px;
+}
+
+.markdown li {
+  margin-bottom: 8px;
+}
