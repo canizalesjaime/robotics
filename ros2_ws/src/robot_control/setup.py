@@ -29,6 +29,8 @@ setup(
             'mpu6050 = robot_control.mpu6050_node:main',
             'picam = robot_control.picam_node:main',
             'arm = robot_control.arm_node:main',
+            'lunar = robot_control.lunar_node:main',
+            'tester = robot_control.tester:main',
         ],
     },
 )

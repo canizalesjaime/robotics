@@ -102,4 +102,5 @@ def main():
         motor.release_lines()
 
 
-#main()
+if __name__ == '__main__':
+    main()

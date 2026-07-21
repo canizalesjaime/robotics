@@ -105,4 +105,5 @@ def main():
         node.pca.deinit()
         
 
-#main()
+if __name__ == '__main__':
+    main()

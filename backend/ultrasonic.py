@@ -44,4 +44,5 @@ def main():
     finally:
         node.free_gpio()
 
-#main()
+if __name__ == '__main__':
+    main()

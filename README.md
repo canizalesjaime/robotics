@@ -86,7 +86,6 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 3. ros2 launch robot_control \<executable_name\>
 4. ros2 service call /capture_image std_srvs/srv/Trigger
 5. xhost +local:root and xhost -local:root for rviz2
-6. ros2 launch my_robot_description display.launch.py
 
 
 ## docker container to run on pi which is ubuntu based with ros2 installed + peripheral libraries
@@ -114,10 +113,9 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 # To Do
 1. homebot: 
   - slam/urdf file use dht table for frames and kinematics for arm
-  - Make the base rotate, at the same time as being able to receive other commands to arm and wheels
   - stereo camera
   - fix tennis navigation
-  - you need main to become a ros node, where you press buttons on the web interface, and those commands get published to the motor node to move the robot
+  - test each ros node individually(lunar, motor_control, arm, mpu6050(test in backend first)), test together with robot_interface(check base can rotate and you can still move around, and move arm, sensors etc)
   - add neovim an tmux for efficient setup to humble_pi as well as any other dependencies to get it all working inside docker and ci
   - make a better physical build
   - install node on pi 5  
