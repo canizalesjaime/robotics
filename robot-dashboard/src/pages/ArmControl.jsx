@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API_URL } from "./config";
 
 export default function ArmControl() {
   const [angles, setAngles] = useState({
@@ -14,7 +15,7 @@ export default function ArmControl() {
   };
 
   const sendAngles = () => {
-    fetch("http://192.168.1.156:8000/set_angles", {
+    fetch(API_URL+"/set_angles", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

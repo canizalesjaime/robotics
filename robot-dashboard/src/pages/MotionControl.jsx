@@ -1,12 +1,13 @@
 import React from "react";
 import CameraView from "./CameraView";
+import { API_URL } from "./config";
 
 export default function MotionControl() {
   const [speed, setSpeed] = React.useState("");
   const activeKeyRef = React.useRef(null); // prevents repeat firing
 
   const sendCommand = (action) => {
-    fetch("http://192.168.1.156:8000/command", {
+    fetch(API_URL+"/command", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,7 +24,7 @@ export default function MotionControl() {
       return;
     }
 
-    fetch("http://192.168.1.156:8000/speed", {
+    fetch(API_URL+"/speed", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

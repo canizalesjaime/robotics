@@ -1,4 +1,5 @@
 import React from "react";
+import { API_URL } from "./config";
 
 export default function CameraView() {
   return (
@@ -7,7 +8,7 @@ export default function CameraView() {
 
       <div className="border rounded overflow-hidden">
         <img
-          src="http://192.168.1.156:8000/camera"
+          src={`${API_URL}/camera`}
           alt="Robot Camera"
           className="w-full"
         />

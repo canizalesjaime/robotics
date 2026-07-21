@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { API_URL } from "./config";
+
 
 export default function Sensors() {
   const [data, setData] = useState({ x: 0, y: 0, z: 0 });
@@ -6,11 +8,11 @@ export default function Sensors() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      fetch("http://192.168.1.156:8000/accelerometer")
+      fetch(API_URL+"/accelerometer")
         .then((res) => res.json())
         .then(setData);
 
-      fetch("http://192.168.1.156:8000/lidar")
+      fetch(API_URL+"/lidar")
         .then((res) => res.json())
         .then(setLidar);
 
@@ -20,11 +22,11 @@ export default function Sensors() {
   }, []);
 
   const rotateBase = async () => {
-    await fetch("http://192.168.1.156:8000/rotate_base");
+    await fetch(API_URL+"/rotate_base");
   };
 
   const stopBase = async () => {
-    await fetch("http://192.168.1.156:8000/stop_base");
+    await fetch(API_URL+"/stop_base");
   };
 
   return (
