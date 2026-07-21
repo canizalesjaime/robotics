@@ -41,8 +41,8 @@ class Mpu6050Node():
 def main():
     try:
         node = Mpu6050Node()
-        while(True):
-            node.sensor_data()
+        for i in range(20):
+            print(node.sensor_data())
     except KeyboardInterrupt:
         pass
 
