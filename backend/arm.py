@@ -33,12 +33,12 @@ class ArmNode():
                                  "gripper": [4,90] }
 
         else:
-            self.SERVO_ANGLES = {"wrist roll", [0, 90],# MG90S below
-                                 "gripper",[1, 90],
-                                 "wrist pitch", [3, 90],
-                                 "elbow",[4, 90],  # MG995 below
-                                 "shoulder",[5, 90],    
-                                 "base"[7, 90] }
+            self.SERVO_ANGLES = {"wrist roll":[0, 90],# MG90S below
+                                 "gripper":[1, 90],
+                                 "wrist pitch":[3, 90],
+                                 "elbow":[4, 90],  # MG995 below
+                                 "shoulder":[5, 90],    
+                                 "base":[7, 90] }
 
         for joint, channel_angle in self.SERVO_ANGLES.items():
             channel, angle = channel_angle
@@ -56,6 +56,7 @@ class ArmNode():
         pulse = MIN_PULSE + (angle / 180.0) * (MAX_PULSE - MIN_PULSE)
         #pulse = MIN_PULSE + ((angle - min_angle) / (max_angle - min_angle)) * (MAX_PULSE - MIN_PULSE)
         duty = int(pulse / 4096 * 65535)
+        print(channel)
         self.pca.channels[channel].duty_cycle = duty
         self.SERVO_ANGLES[joint][1]=angle
 
@@ -96,9 +97,7 @@ class ArmNode():
 def main():
     try:
         node = ArmNode()
-
-        while True:
-            time.sleep(.1)
+        node.move_smooth("elbow", 30)
 
     finally:
         node.clean_up()

@@ -94,7 +94,7 @@ class MotorNode():
 def main():
     try:
         motor=MotorNode()
-        while True:
+        for i in range(3):
             cmd=input("enter one of the following - f(forward), b(back), i(increase), d(decrease), rotate_left(rl), rotate_right(rr): ")
             motor.move(cmd)
         

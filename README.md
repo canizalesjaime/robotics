@@ -115,7 +115,7 @@ uvicorn main:app --host 0.0.0.0 --port 8000
   - slam/urdf file use dht table for frames and kinematics for arm
   - stereo camera
   - fix tennis navigation
-  - test each ros node individually(lunar, motor_control, arm, mpu6050(test in backend first)), test together with robot_interface(check base can rotate and you can still move around, and move arm, sensors etc)
+  - test each ros node individually(lunar, motor_control, arm, mpu6050), test together with robot_interface(check base can rotate and you can still move around, and move arm, sensors etc)
   - add neovim an tmux for efficient setup to humble_pi as well as any other dependencies to get it all working inside docker and ci
   - make a better physical build 
 2. using pytorch course make an unsupervised grasping model, use jetson orin(check out study material on nvidia(test with olama))
