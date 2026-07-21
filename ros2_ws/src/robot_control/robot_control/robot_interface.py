@@ -11,7 +11,7 @@ import threading
 
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import String, Float32, Bool
+from std_msgs.msg import String, Float32, Bool,Int32
 from sensor_msgs.msg import Imu, Temperature, JointState
 from tf_transformations import euler_from_quaternion
 
@@ -50,7 +50,7 @@ class RobotInterface(Node):
         self.base_pub = self.create_publisher(Bool, 'cmd_base', 10)
 
         # lidar
-        self.create_subscription(Float32,'distance',self.distance_callback,10)
+        self.create_subscription(Float32,'li_distance',self.distance_callback,10)
         # accelerometer: mpu6050
         self.create_subscription(Imu,'imu/data_raw',self.imu_callback,10)
 
@@ -81,12 +81,16 @@ def send_command(cmd: Command):
                "rotate_left":"rl", "rotate_right":"rr", "stop":"s"}
 
     if cmd.action in cmd_map:
-        bridge.cmd_pub.publish(cmd[cmd.action])
+        cmd_msg=String()
+        cmd_msg.data=cmd[cmd.action]
+        bridge.cmd_pub.publish(cmd_msg)
     return {"ok": True}
 
 @app.post("/speed")
 def set_speed(spd: Speed):
-    bridge.speed_pub.publish(spd.speed)
+    spd_msg= Int32()
+    spd_msg.data=spd.speed
+    bridge.speed_pub.publish(spd_msg)
     return {"ok": True, "speed": spd.speed}
 
 @app.post("/set_angles")
@@ -103,13 +107,17 @@ def set_angles(angs: ArmAngles):
 
 @app.post("/rotate_base")
 def rotate_base():
-    bridge.base_pub.publish(True)
+    b_msg=Bool()
+    b_msg.data=True
+    bridge.base_pub.publish(b_msg)
     return {"status": "rotating"}
 
 @app.get("/stop_base")
 def stop_base():
-    bridge.base_pub.publish(False)
-    return {"status": "rotating"}
+    b_msg=Bool()
+    b_msg.data=False
+    bridge.base_pub.publish(b_msg)
+    return {"status": "not rotating"}
 
 
 def ros_spin():

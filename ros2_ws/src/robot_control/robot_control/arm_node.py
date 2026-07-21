@@ -19,7 +19,7 @@ class ArmRos(Node):
         angles= [math.degrees(i) for i in msg.position]
         self.arm.set_angles_api(angles)
 
-    def angle_callback(self, msg):
+    def base_callback(self, msg):
        self.arm.rotate_base(msg.data)
 
     def destroy_node(self):
