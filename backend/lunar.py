@@ -22,7 +22,7 @@ class LunarNode():
 def main():
     node = LunarNode()
     try:
-        for i in range(1000):
+        while True:
             d,s=node.get_distance()
             print(f"Distance: {d} cm | Strength: {s}")
 

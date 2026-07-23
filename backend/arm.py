@@ -19,14 +19,17 @@ from adafruit_pca9685 import PCA9685
 #         threading.Thread(target=arm.rotate_loop, daemon=True).start()
 
 class ArmNode():
-    def __init__(self,big_arm=False):
+    def __init__(self,arm="base"):
         self.i2c = busio.I2C(board.SCL, board.SDA)
         self.pca = PCA9685(self.i2c)
         self.pca.frequency = 50
         self.rotating = False
         self.SERVO_ANGLES={} #{"joint name:[pca channel, current angle]"}
+
+        if arm=="base":
+            self.SERVO_ANGLES={"base":[0,90]}
     
-        if not big_arm:
+        elif arm=="small":
             self.SERVO_ANGLES = {"base":[0, 90], # MG90S below
                                  "elbow": [1, 90],
                                  "shoulder": [3, 90],
@@ -53,10 +56,9 @@ class ArmNode():
         min_angle, max_angle = (20,160)
         angle = max(min(angle, max_angle), min_angle)
 
-        pulse = MIN_PULSE + (angle / 180.0) * (MAX_PULSE - MIN_PULSE)
-        #pulse = MIN_PULSE + ((angle - min_angle) / (max_angle - min_angle)) * (MAX_PULSE - MIN_PULSE)
-        duty = int(pulse / 4096 * 65535)
-        print(channel)
+        #pulse = MIN_PULSE + (angle / 180.0) * (MAX_PULSE - MIN_PULSE)
+        pulse = MIN_PULSE + ((angle - min_angle) / (max_angle - min_angle)) * (MAX_PULSE - MIN_PULSE)
+        duty = int(pulse)<<4
         self.pca.channels[channel].duty_cycle = duty
         self.SERVO_ANGLES[joint][1]=angle
 
@@ -97,7 +99,10 @@ class ArmNode():
 def main():
     try:
         node = ArmNode()
-        node.move_smooth("elbow", 30)
+        while True:
+            node.move_smooth("base", 30)
+            node.move_smooth("base", 150)
+            
 
     finally:
         node.clean_up()
