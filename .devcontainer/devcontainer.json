@@ -34,7 +34,7 @@
   "remoteUser": "root",
   "containerEnv": {
     "LIBCAMERA_LOG_LEVELS": "3"
-  },
+  }
 
   // "postCreateCommand": "cd /workspaces/homebot/ros2_ws && colcon build && source install/setup.bash"
 // "postCreateCommand": "cd robot-dashboard && npx create-vite@latest . --template react --no-git --force && npm install -D tailwindcss postcss autoprefixer && npx tailwindcss init -p"
