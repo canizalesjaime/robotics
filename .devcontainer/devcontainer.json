@@ -3,7 +3,7 @@
   // "build": {
   //   "dockerfile": "./robot_dashboard.Dockerfile"
   // },
-  "image": "jaimec21/robot-dashboard:latest",
+  "image": "jaimec21/jazzy_pi:latest",
   "runArgs": [
     "--init",
     "--privileged",
