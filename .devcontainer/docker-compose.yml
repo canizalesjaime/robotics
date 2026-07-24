@@ -1,6 +1,6 @@
 services:
-  nvim:
-    build: .
+  frontend:
+    build: ./robot_dashboard.Dockerfile
     stdin_open: true
     tty: true
     volumes:

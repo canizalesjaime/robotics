@@ -1,49 +1,29 @@
 {
   "name": "Ros2-Setup",
  "build": {
-    "dockerfile": "./win_ros.Dockerfile"
+    "dockerfile": "./humble_pi.Dockerfile"
   },
-  // for pi####################################################################
   // "image": "jaimec21/jazzy_pi:latest",
-  // "runArgs": [
-  //   "--init",
-  //   "--privileged",
-  //   "--net=host",
+  "runArgs": [
+    "--init",
+    "--privileged",
+    "--net=host",
+    "--env=DISPLAY=host.docker.internal:0.0",
+    "--env=QT_X11_NO_MITSHM=1",
+  // for pi 
   //   "--device=/dev/gpiomem",
   //   "--device=/dev/mem",
   //   "--device=/dev/ttyAMA0",
   //   "--cap-add=SYS_RAWIO",
-  //   "--env=DISPLAY",
-  //   "--env=QT_X11_NO_MITSHM=1",
   //   "--volume=/tmp/.X11-unix:/tmp/.X11-unix:rw"
-  // ],
+  ],
+
+  // for pi
   // "mounts": [
   //   "source=/sys/class/gpio,target=/sys/class/gpio,type=bind,consistency=cached",
   //   "source=/dev,target=/dev,type=bind",
   //   "source=/run,target=/run,type=bind"
   // ],
-
-  // "customizations": {
-  //   "vscode": {
-  //     "extensions": [
-  //       "ms-python.python",
-  //       "ms-vscode.cpptools"
-  //     ]
-  //   }
-  // },
-
-  // "remoteUser": "root",
-  // "containerEnv": {
-  //   "LIBCAMERA_LOG_LEVELS": "3"
-  // }
-
-
-// for windows#################################################################
-  "runArgs": [
-    "--net=host",
-    "--env=DISPLAY=host.docker.internal:0.0",
-    "--env=QT_X11_NO_MITSHM=1"
-  ],
 
   "customizations": {
     "vscode": {
@@ -55,5 +35,8 @@
     }
   },
 
-  "remoteUser": "root"
+  "remoteUser": "root",
+  // "containerEnv": { # for pi camera maybe
+  //   "LIBCAMERA_LOG_LEVELS": "3"
+  // }
 }
