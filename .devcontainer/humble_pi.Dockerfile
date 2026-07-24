@@ -1,39 +1,39 @@
-# FROM osrf/ros:jazzy-desktop
-# FROM jaimec21/jazzy_pi:latest
-FROM ros:jazzy
+#FROM osrf/ros:jazzy-desktop
+FROM jaimec21/jazzy_pi:latest
+#FROM ros:jazzy
 
 
-ENV DEBIAN_FRONTEND=noninteractive
+# ENV DEBIAN_FRONTEND=noninteractive
 
-# Update and install development tools
-RUN apt-get update && apt-get install -y \
-    python3-colcon-common-extensions \
-    python3-rosdep \
-    python3-vcstool \
-    x11-apps \
-    mesa-utils \
-    build-essential \
-    ros-jazzy-rviz2 \
-    ros-jazzy-joint-state-publisher-gui \
-    ros-jazzy-xacro \
-    git \
-    neovim \
-    tmux \
-    curl \
-    ripgrep \
-    fd-find \
-    #unzip \ # these are for markdown and pdf viewers but didnt work for some reason
-    #pandoc \
-    #poppler-utils \
-    #glow \
-    #zathura \
-    && rm -rf /var/lib/apt/lists/*
+# # Update and install development tools
+# RUN apt-get update && apt-get install -y \
+#     python3-colcon-common-extensions \
+#     python3-rosdep \
+#     python3-vcstool \
+#     x11-apps \
+#     mesa-utils \
+#     build-essential \
+#     ros-jazzy-rviz2 \
+#     ros-jazzy-joint-state-publisher-gui \
+#     ros-jazzy-xacro \
+#     git \
+#     neovim \
+#     tmux \
+#     curl \
+#     ripgrep \
+#     fd-find \
+#     #unzip \ # these are for markdown and pdf viewers but didnt work for some reason
+#     #pandoc \
+#     #poppler-utils \
+#     #glow \
+#     #zathura \
+#     && rm -rf /var/lib/apt/lists/*
 
 
-RUN echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
-RUN echo "source /workspaces/homebot/ros2_ws/install/setup.bash" >> ~/.bashrc
+# RUN echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
+# RUN echo "source /workspaces/homebot/ros2_ws/install/setup.bash" >> ~/.bashrc
 
-# for pi 
+# # for pi 
 # RUN apt update && apt upgrade -y
 # RUN apt install -y \
 #  python3-lgpio \
@@ -45,13 +45,14 @@ RUN echo "source /workspaces/homebot/ros2_ws/install/setup.bash" >> ~/.bashrc
 #  python3-pip \
 #  python3-smbus \
 #  i2c-tools \
-#  libcap-dev\
-#  libcamera-dev \
-#  libcamera-tools  \
-#  python3-libcamera \
-#  python3-pyqt6
+# #  libcap-dev\
+# #  libcamera-dev \
+# #  libcamera-tools  \
+# #  python3-libcamera \
+# #  python3-pyqt6
 
-# RUN pip3 install mpu6050-raspberrypi picamera2 --break-system-packages
+# RUN pip3 install mpu6050-raspberrypi adafruit-blinka adafruit-circuitpython-pca9685 --break-system-packages\
+#RUN pip3 install picamera2 --break-system-packages
 
 # Initialize rosdep (ignore if already initialized)
 #RUN rosdep init || true
