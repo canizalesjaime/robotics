@@ -1,7 +1,21 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float32
-from .....backend.lunar import LunarNode
+
+import os
+import sys
+
+sys.path.append(
+    os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            "..", "..", "..", "..", "..",
+            "backend"
+        )
+    )
+)
+
+from lunar import LunarNode
 
 
 class LunarRos(Node):

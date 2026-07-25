@@ -3,7 +3,19 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Imu, Temperature
 from tf_transformations import quaternion_from_euler
-from .....backend.mpu6050_node import Mpu6050Node
+import os
+import sys
+sys.path.append(
+    os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            "..", "..", "..", "..", "..",
+            "backend"
+        )
+    )
+)
+
+from mpu6050_node import Mpu6050Node
 
 class Mpu6050Ros(Node):
     def __init__(self):

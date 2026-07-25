@@ -45,14 +45,18 @@ FROM jaimec21/jazzy_pi:latest
 #  python3-pip \
 #  python3-smbus \
 #  i2c-tools \
-# #  libcap-dev\
+# #  libcap-dev\ # camera stuff below
 # #  libcamera-dev \
 # #  libcamera-tools  \
 # #  python3-libcamera \
 # #  python3-pyqt6
 
 # RUN pip3 install mpu6050-raspberrypi adafruit-blinka adafruit-circuitpython-pca9685 --break-system-packages\
+
 #RUN pip3 install picamera2 --break-system-packages
+
+#RUN sudo apt install ros-jazzy-tf-transformations
+#RUN pip3 install  fastapi uvicorn ultralytics opencv-python --break-system-packages
 
 # Initialize rosdep (ignore if already initialized)
 #RUN rosdep init || true

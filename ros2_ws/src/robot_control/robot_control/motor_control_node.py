@@ -1,7 +1,19 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String, Int32
-from .....backend.motor_node import MotorNode
+
+import os
+import sys
+sys.path.append(
+    os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            "..", "..", "..", "..", "..",
+            "backend"
+        )
+    )
+)
+from motor_node import MotorNode
 
 
 class MotorRos(Node):

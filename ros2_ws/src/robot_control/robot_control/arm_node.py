@@ -4,7 +4,20 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Bool
 from sensor_msgs.msg import JointState
-from .....backend.arm import ArmNode 
+
+import os
+import sys
+sys.path.append(
+    os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            "..", "..", "..", "..", "..",
+            "backend"
+        )
+    )
+)
+
+from arm import ArmNode 
 
 class ArmRos(Node):
     def __init__(self):

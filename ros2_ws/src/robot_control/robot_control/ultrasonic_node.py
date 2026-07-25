@@ -1,7 +1,19 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float32
-from .....backend.ultrasonic import UltrasonicNode
+
+import os
+import sys
+sys.path.append(
+    os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            "..", "..", "..", "..", "..",
+            "backend"
+        )
+    )
+)
+from ultrasonic import UltrasonicNode
 
 class UltrasonicRos(Node):
     def __init__(self):
