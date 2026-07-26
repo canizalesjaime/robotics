@@ -35,11 +35,11 @@ class Command(BaseModel):
 class Speed(BaseModel):
     speed: int
 
-class ArmAngles(BaseModel):
-    base: int
-    shoulder: int
-    elbow: int
-    gripper: int
+# class ArmAngles(BaseModel):
+#     base: int
+#     shoulder: int
+#     elbow: int
+#     gripper: int
 
 class RobotInterface(Node):
     def __init__(self):
@@ -48,7 +48,7 @@ class RobotInterface(Node):
         self.cmd_pub = self.create_publisher(String, 'cmd_motor', 10)
         self.speed_pub = self.create_publisher(Int32, 'cmd_speed', 10)
         # servo motors for arm
-        self.arm_pub = self.create_publisher(JointState, 'cmd_arm', 10)
+        #self.arm_pub = self.create_publisher(JointState, 'cmd_arm', 10)
         self.base_pub = self.create_publisher(Bool, 'cmd_base', 10)
 
         # lidar
@@ -95,16 +95,16 @@ def set_speed(spd: Speed):
     bridge.speed_pub.publish(spd_msg)
     return {"ok": True, "speed": spd.speed}
 
-@app.post("/set_angles")
-def set_angles(angs: ArmAngles):
-    arm_msg = JointState()
+# @app.post("/set_angles")
+# def set_angles(angs: ArmAngles):
+#     arm_msg = JointState()
 
-    arm_msg.name = ["base","shoulder","elbow","gripper"]
+#     arm_msg.name = ["base","shoulder","elbow","gripper"]
 
-    arm_msg.position = [math.radians(angs.base),math.radians(angs.shoulder),
-                        math.radians(angs.elbow),math.radians(angs.gripper)]
+#     arm_msg.position = [math.radians(angs.base),math.radians(angs.shoulder),
+#                         math.radians(angs.elbow),math.radians(angs.gripper)]
 
-    bridge.arm_pub.publish(arm_msg)
+#     bridge.arm_pub.publish(arm_msg)
     
 
 @app.post("/rotate_base")

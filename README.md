@@ -25,7 +25,7 @@ Licensed under Cults PU (Personal Use) – No commercial use or AI applications.
 
 
 ### Peripheral Sensors, Motor Drivers Used on Raspberry pi 5
-#### Ultrasonic HCSR04
+#### Ultrasonic HCSR04(no longer used)
 * VCC -> PIN 2(5V)
 * TRIG -> PIN 29 (GPIO 5)
 * ECHO -> PIN 31 (GPIO 6) with voltage divider
@@ -114,11 +114,11 @@ docker run -it --rm --init --privileged --net=host --name ros2-container -v /hom
 
 # To Do
 1. homebot: 
+  - test together with robot_interface: get ros2 to work with ros nodes, make rotate_base and stop_base into a service instead
   - slam/urdf file use dht table for frames and kinematics for arm
-  - stereo camera
+  - fix dockerfile(image on dockerhub works)
+  - add camera to docker, maybe get stereo camera
   - fix tennis navigation
-  - test each ros node individually(lunar, motor_control, arm, mpu6050), test together with robot_interface(check base can rotate and you can still move around, and move arm, sensors etc)
-  - add neovim an tmux for efficient setup to humble_pi as well as any other dependencies to get it all working inside docker and ci
   - make a better physical build 
 2. using pytorch course make an unsupervised grasping model, use jetson orin(check out study material on nvidia(test with olama))
 3. try networking between computer, arm, and homebot use ros_ip. Look into networking and firewalls and other security features.   

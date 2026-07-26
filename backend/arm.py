@@ -76,12 +76,11 @@ class ArmNode():
 
 
     def rotate_base(self, val=True):
-        if not self.rotating:
-            self.rotating=val
-            while self.rotating:
-                self.move_smooth("base",150)
-                self.move_smooth("base",30)
-                    
+        self.rotating=val
+        while self.rotating:
+            self.move_smooth("base",150)
+            self.move_smooth("base",30)
+                
 
     def stop_base(self):
         self.rotating = False
