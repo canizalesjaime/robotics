@@ -9,8 +9,8 @@ class Tester(Node):
         self.cmd_sub = self.create_subscription(Float32, 'li_distance', self.callback, 10)
 
         #self.cmd_pub = self.create_publisher(String,'cmd_motor',10)
-        #self.base_pub = self.create_publisher(Bool,'cmd_base', 10)
-        #self.timer = self.create_timer(1.0, self.callback)
+        self.base_pub = self.create_publisher(Bool,'cmd_base', 10)
+        self.timer = self.create_timer(1.0, self.callback)
  
 
     def callback(self, msg):
@@ -21,9 +21,9 @@ class Tester(Node):
         #time.sleep(1)
         #cmd_pub.publish("s")
 
-        #b_msg = Bool()
-        #b_msg.data=True
-        #base_pub.publish(b_msg)
+        b_msg = Bool()
+        b_msg.data=True
+        self.base_pub.publish(b_msg)
         #time.sleep(10)
         #b_msg.data=False
         #base_pub.publish(b_msg)

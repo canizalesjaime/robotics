@@ -75,21 +75,22 @@ class ArmNode():
             time.sleep(delay)
 
 
-    def rotate_base(self, val):
-        self.rotating=val
-        while self.rotating:
-            self.move_smooth(0,170)
-            self.move_smooth(0,10)
-                
+    def rotate_base(self, val=True):
+        if not self.rotating:
+            self.rotating=val
+            while self.rotating:
+                self.move_smooth(0,150)
+                self.move_smooth(0,30)
+                    
 
-    # def stop_base(self):
-    #     self.rotating = False
+    def stop_base(self):
+        self.rotating = False
         
     
     def clean_up(self):
         for joint in self.SERVO_ANGLES:
             self.move_smooth(joint,90)  
-        #self.stop_base()
+        self.stop_base()
 
 
     def set_angles_api(self, angles):
@@ -99,9 +100,7 @@ class ArmNode():
 def main():
     try:
         node = ArmNode()
-        while True:
-            node.move_smooth("base", 30)
-            node.move_smooth("base", 150)
+        node.rotate_base()
             
 
     finally:
