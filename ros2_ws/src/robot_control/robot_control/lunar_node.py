@@ -28,7 +28,8 @@ class LunarRos(Node):
     def timer_callback(self):
         d,s = self.sensor.get_distance()
         msg = Float32()
-        msg.data = d
+        msg.data = float(d)
+        print(msg.data)
         self.publisher_.publish(msg)
 
 
