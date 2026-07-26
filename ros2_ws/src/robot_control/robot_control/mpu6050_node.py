@@ -9,13 +9,13 @@ sys.path.append(
     os.path.abspath(
         os.path.join(
             os.path.dirname(__file__),
-            "..", "..", "..", "..", "..",
+            "..", "..", "..", "..",
             "backend"
         )
     )
 )
 
-from mpu6050_node import Mpu6050Node
+from mpu6050_node_b import Mpu6050Node
 
 class Mpu6050Ros(Node):
     def __init__(self):
