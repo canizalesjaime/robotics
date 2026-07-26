@@ -3,18 +3,8 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Imu, Temperature
 from tf_transformations import quaternion_from_euler
-import os
-import sys
-sys.path.append(
-    os.path.abspath(
-        os.path.join(
-            os.path.dirname(__file__),
-            "..", "..", "..", "..",
-            "backend"
-        )
-    )
-)
 
+import robot_control.paths
 from mpu6050_node_b import Mpu6050Node
 
 class Mpu6050Ros(Node):

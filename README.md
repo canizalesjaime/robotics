@@ -114,7 +114,8 @@ docker run -it --rm --init --privileged --net=host --name ros2-container -v /hom
 
 # To Do
 1. homebot: 
-  - test together with robot_interface: get ros2 to work with ros nodes, make rotate_base and stop_base into a service instead
+  - test together with robot_interface
+  - make rotate_base and stop_base into a service instead
   - slam/urdf file use dht table for frames and kinematics for arm
   - fix dockerfile(image on dockerhub works)
   - add camera to docker, maybe get stereo camera
