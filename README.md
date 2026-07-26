@@ -109,6 +109,8 @@ uvicorn main:app --host 0.0.0.0 --port 8000
   ros2-setup:latest \
   /bin/bash
 
+3. simple:
+docker run -it --rm --init --privileged --net=host --name ros2-container -v /home/jaime/homebot:/workspaces/homebot jaimec21/jazzy_pi:latest
 
 # To Do
 1. homebot: 
