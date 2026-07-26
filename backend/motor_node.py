@@ -34,8 +34,6 @@ class MotorNode():
 
     ###########################################################################
     def move(self,cmd):
-        print(cmd, "speed: ", self.curr_speed)
-
         if cmd == 'f':
             self.set_motor([0, 1, 1, 0])
         elif cmd == 'b':
