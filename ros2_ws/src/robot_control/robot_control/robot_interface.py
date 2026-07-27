@@ -84,7 +84,7 @@ def send_command(cmd: Command):
 
     if cmd.action in cmd_map:
         cmd_msg=String()
-        cmd_msg.data=cmd[cmd.action]
+        cmd_msg.data=cmd_map[cmd.action]
         bridge.cmd_pub.publish(cmd_msg)
     return {"ok": True}
 
