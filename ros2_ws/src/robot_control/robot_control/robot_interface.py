@@ -63,10 +63,8 @@ class RobotInterface(Node):
         self.distance=msg.data
 
     def imu_callback(self, msg):
-        self.imu = msg
+        self.imu = msg.orientation
     
-bridge = RobotInterface()
-
 
 @app.get("/accelerometer")
 def get_accelerometer_data():
@@ -115,7 +113,7 @@ def rotate_base():
     bridge.base_pub.publish(b_msg)
     return {"status": "rotating"}
 
-@app.get("/stop_base")
+@app.post("/stop_base")
 def stop_base():
     b_msg=Bool()
     b_msg.data=False
@@ -128,6 +126,9 @@ def ros_spin():
 
 
 rclpy.init()
+
+
+bridge = RobotInterface()
 
 threading.Thread(
     target=ros_spin,

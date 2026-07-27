@@ -23,7 +23,8 @@ class ArmRos(Node):
         self.arm.set_angles_api(angles)
 
     def base_callback(self, msg):
-       self.arm.rotate_base(msg.data)
+        print("hiiiiiiiiiiiiiiiii")
+        self.arm.rotate_base(msg.data)
 
     def destroy_node(self):
         super().destroy_node()

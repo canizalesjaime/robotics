@@ -47,12 +47,11 @@ class Mpu6050Ros(Node):
 
         self.imu_pub.publish(imu_msg)
 
-        print(data)
         # Publish temperature
-        temp_msg = Temperature()
-        temp_msg.header = imu_msg.header
-        temp_msg.temperature = data["temp"]
-        self.temp_pub.publish(temp_msg)
+        #temp_msg = Temperature()
+        #temp_msg.header = imu_msg.header
+        #temp_msg.temperature = data["temp"]
+        #self.temp_pub.publish(temp_msg)
 
 
 
