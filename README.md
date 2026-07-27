@@ -116,7 +116,7 @@ docker run -it --rm --init --privileged --net=host --name ros2-container -v /hom
 docker exec -it ros2-container bash
 # To Do
 1. homebot: 
-  - lidar is lagged
+  - lidar, stop base is lagged
   - make rotate_base and stop_base into a service instead(maybe other "actions" as well)
   - slam/urdf file use dht table for frames and kinematics for arm
   - fix dockerfile(image on dockerhub works), fix ci/cd

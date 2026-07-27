@@ -33,14 +33,17 @@ jobs:
     - name: Start backend container
       run: |
         docker run -d \
-          --name homebot-backend \
-          -v ${{ github.workspace }}/backend:/workspace \
+          --init \
+          --privileged \
+          --net=host \
+          --name ros2-container \
+          -v ${{ github.workspace }}:/workspaces/homebot \
           jaimec21/jazzy_pi:latest \
           tail -f /dev/null
 
     - name: Build backend
       run: |
-        docker exec homebot-backend bash -c "
+        docker exec ros2-container bash -c "
           cd /workspaces/homebot/ros2_ws
           colcon build
           source install/setup.bash
@@ -48,7 +51,7 @@ jobs:
 
     - name: Start backend
       run: |
-        docker exec -d homebot-backend bash -c "
+        docker exec -d ros2-container bash -c "
           cd /workspaces/homebot/ros2_ws
           source /opt/ros/jazzy/setup.bash
           source install/setup.bash
