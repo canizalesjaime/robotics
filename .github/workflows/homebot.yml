@@ -42,6 +42,13 @@ jobs:
           jaimec21/jazzy_pi:latest \
           -f /dev/null
 
+    - name: Debug container
+      if: always()
+      run: |
+        docker ps -a
+        docker logs ros2-container || true
+        docker inspect ros2-container --format='Status={{.State.Status}} ExitCode={{.State.ExitCode}} Error={{.State.Error}}'
+
     - name: Build backend
       run: |
         docker exec ros2-container bash -c "
