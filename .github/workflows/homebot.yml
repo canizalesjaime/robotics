@@ -33,13 +33,14 @@ jobs:
     - name: Start backend container
       run: |
         docker run -d \
+          --entrypoint tail \
           --init \
           --privileged \
           --net=host \
           --name ros2-container \
           -v ${{ github.workspace }}:/workspaces/homebot \
           jaimec21/jazzy_pi:latest \
-          tail -f /dev/null
+          -f /dev/null
 
     - name: Build backend
       run: |
