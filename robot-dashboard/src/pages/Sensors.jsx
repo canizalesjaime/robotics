@@ -9,7 +9,7 @@ export default function Sensors() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      fetch(API_URL + "/robot_state")
+      fetch(API_URL + "/robot_state",{cache: "no-store"})
   .then(res => res.json())
   .then(state => {
 
@@ -57,7 +57,7 @@ export default function Sensors() {
       <p>Temp: {data.z}</p>
 
       <h2 className="text-2xl font-bold mb-4"> Lidar:</h2>
-      <p className="mt-4">Distance: {lidar.distance} cm</p>
+      <p className="mt-4">Distance: {lidar.distance} in</p>
       <p>Strength: {lidar.strength}</p>
 
       <div className="mt-4 space-x-2">
