@@ -6,19 +6,24 @@ def generate_launch_description():
     return LaunchDescription([
         Node(
             package='robot_control',
-            executable='ultrasonic',
-            name='u',
-            output='screen',
+            executable='lunar',
+            name='l'#,
+            #output='screen',
         ),
-        # Node(
-        #     package='robot_control',
-        #     executable='teleop',
-        #     name='t'
-        # ),
+        Node(
+            package='robot_control',
+            executable='mpu6050',
+            name='i'
+        ),
         Node(
             package='robot_control',
             executable='motor',
             name='m'
         ),
+        Node(
+            package='robot_control',
+            executable='arm',
+            name='a'
+                ),
             ]
         )
