@@ -26,7 +26,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# bridge = None
 # stop_event = threading.Event()
 
 class Command(BaseModel):
@@ -66,6 +65,8 @@ class RobotInterface(Node):
     def imu_callback(self, msg):
         self.imu = msg
     
+bridge = RobotInterface()
+
 
 @app.get("/accelerometer")
 def get_accelerometer_data():
@@ -127,8 +128,6 @@ def ros_spin():
 
 
 rclpy.init()
-
-bridge = RobotInterface()
 
 threading.Thread(
     target=ros_spin,
