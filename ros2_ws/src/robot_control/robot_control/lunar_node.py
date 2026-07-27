@@ -9,8 +9,8 @@ from lunar import LunarNode
 class LunarRos(Node):
     def __init__(self):
         super().__init__('lunar_node')
-        self.publisher_ = self.create_publisher(Float32, 'li_distance', 10)
-        self.timer = self.create_timer(1, self.timer_callback)
+        self.publisher_ = self.create_publisher(Float32, 'distance', 10)
+        self.timer = self.create_timer(.5, self.timer_callback)
         self.sensor = LunarNode()
 
     def timer_callback(self):

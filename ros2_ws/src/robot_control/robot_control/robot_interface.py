@@ -19,14 +19,15 @@ from tf_transformations import euler_from_quaternion
 
 
 app = FastAPI()
+bridge = None
+# stop_event = threading.Event()
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # tighten later
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# stop_event = threading.Event()
 
 class Command(BaseModel):
     action: str
@@ -50,31 +51,52 @@ class RobotInterface(Node):
         #self.arm_pub = self.create_publisher(JointState, 'cmd_arm', 10)
         self.base_pub = self.create_publisher(Bool, 'cmd_base', 10)
 
-        # lidar
-        self.create_subscription(Float32,'li_distance',self.distance_callback,10)
-        # accelerometer: mpu6050
+        # mpu6050 accelerometer:imu 
         self.create_subscription(Imu,'imu/data_raw',self.imu_callback,10)
+        # lunar lidar
+        self.create_subscription(Float32,'distance',self.distance_callback,10)
 
-        self.distance = None
-        self.imu = None
-        
+        self.declare_parameter("host", "0.0.0.0")
+        self.declare_parameter("port", 8000)
 
-    def distance_callback(self, msg):
-        self.distance=msg.data
+        self.host = self.get_parameter("host").value
+        self.port = self.get_parameter("port").value
+
+        self.robot_state = {
+            "imu": {
+                "roll": 0.0,
+                "pitch": 0.0,
+                "yaw": 0.0,
+            },
+            "lidar": {
+                "distance": 0.0,
+                "strength": -1,
+            },
+            "base_rotating": False,
+            #"battery": 0.0,
+            "motor_speed": 30,
+        }
 
     def imu_callback(self, msg):
-        self.imu = msg.orientation
+        roll, pitch, yaw = euler_from_quaternion([
+            msg.orientation.x,
+            msg.orientation.y,
+            msg.orientation.z,
+            msg.orientation.w,
+        ])
+
+        self.robot_state["imu"]["roll"] = roll
+        self.robot_state["imu"]["pitch"] = pitch
+        self.robot_state["imu"]["yaw"] = yaw
     
 
-@app.get("/accelerometer")
-def get_accelerometer_data():
-    roll, pitch, yaw = euler_from_quaternion([bridge.imu.x,bridge.imu.y,bridge.imu.z,bridge.imu.w])
-    return {"x":roll,"y":pitch,"z":0} # roll(x), pitch(y),temp(z)
+    def distance_callback(self, msg):
+        self.robot_state["lidar"]["distance"] = msg.data
 
-@app.get("/lidar")
-def get_lidar_data():
-    distance = bridge.distance
-    return {"distance": distance,"strength": -1}
+@app.get("/robot_state")
+def get_robot_state():
+    return bridge.robot_state
+
 
 @app.post("/command")
 def send_command(cmd: Command):
@@ -86,6 +108,7 @@ def send_command(cmd: Command):
         cmd_msg.data=cmd_map[cmd.action]
         bridge.cmd_pub.publish(cmd_msg)
     return {"ok": True}
+
 
 @app.post("/speed")
 def set_speed(spd: Speed):
@@ -108,13 +131,16 @@ def set_speed(spd: Speed):
 
 @app.post("/rotate_base")
 def rotate_base():
+    bridge.robot_state["base_rotating"] = True
     b_msg=Bool()
     b_msg.data=True
     bridge.base_pub.publish(b_msg)
     return {"status": "rotating"}
 
+
 @app.post("/stop_base")
 def stop_base():
+    bridge.robot_state["base_rotating"] = False
     b_msg=Bool()
     b_msg.data=False
     bridge.base_pub.publish(b_msg)
@@ -125,18 +151,26 @@ def ros_spin():
     rclpy.spin(bridge)
 
 
-rclpy.init()
+def main():
+    global bridge
+    rclpy.init()
+    bridge = RobotInterface()
+    threading.Thread(
+        target=ros_spin,
+        daemon=True
+    ).start()
+
+    import uvicorn
+
+    uvicorn.run(
+        app,
+        host=bridge.host,
+        port=bridge.port
+    )
 
 
-bridge = RobotInterface()
-
-threading.Thread(
-    target=ros_spin,
-    daemon=True
-).start()
-
-
-
+if __name__ == "__main__":
+    main()
 
 # below considers ros2 cleanup, if I want to go hard about that
 

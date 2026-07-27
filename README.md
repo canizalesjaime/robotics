@@ -114,7 +114,7 @@ docker run -it --rm --init --privileged --net=host --name ros2-container -v /hom
 
 # To Do
 1. homebot: 
-  - test launch file with robot_interface(two terminals)(frontend from laptop), then try o addrobot _interdace.py to launch file
+  - test launch file with robot_interface(two terminals)(frontend from laptop), then try to add robot _interdace.py to launch file
   - make rotate_base and stop_base into a service instead(maybe other "actions" as well)
   - slam/urdf file use dht table for frames and kinematics for arm
   - fix dockerfile(image on dockerhub works), fix ci/cd

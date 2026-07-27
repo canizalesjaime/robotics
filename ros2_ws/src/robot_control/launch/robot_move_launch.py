@@ -7,8 +7,7 @@ def generate_launch_description():
         Node(
             package='robot_control',
             executable='lunar',
-            name='l'#,
-            #output='screen',
+            name='l'
         ),
         Node(
             package='robot_control',
@@ -24,6 +23,17 @@ def generate_launch_description():
             package='robot_control',
             executable='arm',
             name='a'
-                ),
-            ]
-        )
+        ),
+        Node(
+            package='robot_control',
+            executable='robot_interface',
+            name='r',
+            parameters=[
+              {
+               "host": "0.0.0.0",
+               "port": 8000
+              }
+            ],
+            output='screen'
+        ),
+        ])

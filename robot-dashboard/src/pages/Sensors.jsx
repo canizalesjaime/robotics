@@ -5,21 +5,31 @@ import { API_URL } from "./config";
 export default function Sensors() {
   const [data, setData] = useState({ x: 0, y: 0, z: 0 });
   const [lidar, setLidar] = useState({ distance: 0, strength: 0 });
+  const [rotating, setRotating] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      fetch(API_URL+"/accelerometer")
-        .then((res) => res.json())
-        .then(setData);
+      fetch(API_URL + "/robot_state")
+  .then(res => res.json())
+  .then(state => {
 
-      fetch(API_URL+"/lidar")
-        .then((res) => res.json())
-        .then(setLidar);
+    setData({
+      x: state.imu.roll,
+      y: state.imu.pitch,
+      z: state.imu.yaw
+    });
+
+    setLidar(state.lidar);
+
+    setRotating(state.base_rotating);
+
+  });
 
     }, 500);
 
     return () => clearInterval(interval);
   }, []);
+
 
   const rotateBase = async () => {
     await fetch(API_URL+"/rotate_base", {method: "POST"});
@@ -28,6 +38,15 @@ export default function Sensors() {
   const stopBase = async () => {
     await fetch(API_URL+"/stop_base", {method: "POST"});
   };
+
+  const toggleBase = async () => {
+
+    if (rotating) {
+        await stopBase();
+    } else {
+        await rotateBase();
+    }
+};
 
   return (
     <div>
@@ -42,12 +61,13 @@ export default function Sensors() {
       <p>Strength: {lidar.strength}</p>
 
       <div className="mt-4 space-x-2">
-        <button onClick={rotateBase} className="bg-blue-500 text-white px-4 py-2 rounded">
-          Rotate Base
-        </button>
-
-        <button onClick={stopBase} className="bg-red-500 text-white px-4 py-2 rounded">
-          Stop Base
+        <button
+          onClick={toggleBase}
+          className={`text-white px-4 py-2 rounded ${
+              rotating ? "bg-red-500" : "bg-blue-500"
+          }`}
+        >
+          {rotating ? "Stop Base" : "Rotate Base"}
         </button>
       </div>
     </div>
