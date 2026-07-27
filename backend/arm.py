@@ -11,19 +11,13 @@ import time
 import board
 import busio
 from adafruit_pca9685 import PCA9685
-#import threading
 
-# def rotate_base(arm):
-#     if not arm.rotating:
-#         arm.rotating=True
-#         threading.Thread(target=arm.rotate_loop, daemon=True).start()
 
 class ArmNode():
     def __init__(self,arm="base"):
         self.i2c = busio.I2C(board.SCL, board.SDA)
         self.pca = PCA9685(self.i2c)
         self.pca.frequency = 50
-        self.rotating = False
         self.SERVO_ANGLES={} #{"joint name:[pca channel, current angle]"}
 
         if arm=="base":
@@ -73,18 +67,7 @@ class ArmNode():
         for angle in rng:
             self.set_servo_angle(joint, angle)
             time.sleep(delay)
-
-
-    def rotate_base(self, val=True):
-        self.rotating=val
-        while self.rotating:
-            self.move_smooth("base",150)
-            self.move_smooth("base",30)
-                
-
-    def stop_base(self):
-        self.rotating = False
-        
+            
     
     def clean_up(self):
         for joint in self.SERVO_ANGLES:
@@ -99,7 +82,7 @@ class ArmNode():
 def main():
     try:
         node = ArmNode()
-        node.rotate_base()
+        node.rotate_base(True)
             
 
     finally:

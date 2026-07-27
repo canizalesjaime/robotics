@@ -17,14 +17,21 @@ class ArmRos(Node):
         self.base_sub = self.create_subscription(Bool,'cmd_base',
                                                  self.base_callback, 10)
         self.arm = ArmNode()
+        self.rotating = False
+        self.rotate_timer = self.create_timer(0.1, self.rotate_callback)
           
     def angle_callback(self, msg):
         angles= [math.degrees(i) for i in msg.position]
         self.arm.set_angles_api(angles)
 
     def base_callback(self, msg):
-        print("hiiiiiiiiiiiiiiiii")
-        self.arm.rotate_base(msg.data)
+        self.rotating=msg.data
+
+    def rotate_callback(self):
+            if self.rotating:
+                self.arm.move_smooth("base",150)
+                self.arm.move_smooth("base",30)
+        
 
     def destroy_node(self):
         super().destroy_node()

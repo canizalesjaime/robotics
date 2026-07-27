@@ -114,7 +114,7 @@ docker run -it --rm --init --privileged --net=host --name ros2-container -v /hom
 
 # To Do
 1. homebot: 
-  - test together with robot_interface
+  - write a launch file for all nodes with robot_interface, fix the stop rotate base button(added fix but gotta test)
   - make rotate_base and stop_base into a service instead(maybe other "actions" as well)
   - slam/urdf file use dht table for frames and kinematics for arm
   - fix dockerfile(image on dockerhub works)

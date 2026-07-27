@@ -22,11 +22,11 @@ export default function Sensors() {
   }, []);
 
   const rotateBase = async () => {
-    await fetch(API_URL+"/rotate_base");
+    await fetch(API_URL+"/rotate_base", {method: "POST"});
   };
 
   const stopBase = async () => {
-    await fetch(API_URL+"/stop_base");
+    await fetch(API_URL+"/stop_base", {method: "POST"});
   };
 
   return (
