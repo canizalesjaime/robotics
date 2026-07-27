@@ -16,7 +16,7 @@ from rclpy.node import Node
 from std_msgs.msg import String, Float32, Bool,Int32
 from sensor_msgs.msg import Imu, Temperature, JointState
 from tf_transformations import euler_from_quaternion
-
+from rclpy.qos import qos_profile_sensor_data, QoSProfile, ReliabilityPolicy
 
 app = FastAPI()
 bridge = None
@@ -54,7 +54,8 @@ class RobotInterface(Node):
         # mpu6050 accelerometer:imu 
         self.create_subscription(Imu,'imu/data_raw',self.imu_callback,10)
         # lunar lidar
-        self.create_subscription(Float32,'distance',self.distance_callback,10)
+        self.sensor_qos = QoSProfile(depth=1,reliability=ReliabilityPolicy.BEST_EFFORT)
+        self.create_subscription(Float32,'distance',self.distance_callback,self.sensor_qos)
 
         self.declare_parameter("host", "0.0.0.0")
         self.declare_parameter("port", 8000)
@@ -91,6 +92,7 @@ class RobotInterface(Node):
     
 
     def distance_callback(self, msg):
+        #print("LIDAR UPDATE:", msg.data)
         self.robot_state["lidar"]["distance"] = msg.data
 
 @app.get("/robot_state")
@@ -148,7 +150,8 @@ def stop_base():
 
 
 def ros_spin():
-    rclpy.spin(bridge)
+    while rclpy.ok():
+        rclpy.spin_once(bridge,timeout_sec=0.1)
 
 
 def main():

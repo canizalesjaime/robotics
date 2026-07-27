@@ -1,23 +1,27 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float32
+from rclpy.qos import qos_profile_sensor_data,QoSProfile, ReliabilityPolicy
 
 import robot_control.paths
 from lunar import LunarNode
+import time
+
 
 
 class LunarRos(Node):
     def __init__(self):
         super().__init__('lunar_node')
-        self.publisher_ = self.create_publisher(Float32, 'distance', 10)
-        self.timer = self.create_timer(.5, self.timer_callback)
+        self.sensor_qos = QoSProfile(depth=1,reliability=ReliabilityPolicy.BEST_EFFORT)
+        self.publisher_ = self.create_publisher(Float32, 'distance', self.sensor_qos)
+        self.timer = self.create_timer(.1, self.timer_callback)
         self.sensor = LunarNode()
 
     def timer_callback(self):
         d,s = self.sensor.get_distance()
         msg = Float32()
         msg.data = float(d)
-        print(msg.data)
+        self.get_logger().info(f"Publishing: {d} {time.time()}")
         self.publisher_.publish(msg)
 
 

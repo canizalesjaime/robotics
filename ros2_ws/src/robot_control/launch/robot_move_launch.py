@@ -7,7 +7,8 @@ def generate_launch_description():
         Node(
             package='robot_control',
             executable='lunar',
-            name='l'
+            name='l',
+            output='screen'
         ),
         Node(
             package='robot_control',

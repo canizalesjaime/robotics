@@ -1,4 +1,5 @@
 import serial
+import time
 
 
 class LunarNode():
@@ -9,14 +10,13 @@ class LunarNode():
         print("Reading TF-Luna data...")
 
     def get_distance(self):
-        #print(self.ser.in_waiting)
         if self.ser.in_waiting >= 9:
             data = self.ser.read(9)
             # TF-Luna frame starts with 0x59 0x59
             if data[0] == 0x59 and data[1] == 0x59:
                self.distance = data[2] + data[3] * 256
                self.strength = data[4] + data[5] * 256
-        return (self.distance, self.strength) # in cm
+        return (self.distance/2.54, self.strength) # in inches
 
 
 def main():
