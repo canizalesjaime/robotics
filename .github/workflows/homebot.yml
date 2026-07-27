@@ -26,6 +26,8 @@ jobs:
         npm install
         nohup npm run dev > backend.log 2>&1 &
 
+    - name: Setup QEMU
+      uses: docker/setup-qemu-action@v3
   
     - name: Pull backend image
       run: docker pull jaimec21/jazzy_pi:latest
