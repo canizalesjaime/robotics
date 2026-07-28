@@ -58,6 +58,7 @@ jobs:
       run: |
         docker exec ros2-container bash -c "
           cd /workspaces/homebot/ros2_ws
+          source install/setup.bash
           colcon build
           source install/setup.bash
           "
