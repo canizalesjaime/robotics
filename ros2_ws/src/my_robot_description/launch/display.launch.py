@@ -16,7 +16,7 @@ def generate_launch_description():
     rviz_config_path = PathJoinSubstitution([
         FindPackageShare(pkg_name),
         'rviz',
-        'my_robot.rviz'
+        'homebot.rviz'
     ])
 
     return LaunchDescription([
