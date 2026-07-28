@@ -32,3 +32,7 @@
 
 */yolov8n.pt
 *desktop.ini
+*top.stl
+*top_cover.stl
+*lidar_base.stl
+*/core

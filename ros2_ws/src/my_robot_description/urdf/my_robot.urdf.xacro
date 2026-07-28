@@ -1,34 +1,345 @@
 <?xml version="1.0"?>
 <robot name="my_robot" xmlns:xacro="http://ros.org/wiki/xacro">
-  <xacro:property name="wheel_radius" value="0.03"/>
-  <xacro:property name="base_width" value="0.2"/>
 
-  <link name="base_link">
+  <!-- ========================================================= -->
+  <!-- Dimensions (meters)                                       -->
+  <!-- ========================================================= -->
+
+  <xacro:property name="base_length" value="0.1524"/>
+  <xacro:property name="base_width"  value="0.1270"/>
+  <xacro:property name="base_height" value="0.0508"/>
+
+  <xacro:property name="wheel_radius" value="0.0205"/>
+  <xacro:property name="wheel_width"  value="0.0170"/>
+
+  <xacro:property name="caster_length" value="0.0300"/>
+  <xacro:property name="caster_width"  value="0.0240"/>
+  <xacro:property name="caster_height" value="0.0200"/>
+
+  <xacro:property name="servo_size" value="0.0508"/>
+
+  <xacro:property name="lidar_length" value="0.0350"/>
+  <xacro:property name="lidar_width"  value="0.0120"/>
+  <xacro:property name="lidar_height" value="0.02125"/>
+
+  <!-- ========================================================= -->
+  <!-- Base Footprint                                             -->
+  <!-- ========================================================= -->
+
+  <link name="base_footprint"/>
+
+  <!-- ========================================================= -->
+  <!-- Base Link (Drive axle center)                              -->
+  <!-- ========================================================= -->
+
+  <link name="base_link"/>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+
+    <!-- wheel axle above floor -->
+    <origin xyz="0 0 ${wheel_radius}" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ========================================================= -->
+  <!-- Base Mesh                                                  -->
+  <!-- ========================================================= -->
+
+  <link name="base_mesh_link">
+
     <visual>
+      <origin xyz="0 0 0.0254" rpy="0 0 0"/>
+
       <geometry>
-        <box size="0.2 0.15 0.05"/>
+        <mesh filename="package://my_robot_description/meshes/base.stl"
+              scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="blue">
-        <color rgba="0 0 1 1"/>
+
+      <material name="white">
+        <color rgba="1 1 1 1"/>
       </material>
     </visual>
+
+    <collision>
+      <origin xyz="0 0 0.0254"/>
+
+      <geometry>
+        <box size="${base_length} ${base_width} ${base_height}"/>
+      </geometry>
+    </collision>
+
   </link>
 
-  <link name="ultrasonic_link">
+  <joint name="base_mesh_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="base_mesh_link"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+
+  <!-- ========================================================= -->
+  <!-- Base Cover                                                 -->
+  <!-- ========================================================= -->
+
+  <link name="base_cover_link">
+
     <visual>
+    <origin xyz="0 0 0.0635" rpy="0 0 0"/>
+
       <geometry>
-        <cylinder length="0.02" radius="0.01"/>
+        <mesh filename="package://my_robot_description/meshes/base_cover.stl"
+              scale="0.001 0.001 0.001"/>
       </geometry>
-      <origin xyz="0.1 0 0.03" rpy="0 0 0"/>
-      <material name="grey">
+
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0.0635"/>
+
+      <geometry>
+        <box size="${base_length} ${base_width} .002"/>
+      </geometry>
+    </collision>
+
+  </link>
+
+  <joint name="base_cover_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="base_cover_link"/>
+
+    <origin xyz="0 0 0"/>
+  </joint>
+
+  <!-- ========================================================= -->
+  <!-- Left Wheel                                                 -->
+  <!-- ========================================================= -->
+
+  <link name="left_wheel_link">
+
+    <visual>
+
+      <origin rpy="1.5708 0 0"/>
+
+      <geometry>
+        <cylinder radius="${wheel_radius}"
+                  length="${wheel_width}"/>
+      </geometry>
+
+      <material name="black">
+        <color rgba="0.1 0.1 0.1 1"/>
+      </material>
+
+    </visual>
+
+  </link>
+
+  <joint name="left_wheel_joint" type="continuous">
+
+    <parent link="base_link"/>
+    <child link="left_wheel_link"/>
+
+    <origin xyz="-0.05715 0.0720 0"/>
+
+    <axis xyz="0 1 0"/>
+
+  </joint>
+
+  <!-- ========================================================= -->
+  <!-- Right Wheel                                                -->
+  <!-- ========================================================= -->
+
+  <link name="right_wheel_link">
+
+    <visual>
+
+      <origin rpy="1.5708 0 0"/>
+
+      <geometry>
+        <cylinder radius="${wheel_radius}"
+                  length="${wheel_width}"/>
+      </geometry>
+
+      <material name="black">
+        <color rgba="0.1 0.1 0.1 1"/>
+      </material>
+
+    </visual>
+
+  </link>
+
+  <joint name="right_wheel_joint" type="continuous">
+
+    <parent link="base_link"/>
+    <child link="right_wheel_link"/>
+
+    <origin xyz="-0.05715 -0.0720 0"/>
+
+    <axis xyz="0 1 0"/>
+
+  </joint>
+
+  <!-- ========================================================= -->
+  <!-- Caster                                                     -->
+  <!-- ========================================================= -->
+
+  <link name="caster_link">
+
+    <visual>
+
+      <geometry>
+        <box size="${caster_length}
+                   ${caster_width}
+                   ${caster_height}"/>
+      </geometry>
+
+      <material name="gray">
         <color rgba="0.5 0.5 0.5 1"/>
       </material>
+
     </visual>
+
   </link>
 
-  <joint name="ultrasonic_joint" type="fixed">
+  <joint name="caster_joint" type="fixed">
+
     <parent link="base_link"/>
-    <child link="ultrasonic_link"/>
-    <origin xyz="0.1 0 0.03" rpy="0 0 0"/>
+    <child link="caster_link"/>
+
+    <origin xyz="0.0762 0 -0.0205"/>
+
   </joint>
+
+  <!-- ========================================================= -->
+  <!-- MPU6050                                                    -->
+  <!-- ========================================================= -->
+
+  <link name="imu_link">
+
+    <visual>
+
+      <geometry>
+        <box size="0.020 0.015 0.005"/>
+      </geometry>
+
+      <material name="green">
+        <color rgba="0 1 0 1"/>
+      </material>
+
+    </visual>
+
+  </link>
+
+  <joint name="imu_joint" type="fixed">
+
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+
+    <!-- one inch above left wheel -->
+    <origin xyz="-0.05715 0.0720 0.0254"/>
+
+  </joint>
+
+  <!-- ========================================================= -->
+  <!-- Servo                                                      -->
+  <!-- ========================================================= -->
+
+  <link name="servo_link">
+
+    <visual>
+
+      <geometry>
+        <box size="${servo_size}
+                   ${servo_size}
+                   ${servo_size}"/>
+      </geometry>
+
+      <material name="orange">
+        <color rgba="1 0.6 0.1 1"/>
+      </material>
+
+    </visual>
+
+  </link>
+
+  <joint name="servo_joint" type="revolute">
+
+    <parent link="base_link"/>
+    <child link="servo_link"/>
+
+    <origin xyz="0 0 0.0762"/>
+
+    <axis xyz="0 0 1"/>
+
+    <limit
+        lower="-1.5708"
+        upper="1.5708"
+        effort="2"
+        velocity="2"/>
+
+  </joint>
+
+  <!-- ========================================================= -->
+  <!-- LiDAR Base                                                 -->
+  <!-- ========================================================= -->
+
+  <link name="lidar_base_link">
+
+    <visual>
+
+      <geometry>
+        <mesh filename="package://my_robot_description/meshes/lidar_base.stl"
+              scale="0.001 0.001 0.001"/>
+      </geometry>
+
+      <material name="silver">
+        <color rgba="0.75 0.75 0.75 1"/>
+      </material>
+
+    </visual>
+
+  </link>
+
+  <joint name="lidar_base_joint" type="fixed">
+
+    <parent link="servo_link"/>
+    <child link="lidar_base_link"/>
+
+    <origin xyz="0 0 0.0254"/>
+
+  </joint>
+
+  <!-- ========================================================= -->
+  <!-- LiDAR                                                      -->
+  <!-- ========================================================= -->
+
+  <link name="lidar_link">
+
+    <visual>
+
+      <geometry>
+        <box size="${lidar_length}
+                   ${lidar_width}
+                   ${lidar_height}"/>
+      </geometry>
+
+      <material name="white">
+        <color rgba="0.95 0.95 0.95 1"/>
+      </material>
+
+    </visual>
+
+  </link>
+
+  <joint name="lidar_joint" type="fixed">
+
+    <parent link="lidar_base_link"/>
+    <child link="lidar_link"/>
+
+    <origin xyz="0 0 0.021"/>
+
+  </joint>
+
 </robot>

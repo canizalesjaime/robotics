@@ -81,7 +81,7 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 
 # ros2 setup (work in progress)
 ## workspace setup
-1. cd /workspaces/homebot/ros2_ws && colcon build && source install/setup.bash
+1. cd /workspaces/homebot/ros2_ws && colcon build or or colcon build --symlink-install && source install/setup.bash 
 2. ros2 run robot_control \<executable_name\>
 3. ros2 launch robot_control \<executable_name\>
 4. ros2 service call /capture_image std_srvs/srv/Trigger
@@ -119,7 +119,7 @@ docker exec -it ros2-container bash
   - lidar, stop base is lagged
   - make rotate_base and stop_base into a service instead(maybe other "actions" as well)
   - slam/urdf file use dht table for frames and kinematics for arm
-  - fix dockerfile(image on dockerhub works), fix ci/cd
+  - fix dockerfile(image on dockerhub works), fix ci/cd 
   - add camera to docker, maybe get stereo camera
   - fix tennis navigation
   - make a better physical build 
