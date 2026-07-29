@@ -4,10 +4,7 @@
        name="my_robot">
 
 
-<!-- ========================= -->
 <!-- Properties                -->
-<!-- ========================= -->
-
 <xacro:property name="base_length" value="0.1500"/>
 <xacro:property name="base_width"  value="0.1250"/>
 <xacro:property name="base_height" value="0.0508"/>
@@ -15,14 +12,11 @@
 <xacro:property name="wheel_radius" value="0.0205"/>
 <xacro:property name="wheel_width"  value="0.017"/>
 
-<xacro:property name="wheel_x" value="-0.06985"/>
-<xacro:property name="wheel_y" value="0.072"/>
+<xacro:property name="wheel_x" value="0.0225"/>
+<xacro:property name="left_wheel_y" value="0.1335"/>
+<xacro:property name="right_wheel_y" value="-0.0085"/>
 
-
-<!-- ========================= -->
 <!-- Base                      -->
-<!-- ========================= -->
-
 <link name="base_link">
 
     <visual>
@@ -57,12 +51,7 @@
 </link>
 
 
-
-<!-- ========================= -->
 <!-- Wheels                    -->
-<!-- ========================= -->
-
-
 <xacro:macro name="wheel" params="name x y">
 
 <link name="${name}">
@@ -101,7 +90,7 @@
     <parent link="base_link"/>
     <child link="${name}"/>
 
-    <origin xyz="${x} ${y} ${wheel_radius}"
+    <origin xyz="${x} ${y} -0.0105"
             rpy="0 0 0"/>
 
     <axis xyz="0 1 0"/>
@@ -111,25 +100,18 @@
 </xacro:macro>
 
 
-
 <xacro:wheel
     name="left_wheel"
     x="${wheel_x}"
-    y="${wheel_y}"/>
-
+    y="${left_wheel_y}"/>
 
 <xacro:wheel
     name="right_wheel"
     x="${wheel_x}"
-    y="-${wheel_y}"/>
+    y="${right_wheel_y}"/>
 
 
-
-<!-- ========================= -->
 <!-- Front Caster               -->
-<!-- ========================= -->
-
-
 <link name="caster_link">
 
     <visual>
@@ -158,18 +140,13 @@
     <parent link="base_link"/>
     <child link="caster_link"/>
 
-    <origin xyz="0.0762 0 -0.005"
+    <origin xyz="0.140 0.0625 -0.01"
             rpy="0 0 0"/>
 
 </joint>
 
 
-
-<!-- ========================= -->
 <!-- MPU6050 IMU               -->
-<!-- ========================= -->
-
-
 <link name="imu_link">
 
     <visual>
@@ -178,8 +155,8 @@
             <box size="0.01 0.01 0.005"/>
         </geometry>
 
-        <material name="blue">
-            <color rgba="0 0 .5 1"/>
+        <material name="light blue">
+            <color rgba="0 0 .25 1"/>
         </material>
 
     </visual>
@@ -193,18 +170,13 @@
     <parent link="base_link"/>
     <child link="imu_link"/>
 
-    <origin xyz="-0.06985 0.072 0.0459"
+    <origin xyz="0.02 0 0.0459"
             rpy="0 0 0"/>
 
 </joint>
 
 
-
-<!-- ========================= -->
 <!-- Camera                    -->
-<!-- ========================= -->
-
-
 <link name="camera_link">
 
     <visual>
@@ -228,18 +200,13 @@
     <parent link="base_link"/>
     <child link="camera_link"/>
 
-    <origin xyz="0.0762 0.04445 0.075"
+    <origin xyz="0.142 .02 0.035"
             rpy="0 0 0"/>
 
 </joint>
 
 
-
-<!-- ========================= -->
 <!-- LiDAR Servo Housing       -->
-<!-- ========================= -->
-
-
 <link name="lidar_base_link">
 
     <visual>
@@ -269,24 +236,18 @@
 
 
 <!-- Servo enclosure is fixed to robot -->
-
 <joint name="lidar_base_joint" type="fixed">
 
     <parent link="base_link"/>
     <child link="lidar_base_link"/>
 
-    <origin xyz="0 0 0.075"
-            rpy="0 0 0"/>
+    <origin xyz=".05 .143 -0.0625"
+            rpy="1.5708 0 0"/>
 
 </joint>
 
 
-
-<!-- ========================= -->
 <!-- Stationary Base Cover     -->
-<!-- ========================= -->
-
-
 <link name="base_cover_link">
 
     <visual>
@@ -305,24 +266,18 @@
 </link>
 
 
-
 <joint name="base_cover_joint" type="fixed">
 
     <parent link="base_link"/>
     <child link="base_cover_link"/>
 
-    <origin xyz="0 0 0.055"
+    <origin xyz="0 0 0.050"
             rpy="0 0 0"/>
 
 </joint>
 
 
-
-<!-- ========================= -->
 <!-- Rotating LiDAR            -->
-<!-- ========================= -->
-
-
 <link name="lidar_link">
 
     <visual>
@@ -341,16 +296,14 @@
 </link>
 
 
-
 <!-- Servo shaft rotates lidar -->
-
 <joint name="lidar_rotation_joint" type="revolute">
 
     <parent link="lidar_base_link"/>
     <child link="lidar_link"/>
 
-    <origin xyz="0 0 0.045"
-            rpy="0 0 0"/>
+    <origin xyz=".03 .125 .0855"
+            rpy="-1.5708 0 0"/>
 
     <axis xyz="0 0 1"/>
 

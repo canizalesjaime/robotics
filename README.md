@@ -115,6 +115,9 @@ docker run -it --rm --init --privileged --net=host --name ros2-container -v /hom
 
 4. open another terminal for container:
 docker exec -it ros2-container bash
+
+
+
 # To Do
 1. homebot: 
   - lidar, stop base is lagged
@@ -123,7 +126,7 @@ docker exec -it ros2-container bash
   - fix dockerfile(image on dockerhub works), fix ci/cd 
   - add camera to docker, maybe get stereo camera
   - fix tennis navigation
-  - make a better physical build 
+  - make a better physical build, make your own lidar base link, reprint tftree
 2. using pytorch course make an unsupervised grasping model, use jetson orin(check out study material on nvidia(test with olama))
 3. try networking between computer, arm, and homebot use ros_ip. Look into networking and firewalls and other security features.   
 4. add flutter app

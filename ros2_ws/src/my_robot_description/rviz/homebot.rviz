@@ -7,6 +7,7 @@ Panels:
         - /Global Options1
         - /Status1
         - /RobotModel1
+        - /RobotModel1/Links1/base_link1
       Splitter Ratio: 0.5
     Tree Height: 358
   - Class: rviz_common/Selection
@@ -66,9 +67,14 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        base_link:
+        base_cover_link:
           Alpha: 1
           Show Axes: false
+          Show Trail: false
+          Value: true
+        base_link:
+          Alpha: 1
+          Show Axes: true
           Show Trail: false
           Value: true
         camera_link:
@@ -96,14 +102,9 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        lidar_cover_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
         lidar_link:
           Alpha: 1
-          Show Axes: false
+          Show Axes: true
           Show Trail: false
           Value: true
         right_wheel:
@@ -180,10 +181,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.3453980088233948
+      Pitch: -0.014601967297494411
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.568583011627197
+      Yaw: 3.1735832691192627
     Saved: ~
 Window Geometry:
   Displays:
@@ -201,5 +202,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1280
-  X: 0
-  Y: 23
+  X: 8
+  Y: 31
