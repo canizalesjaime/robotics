@@ -126,7 +126,7 @@ docker exec -it ros2-container bash
   - fix dockerfile(image on dockerhub works), fix ci/cd 
   - add camera to docker, maybe get stereo camera
   - fix tennis navigation
-  - make a better physical build, make your own lidar base link, reprint tftree
+  - make a better physical build, make your own lidar base link
 2. using pytorch course make an unsupervised grasping model, use jetson orin(check out study material on nvidia(test with olama))
 3. try networking between computer, arm, and homebot use ros_ip. Look into networking and firewalls and other security features.   
 4. add flutter app
