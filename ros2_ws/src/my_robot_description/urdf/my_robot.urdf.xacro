@@ -74,6 +74,10 @@
         </geometry>
 
         <origin rpy="1.5708 0 0"/>
+
+        <material name="black">
+            <color rgba="0 0 0 1"/>
+        </material>
     </visual>
 
 
@@ -132,6 +136,10 @@
         <geometry>
             <sphere radius="0.015"/>
         </geometry>
+
+        <material name="gray">
+            <color rgba=".35 .35 .35 1"/>
+        </material>
     </visual>
 
 
@@ -170,6 +178,10 @@
             <box size="0.01 0.01 0.005"/>
         </geometry>
 
+        <material name="blue">
+            <color rgba="0 0 .5 1"/>
+        </material>
+
     </visual>
 
 
@@ -200,6 +212,10 @@
         <geometry>
             <box size="0.015 0.015 0.015"/>
         </geometry>
+
+        <material name="red">
+            <color rgba="1 0 0 1"/>
+        </material>
 
     </visual>
 
@@ -233,6 +249,10 @@
                   scale="0.001 0.001 0.001"/>
         </geometry>
 
+        <material name="gray">
+            <color rgba=".35 .35 .35 1"/>
+        </material>
+
     </visual>
 
 
@@ -245,10 +265,10 @@
 
     </collision>
 
-
 </link>
 
 
+<!-- Servo enclosure is fixed to robot -->
 
 <joint name="lidar_base_joint" type="fixed">
 
@@ -263,11 +283,11 @@
 
 
 <!-- ========================= -->
-<!-- Rotating LiDAR cover      -->
+<!-- Stationary Base Cover     -->
 <!-- ========================= -->
 
 
-<link name="lidar_cover_link">
+<link name="base_cover_link">
 
     <visual>
 
@@ -276,35 +296,30 @@
                   scale="0.001 0.001 0.001"/>
         </geometry>
 
+        <material name="white">
+            <color rgba="1 1 1 1"/>
+        </material>
+
     </visual>
 
 </link>
 
 
 
-<joint name="lidar_rotation_joint" type="revolute">
+<joint name="base_cover_joint" type="fixed">
 
-    <parent link="lidar_base_link"/>
-    <child link="lidar_cover_link"/>
+    <parent link="base_link"/>
+    <child link="base_cover_link"/>
 
-    <origin xyz="0 0 0"
+    <origin xyz="0 0 0.055"
             rpy="0 0 0"/>
-
-    <axis xyz="0 0 1"/>
-
-
-    <limit
-        lower="-3.14159"
-        upper="3.14159"
-        effort="2"
-        velocity="5"/>
 
 </joint>
 
 
 
 <!-- ========================= -->
-<!-- LiDAR Sensor              -->
+<!-- Rotating LiDAR            -->
 <!-- ========================= -->
 
 
@@ -317,23 +332,34 @@
                       length="0.02"/>
         </geometry>
 
-    </visual>
+        <material name="black">
+            <color rgba="0 1 0 1"/>
+        </material>
 
+    </visual>
 
 </link>
 
 
 
-<joint name="lidar_joint" type="fixed">
+<!-- Servo shaft rotates lidar -->
 
-    <parent link="lidar_cover_link"/>
+<joint name="lidar_rotation_joint" type="revolute">
+
+    <parent link="lidar_base_link"/>
     <child link="lidar_link"/>
 
-    <origin xyz="0 0 0.025"
+    <origin xyz="0 0 0.045"
             rpy="0 0 0"/>
 
+    <axis xyz="0 0 1"/>
+
+    <limit
+        lower="-3.14159"
+        upper="3.14159"
+        effort="2"
+        velocity="5"/>
+
 </joint>
-
-
 
 </robot>
