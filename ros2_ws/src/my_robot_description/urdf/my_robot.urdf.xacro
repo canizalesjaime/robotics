@@ -120,7 +120,7 @@
         </geometry>
 
         <material name="gray">
-            <color rgba=".35 .35 .35 1"/>
+            <color rgba=".5 .5 .5 1"/>
         </material>
     </visual>
 
@@ -186,7 +186,7 @@
         </geometry>
 
         <material name="green">
-            <color rgba="0 1 0 1"/>
+            <color rgba=".2 .2 .2 1"/>
         </material>
 
     </visual>
@@ -217,7 +217,7 @@
         </geometry>
 
         <material name="gray">
-            <color rgba=".35 .35 .35 1"/>
+            <color rgba=".5 .5 .5 1"/>
         </material>
 
     </visual>
@@ -258,7 +258,7 @@
         </geometry>
 
         <material name="white">
-            <color rgba="1 1 1 1"/>
+            <color rgba="1 1 1 .25"/>
         </material>
 
     </visual>
@@ -308,8 +308,8 @@
     <axis xyz="0 0 1"/>
 
     <limit
-        lower="-3.14"
-        upper="3.14"
+        lower="-2.6"
+        upper="-.4"
         effort="2"
         velocity="5"/>
 
@@ -326,7 +326,7 @@
         </geometry>
 
         <material name="gray">
-            <color rgba=".35 .35 .35 1"/>
+            <color rgba=".5 .5 .5 1"/>
         </material>
 
     </visual>
@@ -338,7 +338,7 @@
     <parent link="servo_link"/>
     <child link="top_link"/>
 
-    <origin xyz="-.04 .09 -.125"
+    <origin xyz="-.0375 .085 -.125"
             rpy="1.5708 0 0"/>
 
 </joint>
@@ -363,7 +363,7 @@
     <parent link="top_link"/>
     <child link="lidar_link"/>
 
-    <origin xyz="0 .15 .11"
+    <origin xyz=".04 .17 .09"
             rpy="0 0 0"/>
 
 </joint>

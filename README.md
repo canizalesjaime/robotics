@@ -120,7 +120,6 @@ docker exec -it ros2-container bash
 
 # To Do
 1. homebot: 
-  - fix top, new tfframes and new rviz image
   - lidar, stop base is lagged
   - make rotate_base and stop_base into a service instead(maybe other "actions" as well)
   - slam/urdf file use dht table for frames and kinematics for arm
