@@ -86,7 +86,8 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 3. ros2 launch robot_control \<executable_name\>
 4. ros2 service call /capture_image std_srvs/srv/Trigger
 5. xhost +local:root and xhost -local:root for rviz2 on linux
-6. ros2 run tf2_tools view_frames
+6. ros2 run tf2_tools view_frames (saves pdf frames)
+7. ros2 pkg create my_robot_description --build-type ament_python 
 
 
 ## docker container to run on pi which is ubuntu based with ros2 installed + peripheral libraries

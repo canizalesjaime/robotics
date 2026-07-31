@@ -35,3 +35,4 @@
 *top.stl
 *lidar_base.stl
 */core
+ros2_ws/src/arm_description/meshes*
