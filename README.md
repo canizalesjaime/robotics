@@ -18,26 +18,18 @@ another dockerfile sets up dependencies on raspberry pi 5 to run backend.<br>
 
 ## Hardware
 * stl files used for 3D printing robot base included in [freecad_files](./free_cad_files)
-* pcb board power by a 7.4V LiPo battery 2200mAh, buck converter to 5V to power raspberry pi 5, 7.4V used to power all the motors(4 servo, 2 tt motors)
+* pcb board power by a 7.4V LiPo battery 2200mAh, buck converter to 5V to power raspberry pi 5 and 4 servo motors, 7.4V used to power all the tt motors(with encoders)
 * The robotic arm shown in was 3D printed using a model created by [FABRI_CREATOR](https://cults3d.com/en/users/FABRI_CREATOR).  
 STL file available here: [Mini Robotic Arm on Cults3D](https://cults3d.com/en/3d-model/gadget/mini-robotic-arm)  
 Licensed under Cults PU (Personal Use) – No commercial use or AI applications.
 
 
 ### Peripheral Sensors, Motor Drivers Used on Raspberry pi 5
-#### Ultrasonic HCSR04(no longer used)
-* VCC -> PIN 2(5V)
-* TRIG -> PIN 29 (GPIO 5)
-* ECHO -> PIN 31 (GPIO 6) with voltage divider
-* GND -> PIN 39 (GND)
-
-
 #### Accelerometer MPU6050 
 * VCC -> PCB
 * GND -> PIN 6 (GND)
 * SCL -> PCB
 * SDA -> PCB
-
 
 #### TB6612 Motor Driver 1
 * GND -> LIPO Battery and PIN 9 (GND)
@@ -51,7 +43,7 @@ Licensed under Cults PU (Personal Use) – No commercial use or AI applications.
 * STBY -> PIN 22 (GPIO 25) 
 * VCC -> PIN 17
 
-#### PCA9865
+#### PCA9685 12-bit PWM controller
 * VCC(3.3) -> PCB
 * SDA -> PCB
 * SCL -> PCB
@@ -64,7 +56,6 @@ Licensed under Cults PU (Personal Use) – No commercial use or AI applications.
 * GND -> PIN 14
 
 
-
 # Working Setup
 ## Web App(Frontend)
 * Note: Recommended to use another computer for this part to take some of the load off raspberry pi 5. Still works if you decide to use the raspberry pi 5 just a bit slower.
@@ -72,26 +63,7 @@ Licensed under Cults PU (Personal Use) – No commercial use or AI applications.
 1. ```docker build -f ./robot_dashboard.Dockerfile -t web-setup . ```
 2. ```docker run -it --rm --net=host --name web-container -v /home/jaime/homebot:/workspace web-setup:latest```
 
-## Backend  
-* run on raspeberry pi 5(in container created by dockerfile [humble_pi.Dockerfile](./.devcontainer/humble_pi.Dockerfile)): 
-```
-uvicorn main:app --host 0.0.0.0 --port 8000
-```
-
-
-# ros2 setup (work in progress)
-## workspace setup
-1. cd /workspaces/homebot/ros2_ws && colcon build or or colcon build --symlink-install && source install/setup.bash 
-2. ros2 run robot_control \<executable_name\>
-3. ros2 launch robot_control \<executable_name\>
-4. ros2 service call /capture_image std_srvs/srv/Trigger
-5. xhost +local:root and xhost -local:root for rviz2 on linux
-6. ros2 run tf2_tools view_frames (saves pdf frames)
-7. ros2 pkg create my_robot_description --build-type ament_python  (create package)
-8. ros2 run rqt_graph rqt_graph (sub-pub architecture)
-
-
-## docker container to run on pi which is ubuntu based with ros2 installed + peripheral libraries
+## Backend(must run on raspberry pi)  
 1. docker build -f ./humble_pi.Dockerfile -t ros2-setup .
 2. docker run -it --rm \
   --init \
@@ -111,13 +83,36 @@ uvicorn main:app --host 0.0.0.0 --port 8000
   -v /home/jaime/homebot:/workspace \
   ros2-setup:latest \
   /bin/bash
+3. Testing backend without ros2:
+```
+uvicorn main:app --host 0.0.0.0 --port 8000
+```
 
-3. simple:
+### workspace setup(backend with ros2)
+1. source /opt/jazzy/setup.bash
+2. cd /workspaces/homebot/ros2_ws
+3. colcon build or or colcon build --symlink-install
+4. source install/setup.bash
+5. ros2 launch robot_control robot_move_launch.py
+6. ros2 launch my_robot_description display.launch.py
+
+
+### useful commands to remember
+1. ros2 service call /capture_image std_srvs/srv/Trigger
+2. xhost +local:root and xhost -local:root (for rviz2 on kubuntu)
+3. ros2 run tf2_tools view_frames (saves tf frames in pdf)
+4. ros2 pkg create my_robot_description --build-type ament_python  (create package)
+5. ros2 run rqt_graph rqt_graph (view sub-pub architecture)
+6. ros2 run \<package_name\> \<executable_name\>
+7. ros2 launch \<package_name\> \<executable_name\>
+8. simple docker:
+```
 docker run -it --rm --init --privileged --net=host --name ros2-container -v /home/jaime/homebot:/workspaces/homebot jaimec21/jazzy_pi:latest
-
-4. open another terminal for container:
+```
+9. open another terminal for container:
+```
 docker exec -it ros2-container bash
-
+```
 
 
 # To Do
