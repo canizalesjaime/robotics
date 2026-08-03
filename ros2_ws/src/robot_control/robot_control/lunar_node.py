@@ -21,7 +21,7 @@ class LunarRos(Node):
         d,s = self.sensor.get_distance()
         msg = Float32()
         msg.data = float(d)
-        self.get_logger().info(f"Publishing: {d} {time.time()}")
+        #self.get_logger().info(f"Publishing: {d} {time.time()}")
         self.publisher_.publish(msg)
 
 

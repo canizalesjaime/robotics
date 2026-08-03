@@ -87,7 +87,8 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 4. ros2 service call /capture_image std_srvs/srv/Trigger
 5. xhost +local:root and xhost -local:root for rviz2 on linux
 6. ros2 run tf2_tools view_frames (saves pdf frames)
-7. ros2 pkg create my_robot_description --build-type ament_python 
+7. ros2 pkg create my_robot_description --build-type ament_python  (create package)
+8. ros2 run rqt_graph rqt_graph (sub-pub architecture)
 
 
 ## docker container to run on pi which is ubuntu based with ros2 installed + peripheral libraries
@@ -123,11 +124,11 @@ docker exec -it ros2-container bash
 1. homebot: 
   - lidar, stop base is lagged
   - make rotate_base and stop_base into a service instead(maybe other "actions" as well)
-  - slam/urdf file use dht table for frames and kinematics for arm
-  - fix dockerfile(image on dockerhub works), fix ci/cd 
+  - slam/urdf file for frames and kinematics for arm, differential-drive for homebot, visualize lidar, camera, bno055,and motors in rviz
+  - fix dockerfile(image on dockerhub works), run both launch files to get full sub-pub arch
   - add camera to docker, maybe get stereo camera
   - fix tennis navigation
-  - make a better physical build, make your own lidar base link
+  - make a better physical build, make your own lidar base link,replace mpu6050 with bno055, encoder equipped tt motors
 2. using pytorch course make an unsupervised grasping model, use jetson orin(check out study material on nvidia(test with olama))
 3. try networking between computer, arm, and homebot use ros_ip. Look into networking and firewalls and other security features.   
 4. add flutter app
