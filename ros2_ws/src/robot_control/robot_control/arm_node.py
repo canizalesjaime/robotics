@@ -19,7 +19,7 @@ class ArmRos(Node):
         self.create_subscription(Float32,'distance',self.distance_callback,1)
 
         self.joint_pub = self.create_publisher(JointState,"/joint_states",10)
-
+        self.scan_pub = self.create_publisher(LaserScan,"/scan",10)
 
         self.arm = ArmNode()
         self.rotating = True
@@ -63,6 +63,8 @@ class ArmRos(Node):
 
 
                 scan.intensities = []
+                print(msg)
+                print(scan)
                 self.scan_pub.publish(scan)
                 self.arm.move_smooth("base",30)#reset
                       
