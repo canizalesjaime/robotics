@@ -48,6 +48,7 @@ class ArmRos(Node):
                 scan.angle_max = math.radians(150)
                 scan.angle_increment = math.radians(10)
                 scan.ranges=[]
+                scan.intensities = []
                 scan.time_increment = 0.05
                 scan.scan_time = 0.6
                 scan.range_min = 0.04
@@ -59,10 +60,11 @@ class ArmRos(Node):
                     msg.header.stamp = self.get_clock().now().to_msg()
                     msg.position = [angle]
                     scan.ranges.append(self.lidar_data)
+                    scan.intensities.append(1000)
                     self.joint_pub.publish(msg)
 
 
-                scan.intensities = []
+                
                 print(msg)
                 print(scan)
                 self.scan_pub.publish(scan)
