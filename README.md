@@ -119,15 +119,15 @@ docker exec -it ros2-container bash
   - lidar, stop base is lagged, dont see lidar points: sensor_msgs.msg.JointState(header=std_msgs.msg.Header(stamp=builtin_interfaces.msg.Time(sec=1785800243, nanosec=113936840), frame_id=''), name=['servo_rotation_joint'], position=[2.6179938779914944], velocity=[], effort=[])
 sensor_msgs.msg.LaserScan(header=std_msgs.msg.Header(stamp=builtin_interfaces.msg.Time(sec=1785800241, nanosec=579219579), frame_id='lidar_link'), angle_min=0.5235987755982988, angle_max=2.6179938779914944, angle_increment=0.17453292519943295, time_increment=0.05, scan_time=0.6, range_min=0.04, range_max=4.0, ranges=[4.800000190734863, 4.800000190734863, 4.800000190734863, 4.800000190734863, 4.800000190734863, 4.800000190734863, 4.800000190734863, 4.800000190734863, 4.800000190734863, 4.800000190734863, 4.800000190734863, 4.800000190734863, 4.800000190734863], intensities=[1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0, 1000.0])
   - make rotate_base and stop_base into a service instead(maybe other "actions" as well)
-  - slam/urdf file for frames and kinematics for arm, differential-drive for homebot, visualize lidar, camera, bno055,and motors in rviz
+  - slam/urdf file for frames and kinematics for arm, differential-drive for homebot, visualize lidar, camera, bno055,and motors in rviz, fix orientation of lidar in rviz when publishing servo rotation(test solution)
   - fix dockerfile(image on dockerhub works), run both launch files to get full sub-pub arch
   - add camera to docker, maybe get stereo camera
   - fix tennis navigation
   - make a better physical build, make your own lidar base link,replace mpu6050 with bno055, encoder equipped tt motors
-2. using pytorch course make an unsupervised grasping model, use jetson orin(check out study material on nvidia(test with olama))
-3. try networking between computer, arm, and homebot use ros_ip. Look into networking and firewalls and other security features.   
-4. add flutter app
-5. autocad or freecad for designing: drone version, pcb board
+  - try networking between computer, and homebot use ros_ip. Look into networking and firewalls and other security features.
+2. using pytorch course make an unsupervised grasping model, use jetson orin(check out study material on nvidia(test with olama))   
+3. add flutter app
+4. autocad or freecad for designing: drone version, pcb board
 
 
 [CODE LINK](https://github.com/canizalesjaime/homebot)

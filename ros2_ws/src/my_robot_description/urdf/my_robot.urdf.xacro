@@ -303,13 +303,13 @@
     <child link="servo_link"/>
 
     <origin xyz=".04 .125 .0875"
-            rpy="-1.5708 0 0"/>
+            rpy="-1.5708 3.14159 0"/>
 
     <axis xyz="0 0 1"/>
 
     <limit
-        lower="-2.6"
-        upper="-.4"
+        lower=".52"
+        upper="2.62"
         effort="2"
         velocity="5"/>
 
