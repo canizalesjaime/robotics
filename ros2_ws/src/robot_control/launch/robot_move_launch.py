@@ -7,28 +7,28 @@ def generate_launch_description():
         Node(
             package='robot_control',
             executable='lunar',
-            name='l',
+            #name='l',
             output='screen'
         ),
         Node(
             package='robot_control',
             executable='mpu6050',
-            name='i'
+            #name='i'
         ),
         Node(
             package='robot_control',
             executable='motor',
-            name='m'
+            #name='m'
         ),
         Node(
             package='robot_control',
             executable='arm',
-            name='a'
+            #name='a'
         ),
         Node(
             package='robot_control',
             executable='robot_interface',
-            name='r',
+            #name='r',
             parameters=[
               {
                "host": "0.0.0.0",

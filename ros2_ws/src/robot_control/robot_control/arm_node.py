@@ -43,7 +43,7 @@ class ArmRos(Node):
 
                 scan = LaserScan()
                 scan.header.stamp = self.get_clock().now().to_msg()
-                scan.header.frame_id = "lidar_link"
+                scan.header.frame_id = "servo_link"
                 scan.angle_min = math.radians(30)
                 scan.angle_max = math.radians(150)
                 scan.angle_increment = math.radians(10)
@@ -52,7 +52,7 @@ class ArmRos(Node):
                 scan.time_increment = 0.05
                 scan.scan_time = 0.6
                 scan.range_min = 0.000004
-                scan.range_max = 200.00
+                scan.range_max = 50.00
 
                 for angle in range(30,160,10):
                     self.arm.move_smooth("base",angle)

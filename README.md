@@ -116,9 +116,9 @@ docker exec -it ros2-container bash
 
 # To Do
 1. homebot: 
-  - lidar, stop base is lagged, dont see lidar points in rviz(test fix)
+  - lidar and stop base is lagged
   - make rotate_base and stop_base into a service instead(maybe other "actions" as well)
-  - slam/urdf file for frames and kinematics for arm, differential-drive for homebot, visualize lidar, camera, bno055,and motors in rviz, fix orientation of lidar in rviz when publishing servo rotation(test solution)
+  - slam/urdf file for frames and kinematics for arm, differential-drive for homebot-odom and joint states, visualize lidar, camera, bno055,and motors in rviz
   - fix dockerfile(image on dockerhub works), run both launch files to get full sub-pub arch
   - add camera to docker, maybe get stereo camera
   - fix tennis navigation

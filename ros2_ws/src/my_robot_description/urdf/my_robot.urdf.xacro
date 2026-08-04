@@ -84,8 +84,8 @@
 
 </link>
 
-
-<joint name="${name}_joint" type="continuous">
+<!-- change type to continuous when moving -->
+<joint name="${name}_joint" type="fixed">
 
     <parent link="base_link"/>
     <child link="${name}"/>
@@ -134,7 +134,7 @@
 
 </link>
 
-
+<!-- change type to continuous when moving -->
 <joint name="caster_joint" type="fixed">
 
     <parent link="base_link"/>

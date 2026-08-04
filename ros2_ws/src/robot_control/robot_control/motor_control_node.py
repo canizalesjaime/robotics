@@ -1,6 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String, Int32
+#from sensor_msgs.msg import JointState
 
 import robot_control.paths
 from motor_node import MotorNode
@@ -11,6 +12,8 @@ class MotorRos(Node):
         super().__init__('motor_control_node')
         self.cmd_sub = self.create_subscription(String, 'cmd_motor', self.cmd_callback, 10)
         self.speed_sub = self.create_subscription(Int32, 'cmd_speed', self.speed_callback, 10)
+        #self.joint_pub = self.create_publisher(JointState,"/wheel_states",10)
+
         self.motors=MotorNode()
 
     def cmd_callback(self, msg):
