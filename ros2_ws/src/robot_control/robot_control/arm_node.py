@@ -51,8 +51,8 @@ class ArmRos(Node):
                 scan.intensities = []
                 scan.time_increment = 0.05
                 scan.scan_time = 0.6
-                scan.range_min = 0.04
-                scan.range_max = 4.0
+                scan.range_min = 0.000004
+                scan.range_max = 200.00
 
                 for angle in range(30,160,10):
                     self.arm.move_smooth("base",angle)

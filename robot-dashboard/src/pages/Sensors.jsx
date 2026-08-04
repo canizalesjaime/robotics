@@ -57,7 +57,7 @@ export default function Sensors() {
       <p>Temp: {data.z}</p>
 
       <h2 className="text-2xl font-bold mb-4"> Lidar:</h2>
-      <p className="mt-4">Distance: {lidar.distance} in</p>
+      <p className="mt-4">Distance: {lidar.distance} meters</p>
       <p>Strength: {lidar.strength}</p>
 
       <div className="mt-4 space-x-2">

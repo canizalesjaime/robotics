@@ -16,7 +16,7 @@ class LunarNode():
             if data[0] == 0x59 and data[1] == 0x59:
                self.distance = data[2] + data[3] * 256
                self.strength = data[4] + data[5] * 256
-        return (self.distance/100, self.strength) # in inches
+        return (self.distance/100, self.strength) # in meters
 
 
 def main():
@@ -24,7 +24,7 @@ def main():
     try:
         while True:
             d,s=node.get_distance()
-            print(f"Distance: {d} cm | Strength: {s}")
+            print(f"Distance: {d} meters | Strength: {s}")
 
     except KeyboardInterrupt:
         print("\nExiting...")
