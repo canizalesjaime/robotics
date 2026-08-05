@@ -63,7 +63,14 @@ Licensed under Cults PU (Personal Use) – No commercial use or AI applications.
 1. ```docker build -f ./robot_dashboard.Dockerfile -t web-setup . ```
 2. ```docker run -it --rm --net=host --name web-container -v /home/jaime/homebot:/workspace web-setup:latest```
 
-## Backend(must run on raspberry pi)  
+## Backend(must run on raspberry pi) 
+### subscriber-publisher architecture
+<img src="./robot-dashboard/public/rosgraph.png" length ="500" >
+
+### transform tree
+<img src="./robot-dashboard/public/tf_tree.png" width ="500" > 
+
+### Docker setup
 1. docker build -f ./humble_pi.Dockerfile -t ros2-setup .
 2. docker run -it --rm \
   --init \
@@ -119,14 +126,13 @@ docker exec -it ros2-container bash
   - lidar and stop base is lagged
   - make rotate_base and stop_base into a service instead(maybe other "actions" as well)
   - slam/urdf file for frames and kinematics for arm, differential-drive for homebot-odom and joint states, visualize lidar, camera, bno055,and motors in rviz
-  - fix dockerfile(image on dockerhub works), run both launch files to get full sub-pub arch
+  - fix dockerfile humble_pi on on pi (image on dockerhub works fine (jazzy_pi))
   - add camera to docker, maybe get stereo camera
   - fix tennis navigation
-  - make a better physical build, make your own lidar base link,replace mpu6050 with bno055, encoder equipped tt motors
-  - try networking between computer, and homebot use ros_ip. Look into networking and firewalls and other security features.
+  - make a better physical build, make your own lidar base link,replace mpu6050 with bno055, encoder equipped tt motors, design pcb board no cables
+  - network between computer, and homebot(ros_ip) for faster rviz. Look into networking and firewalls and other security features.
 2. using pytorch course make an unsupervised grasping model, use jetson orin(check out study material on nvidia(test with olama))   
 3. add flutter app
-4. autocad or freecad for designing: drone version, pcb board
 
 
 [CODE LINK](https://github.com/canizalesjaime/homebot)
