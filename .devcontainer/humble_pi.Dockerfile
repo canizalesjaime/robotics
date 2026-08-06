@@ -53,9 +53,13 @@ RUN echo "source /workspaces/homebot/ros2_ws/install/setup.bash" >> ~/.bashrc
 # #  python3-libcamera \
 # #  python3-pyqt6
 
-# RUN pip3 install mpu6050-raspberrypi adafruit-blinka adafruit-circuitpython-pca9685 --break-system-packages\
+#RUN pip3 install mpu6050-raspberrypi adafruit-blinka adafruit-circuitpython-pca9685 --break-system-packages
 #RUN sudo apt install ros-jazzy-tf-transformations
 #RUN pip3 install fastapi uvicorn ultralytics opencv-python --break-system-packages
+
+
+
+#RUN pip install adafruit-circuitpython-bno055 adafruit-blinka --break-system-packages
 
 
 #RUN pip3 install picamera2 --break-system-packages
