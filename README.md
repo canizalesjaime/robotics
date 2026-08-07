@@ -25,7 +25,7 @@ Licensed under Cults PU (Personal Use) – No commercial use or AI applications.
 
 
 ### Peripheral Sensors, Motor Drivers Used on Raspberry pi 5
-#### Accelerometer MPU6050 
+#### IMU BNO055 
 * VCC -> PCB
 * GND -> PIN 6 (GND)
 * SCL -> PCB
@@ -49,7 +49,7 @@ Licensed under Cults PU (Personal Use) – No commercial use or AI applications.
 * SCL -> PCB
 * GND -> PIN 34
 
-#### Lidar
+#### Lunar Lidar 1D
 * VCC -> PIN 4(5V)
 * RX -> PIN 8 (GPIO 14)
 * TX -> PIN 10(GPIO 15)
@@ -123,13 +123,14 @@ docker exec -it ros2-container bash
 
 # To Do
 1. homebot: 
+  - test BNO055 in rviz
   - lidar and stop base is lagged
   - make rotate_base and stop_base into a service instead(maybe other "actions" as well)
-  - slam/urdf file for frames and kinematics for arm, differential-drive for homebot-odom and joint states, visualize lidar, camera, bno055,and motors in rviz
+  - slam/urdf file for frames and kinematics for arm, differential-drive/odom in rviz
   - fix dockerfile humble_pi on on pi (image on dockerhub works fine (jazzy_pi))
-  - add camera to docker, maybe get stereo camera
+  - add camera to docker and rviz, maybe get stereo camera
   - fix tennis navigation
-  - make a better physical build, make your own lidar base link,replace mpu6050 with bno055, encoder equipped tt motors, design pcb board no cables
+  - make a better physical build, make your own lidar base link,encoder equipped tt motors, design pcb board no cables
   - network between computer, and homebot(ros_ip) for faster rviz. Look into networking and firewalls and other security features.
 2. using pytorch course make an unsupervised grasping model, use jetson orin(check out study material on nvidia(test with olama))   
 3. add flutter app

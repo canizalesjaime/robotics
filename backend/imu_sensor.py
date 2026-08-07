@@ -3,7 +3,7 @@ import busio
 import adafruit_bno055
 
 
-class Imu():
+class ImuSensor():
     def __init__(self):
         self.i2c = busio.I2C(board.SCL, board.SDA)
         self.sensor = adafruit_bno055.BNO055_I2C(self.i2c)
@@ -13,9 +13,6 @@ class Imu():
 
     def get_quaternion(self):
         return self.sensor.quaternion
-
-    def get_gyro(self):
-        return self.sensor.gyro
 
     def get_gyro(self): # angular acceleration
         return self.sensor.gyro
@@ -34,8 +31,8 @@ class Imu():
         
 
 def main():
-    sensor=Imu()    
-    for i in range(10):
+    sensor=ImuSensor()    
+    while True:
         print(sensor.get_euler)
 
 if __name__ == '__main__':

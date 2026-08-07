@@ -32,6 +32,7 @@ setup(
             'lunar = robot_control.lunar_node:main',
             'tester = robot_control.tester:main',
             'robot_interface = robot_control.robot_interface:main',
+            'imu = robot_control.imu_node:main',
         ],
     },
 )
