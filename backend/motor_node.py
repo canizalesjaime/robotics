@@ -31,6 +31,10 @@ class MotorNode():
         self.curr_speed=30
         self.set_speed(self.curr_speed)
 
+        self.left_ticks = 0
+        self.right_ticks = 0
+
+        # Configure GPIO pins, Register callbacks, Initialize timing
 
     ###########################################################################
     def move(self,cmd):
@@ -67,6 +71,25 @@ class MotorNode():
         
 
     ###########################################################################
+    def set_speed(self,percent):
+        percent=min(max(percent,0),100)
+        
+        for name, pin in self.drivers_enable_pin_map.items():
+            GPIO.tx_pwm(self.h, pin, self.frequency, percent)
+
+
+    ###########################################################################
+    def get_ticks(self):
+        return self.left_ticks, self.right_ticks
+
+
+    ###########################################################################
+    def reset_ticks(self):
+        self.left_ticks = 0
+        self.right_ticks = 0
+
+
+    ###########################################################################
     def release_lines(self):
         for name, line in self.drivers_input_map.items():
             line.set_value(0)
@@ -78,14 +101,6 @@ class MotorNode():
 
         self.stby.set_value(0)
         self.stby.release()
-
-
-    ###########################################################################
-    def set_speed(self,percent):
-        percent=min(max(percent,0),100)
-        
-        for name, pin in self.drivers_enable_pin_map.items():
-            GPIO.tx_pwm(self.h, pin, self.frequency, percent)
             
 
 ###############################################################################
