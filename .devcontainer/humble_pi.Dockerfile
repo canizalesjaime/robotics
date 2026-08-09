@@ -59,7 +59,7 @@ RUN echo "source /workspaces/homebot/ros2_ws/install/setup.bash" >> ~/.bashrc
 
 
 
-#RUN pip install adafruit-circuitpython-bno055 adafruit-blinka --break-system-packages
+#RUN pip3 install adafruit-circuitpython-bno055 adafruit-blinka --break-system-packages
 
 
 #RUN pip3 install picamera2 --break-system-packages
