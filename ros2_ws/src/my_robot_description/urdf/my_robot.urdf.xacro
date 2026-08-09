@@ -4,7 +4,6 @@
        name="my_robot">
 
 
-<!-- Properties                -->
 <xacro:property name="base_length" value="0.1500"/>
 <xacro:property name="base_width"  value="0.1250"/>
 <xacro:property name="base_height" value="0.0508"/>
@@ -16,7 +15,7 @@
 <xacro:property name="left_wheel_y" value="0.1335"/>
 <xacro:property name="right_wheel_y" value="-0.0085"/>
 
-<!-- Base                      -->
+
 <link name="base_link">
 
     <visual>
@@ -84,8 +83,7 @@
 
 </link>
 
-<!-- change type to continuous when moving -->
-<joint name="${name}_joint" type="fixed">
+<joint name="${name}_joint" type="continuous">
 
     <parent link="base_link"/>
     <child link="${name}"/>
@@ -111,7 +109,6 @@
     y="${right_wheel_y}"/>
 
 
-<!-- Front Caster               -->
 <link name="caster_link">
 
     <visual>
@@ -134,7 +131,6 @@
 
 </link>
 
-<!-- change type to continuous when moving -->
 <joint name="caster_joint" type="fixed">
 
     <parent link="base_link"/>
@@ -146,7 +142,6 @@
 </joint>
 
 
-<!-- MPU6050 IMU               -->
 <link name="imu_link">
 
     <visual>
@@ -176,7 +171,6 @@
 </joint>
 
 
-<!-- Camera                    -->
 <link name="camera_link">
 
     <visual>
@@ -206,7 +200,6 @@
 </joint>
 
 
-<!-- LiDAR Servo Housing       -->
 <link name="lidar_base_link">
 
     <visual>
@@ -235,7 +228,6 @@
 </link>
 
 
-<!-- Servo enclosure is fixed to robot -->
 <joint name="lidar_base_joint" type="fixed">
 
     <parent link="base_link"/>
@@ -247,7 +239,6 @@
 </joint>
 
 
-<!-- Stationary Base Cover     -->
 <link name="base_cover_link">
 
     <visual>
@@ -277,7 +268,6 @@
 </joint>
 
 
-<!-- Rotating LiDAR            -->
 <link name="servo_link">
 
     <visual>
@@ -296,7 +286,6 @@
 </link>
 
 
-<!-- Servo shaft rotates lidar -->
 <joint name="servo_rotation_joint" type="revolute">
 
     <parent link="lidar_base_link"/>

@@ -19,7 +19,7 @@ class MotorRos(Node):
         self.motors=MotorNode()
 
         # Example conversion factor:Replace with your actual encoder 
-        # calculation later. Get Wheel radius
+        # calculation later. Get Wheel radius, 12 pulses per revolution
         self.TICK_TO_RAD = 0.01
 
     def cmd_callback(self, msg):
