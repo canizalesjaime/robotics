@@ -33,7 +33,7 @@ class ImuSensor():
 def main():
     sensor=ImuSensor()    
     while True:
-        print(sensor.get_euler)
+        print(sensor.get_euler())
 
 if __name__ == '__main__':
     main()
