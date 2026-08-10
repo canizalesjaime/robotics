@@ -133,6 +133,7 @@ docker exec -it ros2-container bash
   - network between computer, and homebot(ros_ip) for faster rviz. Look into networking and firewalls and other security features.
 2. using pytorch course make an unsupervised grasping model, use jetson orin(check out study material on nvidia(test with olama))   
 3. add flutter app
+4. contribute to ros open source
 
 
 [CODE LINK](https://github.com/canizalesjaime/homebot)

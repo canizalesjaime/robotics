@@ -358,4 +358,358 @@
 </joint>
 
 
+<link name="shoulder_link">
+
+    <visual>
+
+        <geometry>
+            <mesh filename="package://my_robot_description/meshes/shoulder_small.stl"
+                  scale="0.001 0.001 0.001"/>
+        </geometry>
+
+        <material name="gray">
+            <color rgba="1 1 1 1"/>
+        </material>
+
+    </visual>
+
+
+    <collision>
+
+        <geometry>
+            <mesh filename="package://my_robot_description/meshes/shoulder_small.stl"
+                  scale="0.001 0.001 0.001"/>
+        </geometry>
+
+    </collision>
+
+</link>
+
+
+
+<joint name="shoulder_joint" type="fixed">
+
+    <parent link="top_link"/>
+    <child link="shoulder_link"/>
+
+    <origin xyz="0 0 0"
+            rpy="0 0 0"/>
+
+</joint>
+
+
+
+<link name="elbow_link">
+
+    <visual>
+
+        <geometry>
+            <mesh filename="package://my_robot_description/meshes/elbow_small.stl"
+                  scale="0.001 0.001 0.001"/>
+        </geometry>
+
+        <material name="gray">
+            <color rgba="1 1 1 1"/>
+        </material>
+
+    </visual>
+
+
+    <collision>
+
+        <geometry>
+            <mesh filename="package://my_robot_description/meshes/elbow_small.stl"
+                  scale="0.001 0.001 0.001"/>
+        </geometry>
+
+    </collision>
+
+</link>
+
+
+
+<joint name="elbow_joint" type="fixed">
+
+    <parent link="shoulder_link"/>
+    <child link="elbow_link"/>
+
+    <origin xyz="0 0 0"
+            rpy="0 0 0"/>
+
+</joint>
+
+<!-- when testing arm, make wheel joints and servo joint fixed -->
+
+<!-- <link name="base_gripper_link">
+
+    <visual>
+
+        <geometry>
+            <mesh filename="package://my_robot_description/meshes/base_gripper.stl"
+                  scale="0.001 0.001 0.001"/>
+        </geometry>
+
+        <material name="gray">
+            <color rgba="1 1 1 1"/>
+        </material>
+
+    </visual>
+
+
+    <collision>
+
+        <geometry>
+            <mesh filename="package://my_robot_description/meshes/base_gripper.stl"
+                  scale="0.001 0.001 0.001"/>
+        </geometry>
+
+    </collision>
+
+</link>
+
+
+<joint name="base_gripper_joint" type="fixed">
+
+    <parent link="elbow_link"/>
+    <child link="base_gripper_link"/>
+
+    <origin xyz="-.03 .155 .045"
+            rpy="0 0 0"/>
+
+</joint>
+
+
+<link name="gear1_link">
+
+    <visual>
+
+        <geometry>
+            <mesh filename="package://my_robot_description/meshes/gear1.stl"
+                  scale="0.001 0.001 0.001"/>
+        </geometry>
+
+        <material name="gray">
+            <color rgba="1 1 1 1"/>
+        </material>
+
+    </visual>
+
+
+    <collision>
+
+        <geometry>
+            <mesh filename="package://my_robot_description/meshes/gear1.stl"
+                  scale="0.001 0.001 0.001"/>
+        </geometry>
+
+    </collision>
+
+</link>
+
+
+<joint name="gear1_joint" type="fixed">
+
+    <parent link="base_gripper_link"/>
+    <child link="gear1_link"/>
+
+    <origin xyz="0 0 0"
+            rpy="0 0 0"/>
+
+</joint>
+
+
+<link name="gear2_link">
+
+    <visual>
+
+        <geometry>
+            <mesh filename="package://my_robot_description/meshes/gear2.stl"
+                  scale="0.001 0.001 0.001"/>
+        </geometry>
+
+        <material name="gray">
+            <color rgba="1 1 1 1"/>
+        </material>
+
+    </visual>
+
+
+    <collision>
+
+        <geometry>
+            <mesh filename="package://my_robot_description/meshes/gear2.stl"
+                  scale="0.001 0.001 0.001"/>
+        </geometry>
+
+    </collision>
+
+</link>
+
+
+<joint name="gear2_joint" type="fixed">
+
+    <parent link="base_gripper_link"/>
+    <child link="gear2_link"/>
+
+    <origin xyz="0 0 0"
+            rpy="0 0 0"/>
+
+</joint>
+
+
+<link name="bar1_link">
+
+    <visual>
+
+        <geometry>
+            <mesh filename="package://my_robot_description/meshes/bar1.stl"
+                  scale="0.001 0.001 0.001"/>
+        </geometry>
+
+        <material name="gray">
+            <color rgba="1 1 1 1"/>
+        </material>
+
+    </visual>
+
+
+    <collision>
+
+        <geometry>
+            <mesh filename="package://my_robot_description/meshes/bar1.stl"
+                  scale="0.001 0.001 0.001"/>
+        </geometry>
+
+    </collision>
+
+</link>
+
+
+<joint name="bar1_joint" type="fixed">
+
+    <parent link="base_gripper_link"/>
+    <child link="bar1_link"/>
+
+    <origin xyz="0 0 0"
+            rpy="0 0 0"/>
+
+</joint>
+
+
+<link name="bar2_link">
+
+    <visual>
+
+        <geometry>
+            <mesh filename="package://my_robot_description/meshes/bar2.stl"
+                  scale="0.001 0.001 0.001"/>
+        </geometry>
+
+        <material name="gray">
+            <color rgba="1 1 1 1"/>
+        </material>
+
+    </visual>
+
+
+    <collision>
+
+        <geometry>
+            <mesh filename="package://my_robot_description/meshes/bar2.stl"
+                  scale="0.001 0.001 0.001"/>
+        </geometry>
+
+    </collision>
+
+</link>
+
+
+<joint name="bar2_joint" type="fixed">
+
+    <parent link="base_gripper_link"/>
+    <child link="bar2_link"/>
+
+    <origin xyz="0 0 0"
+            rpy="0 0 0"/>
+
+</joint>
+
+
+<link name="gripper1_link">
+
+    <visual>
+
+        <geometry>
+            <mesh filename="package://my_robot_description/meshes/gripper1.stl"
+                  scale="0.001 0.001 0.001"/>
+        </geometry>
+
+        <material name="gray">
+            <color rgba="1 1 1 1"/>
+        </material>
+
+    </visual>
+
+
+    <collision>
+
+        <geometry>
+            <mesh filename="package://my_robot_description/meshes/gripper1.stl"
+                  scale="0.001 0.001 0.001"/>
+        </geometry>
+
+    </collision>
+
+</link>
+
+
+<joint name="gripper1_joint" type="fixed">
+
+    <parent link="base_gripper_link"/>
+    <child link="gripper1_link"/>
+
+    <origin xyz="0 0 0"
+            rpy="0 0 0"/>
+
+</joint>
+
+
+<link name="gripper2_link">
+
+    <visual>
+
+        <geometry>
+            <mesh filename="package://my_robot_description/meshes/gripper2.stl"
+                  scale="0.001 0.001 0.001"/>
+        </geometry>
+
+        <material name="gray">
+            <color rgba="1 1 1 1"/>
+        </material>
+
+    </visual>
+
+
+    <collision>
+
+        <geometry>
+            <mesh filename="package://my_robot_description/meshes/gripper2.stl"
+                  scale="0.001 0.001 0.001"/>
+        </geometry>
+
+    </collision>
+
+</link>
+
+
+<joint name="gripper2_joint" type="fixed">
+
+    <parent link="base_gripper_link"/>
+    <child link="gripper2_link"/>
+
+    <origin xyz="0 0 0"
+            rpy="0 0 0"/>
+
+</joint> -->
+
 </robot>

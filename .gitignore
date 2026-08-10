@@ -32,7 +32,16 @@
 
 */yolov8n.pt
 *desktop.ini
-*top.stl
-*lidar_base.stl
 */core
 ros2_ws/src/arm_description/meshes*
+ros2_ws/src/my_robot_description/meshes/top.stl
+ros2_ws/src/my_robot_description/meshes/lidar_base.stl
+ros2_ws/src/my_robot_description/meshes/shoulder_small.stl
+ros2_ws/src/my_robot_description/meshes/elbow_small.stl
+ros2_ws/src/my_robot_description/meshes/base_gripper.stl
+ros2_ws/src/my_robot_description/meshes/gear1.stl
+ros2_ws/src/my_robot_description/meshes/gear2.stl
+ros2_ws/src/my_robot_description/meshes/bar1.stl
+ros2_ws/src/my_robot_description/meshes/bar2.stl
+ros2_ws/src/my_robot_description/meshes/gripper1.stl
+ros2_ws/src/my_robot_description/meshes/gripper2.stl
