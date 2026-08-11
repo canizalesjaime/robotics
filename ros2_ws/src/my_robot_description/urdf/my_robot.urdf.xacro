@@ -50,50 +50,63 @@
 </link>
 
 
-<!-- Wheels                    -->
 <xacro:macro name="wheel" params="name x y">
 
-<link name="${name}">
+    <link name="${name}">
 
-    <visual>
-        <geometry>
-            <cylinder radius="${wheel_radius}"
-                      length="${wheel_width}"/>
-        </geometry>
+        <visual>
+            <geometry>
+                <cylinder radius="${wheel_radius}"
+                          length="${wheel_width}"/>
+            </geometry>
 
-        <origin rpy="1.5708 0 0"/>
+            <origin rpy="1.5708 0 0"/>
 
-        <material name="black">
-            <color rgba="0 0 0 1"/>
-        </material>
-    </visual>
+            <material name="black">
+                <color rgba="0 0 0 1"/>
+            </material>
+        </visual>
+
+        <!-- Rotation marker -->
+        <visual>
+            <geometry>
+                <box size="0.006 0.006 0.025"/>
+            </geometry>
+
+            <origin xyz="${wheel_radius + 0.004} 0 0"
+                    rpy="0 0 0"/>
+
+            <material name="${name}_red_marker">
+                <color rgba="1 0 0 1"/>
+            </material>
+        </visual>
 
 
-    <collision>
+        <collision>
 
-        <geometry>
-            <cylinder radius="${wheel_radius}"
-                      length="${wheel_width}"/>
-        </geometry>
+            <geometry>
+                <cylinder radius="${wheel_radius}"
+                          length="${wheel_width}"/>
+            </geometry>
 
-        <origin rpy="1.5708 0 0"/>
+            <origin rpy="1.5708 0 0"/>
 
-    </collision>
+        </collision>
 
 
-</link>
+    </link>
 
-<joint name="${name}_joint" type="continuous">
+    <joint name="${name}_joint" type="continuous">
 
-    <parent link="base_link"/>
-    <child link="${name}"/>
+        <parent link="base_link"/>
+        <child link="${name}"/>
 
-    <origin xyz="${x} ${y} -0.0105"
-            rpy="0 0 0"/>
+        <origin xyz="${x} ${y} -0.0105"
+                rpy="0 0 0"/>
 
-    <axis xyz="0 1 0"/>
+        <axis xyz="0 1 0"/>
 
-</joint>
+    </joint>
 
 </xacro:macro>
 
@@ -357,8 +370,10 @@
 
 </joint>
 
+<!-- when testing arm, make wheel joints and servo joint fixed -->
 
-<link name="shoulder_link">
+
+<!-- <link name="shoulder_link">
 
     <visual>
 
@@ -438,9 +453,7 @@
 
 </joint>
 
-<!-- when testing arm, make wheel joints and servo joint fixed -->
-
-<!-- <link name="base_gripper_link">
+<link name="base_gripper_link">
 
     <visual>
 
