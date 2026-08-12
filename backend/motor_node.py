@@ -210,9 +210,10 @@ class MotorNode():
 def main():
     try:
         motor=MotorNode()
-        for i in range(3):
+        while True:
             cmd=input("enter one of the following - f(forward), b(back), i(increase), d(decrease), rotate_left(rl), rotate_right(rr): ")
             motor.move(cmd)
+            print(motor.get_ticks())
         
     finally:
         motor.release_lines()
