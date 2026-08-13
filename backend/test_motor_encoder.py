@@ -2,25 +2,34 @@ import time
 import lgpio as GPIO
 
 
-# ---------------------------------------------------------
-# GPIO setup
-# ---------------------------------------------------------
+# ============================================================
+# GPIO
+# ============================================================
 
 h = GPIO.gpiochip_open(0)
 
-# TB6612 motor control
-AIN1 = 17
-AIN2 = 27
 
-BIN1 = 23
-BIN2 = 24
+# ------------------------------------------------------------
+# TB6612
+# ------------------------------------------------------------
 
-PWMA = 12
-PWMB = 13
+# Left motor
+LEFT_IN1 = 17
+LEFT_IN2 = 27
+LEFT_PWM = 12
+
+# Right motor
+RIGHT_IN1 = 23
+RIGHT_IN2 = 24
+RIGHT_PWM = 13
 
 STBY = 25
 
-# Encoder pins
+
+# ------------------------------------------------------------
+# Encoders
+# ------------------------------------------------------------
+
 LEFT_A = 5
 LEFT_B = 6
 
@@ -28,28 +37,26 @@ RIGHT_A = 16
 RIGHT_B = 26
 
 
-# ---------------------------------------------------------
+# ============================================================
 # Motor GPIO setup
-# ---------------------------------------------------------
+# ============================================================
 
-GPIO.gpio_claim_output(h, AIN1)
-GPIO.gpio_claim_output(h, AIN2)
+GPIO.gpio_claim_output(h, LEFT_IN1)
+GPIO.gpio_claim_output(h, LEFT_IN2)
+GPIO.gpio_claim_output(h, LEFT_PWM)
 
-GPIO.gpio_claim_output(h, BIN1)
-GPIO.gpio_claim_output(h, BIN2)
+GPIO.gpio_claim_output(h, RIGHT_IN1)
+GPIO.gpio_claim_output(h, RIGHT_IN2)
+GPIO.gpio_claim_output(h, RIGHT_PWM)
 
 GPIO.gpio_claim_output(h, STBY)
 
-GPIO.gpio_claim_output(h, PWMA)
-GPIO.gpio_claim_output(h, PWMB)
-
-# Enable TB6612
 GPIO.gpio_write(h, STBY, 1)
 
 
-# ---------------------------------------------------------
+# ============================================================
 # Encoder GPIO setup
-# ---------------------------------------------------------
+# ============================================================
 
 GPIO.gpio_claim_input(h, LEFT_A)
 GPIO.gpio_claim_input(h, LEFT_B)
@@ -58,102 +65,113 @@ GPIO.gpio_claim_input(h, RIGHT_A)
 GPIO.gpio_claim_input(h, RIGHT_B)
 
 
+# ============================================================
+# Tick counters
+# ============================================================
+
 left_ticks = 0
 right_ticks = 0
 
 
-# ---------------------------------------------------------
+# ============================================================
 # Encoder callbacks
-# ---------------------------------------------------------
+# ============================================================
 
-def left_encoder_event(chip, gpio, level, timestamp):
+def left_encoder_callback(chip, gpio, level, timestamp):
+
     global left_ticks
+
+    print("LEFT CALLBACK")
 
     if GPIO.gpio_read(h, LEFT_B) == 0:
         left_ticks += 1
     else:
         left_ticks -= 1
 
-    print("Left:", left_ticks, " Right:", right_ticks)
+    print("Left ticks:", left_ticks)
 
 
-def right_encoder_event(chip, gpio, level, timestamp):
+def right_encoder_callback(chip, gpio, level, timestamp):
+
     global right_ticks
+
+    print("RIGHT CALLBACK")
 
     if GPIO.gpio_read(h, RIGHT_B) == 0:
         right_ticks += 1
     else:
         right_ticks -= 1
 
-    print("Left:", left_ticks, " Right:", right_ticks)
+    print("Right ticks:", right_ticks)
 
 
 left_callback = GPIO.callback(
     h,
     LEFT_A,
     GPIO.RISING_EDGE,
-    left_encoder_event
+    left_encoder_callback
 )
 
 right_callback = GPIO.callback(
     h,
     RIGHT_A,
     GPIO.RISING_EDGE,
-    right_encoder_event
+    right_encoder_callback
 )
 
 
-# ---------------------------------------------------------
-# Motor functions
-# ---------------------------------------------------------
+# ============================================================
+# Motor control
+# ============================================================
 
-def forward(speed):
+def left_forward(speed):
 
-    # Left motor
-    GPIO.gpio_write(h, AIN1, 0)
-    GPIO.gpio_write(h, AIN2, 1)
+    GPIO.gpio_write(h, LEFT_IN1, 0)
+    GPIO.gpio_write(h, LEFT_IN2, 1)
 
-    # Right motor
-    GPIO.gpio_write(h, BIN1, 1)
-    GPIO.gpio_write(h, BIN2, 0)
-
-    # PWM
-    GPIO.tx_pwm(h, PWMA, 1000, speed)
-    GPIO.tx_pwm(h, PWMB, 1000, speed)
+    GPIO.tx_pwm(
+        h,
+        LEFT_PWM,
+        1000,
+        speed
+    )
 
 
 def stop():
 
-    GPIO.tx_pwm(h, PWMA, 1000, 0)
-    GPIO.tx_pwm(h, PWMB, 1000, 0)
+    GPIO.tx_pwm(h, LEFT_PWM, 1000, 0)
+    GPIO.tx_pwm(h, RIGHT_PWM, 1000, 0)
 
-    GPIO.gpio_write(h, AIN1, 0)
-    GPIO.gpio_write(h, AIN2, 0)
+    GPIO.gpio_write(h, LEFT_IN1, 0)
+    GPIO.gpio_write(h, LEFT_IN2, 0)
 
-    GPIO.gpio_write(h, BIN1, 0)
-    GPIO.gpio_write(h, BIN2, 0)
+    GPIO.gpio_write(h, RIGHT_IN1, 0)
+    GPIO.gpio_write(h, RIGHT_IN2, 0)
 
 
-# ---------------------------------------------------------
+# ============================================================
 # Test
-# ---------------------------------------------------------
+# ============================================================
 
 try:
 
-    print("Starting motor test...")
-    print("Ticks:", left_ticks, right_ticks)
+    print("Starting LEFT motor test...")
+    print("Initial LEFT A:",
+          GPIO.gpio_read(h, LEFT_A))
 
-    # Run motors at 30% speed
-    forward(30)
+    # Only move the LEFT motor
+    left_forward(30)
 
-    # Run for 5 seconds
     start = time.monotonic()
 
     while time.monotonic() - start < 5:
 
         print(
-            "Ticks:",
+            "GPIO 5:",
+            GPIO.gpio_read(h, LEFT_A),
+            " | Left ticks:",
             left_ticks,
+            " | Right ticks:",
             right_ticks
         )
 
@@ -162,9 +180,10 @@ try:
     stop()
 
     print()
-    print("FINAL TICKS:")
-    print("Left :", left_ticks)
-    print("Right:", right_ticks)
+    print("================================")
+    print("FINAL LEFT TICKS :", left_ticks)
+    print("FINAL RIGHT TICKS:", right_ticks)
+    print("================================")
 
 
 finally:
