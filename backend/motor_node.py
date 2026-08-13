@@ -41,10 +41,13 @@ class MotorNode():
         self.right_encoder_a = 16
         self.right_encoder_b = 26
 
-        GPIO.gpio_claim_input(self.h, self.left_encoder_a)
+        GPIO.gpio_claim_alert(self.h, self.left_encoder_a, GPIO.RISING_EDGE)
         GPIO.gpio_claim_input(self.h, self.left_encoder_b)
-        GPIO.gpio_claim_input(self.h, self.right_encoder_a)
+        GPIO.gpio_claim_alert(self.h, self.right_encoder_a, GPIO.RISING_EDGE)
         GPIO.gpio_claim_input(self.h, self.right_encoder_b)
+
+        GPIO.gpio_set_debounce_micros(self.h, self.left_encoder_a, 1000)
+        GPIO.gpio_set_debounce_micros(self.h, self.right_encoder_a, 1000)
 
         self.left_ticks = 0
         self.right_ticks = 0
