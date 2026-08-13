@@ -1,0 +1,17 @@
+Starting LEFT motor test...
+Initial LEFT A: 0
+GPIO 5: 0  | Left ticks: 0  | Right ticks: 0
+GPIO 5: 0  | Left ticks: 0  | Right ticks: 0
+GPIO 5: 1  | Left ticks: 0  | Right ticks: 0
+GPIO 5: 0  | Left ticks: 0  | Right ticks: 0
+GPIO 5: 0  | Left ticks: 0  | Right ticks: 0
+GPIO 5: 1  | Left ticks: 0  | Right ticks: 0
+GPIO 5: 0  | Left ticks: 0  | Right ticks: 0
+GPIO 5: 1  | Left ticks: 0  | Right ticks: 0
+GPIO 5: 1  | Left ticks: 0  | Right ticks: 0
+GPIO 5: 0  | Left ticks: 0  | Right ticks: 0
+
+================================
+FINAL LEFT TICKS : 0
+FINAL RIGHT TICKS: 0
+================================
