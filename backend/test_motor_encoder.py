@@ -3,22 +3,20 @@ import lgpio as GPIO
 
 
 # ============================================================
-# GPIO
+# GPIO setup
 # ============================================================
 
 h = GPIO.gpiochip_open(0)
 
 
-# ------------------------------------------------------------
-# TB6612
-# ------------------------------------------------------------
+# ============================================================
+# TB6612 pins
+# ============================================================
 
-# Left motor
 LEFT_IN1 = 17
 LEFT_IN2 = 27
 LEFT_PWM = 12
 
-# Right motor
 RIGHT_IN1 = 23
 RIGHT_IN2 = 24
 RIGHT_PWM = 13
@@ -26,9 +24,9 @@ RIGHT_PWM = 13
 STBY = 25
 
 
-# ------------------------------------------------------------
-# Encoders
-# ------------------------------------------------------------
+# ============================================================
+# Encoder pins
+# ============================================================
 
 LEFT_A = 5
 LEFT_B = 6
@@ -38,7 +36,7 @@ RIGHT_B = 26
 
 
 # ============================================================
-# Motor GPIO setup
+# Motor GPIO
 # ============================================================
 
 GPIO.gpio_claim_output(h, LEFT_IN1)
@@ -55,13 +53,24 @@ GPIO.gpio_write(h, STBY, 1)
 
 
 # ============================================================
-# Encoder GPIO setup
+# Encoder GPIO
 # ============================================================
 
-GPIO.gpio_claim_input(h, LEFT_A)
-GPIO.gpio_claim_input(h, LEFT_B)
+# A pins need edge detection
+GPIO.gpio_claim_alert(
+    h,
+    LEFT_A,
+    GPIO.RISING_EDGE
+)
 
-GPIO.gpio_claim_input(h, RIGHT_A)
+GPIO.gpio_claim_alert(
+    h,
+    RIGHT_A,
+    GPIO.RISING_EDGE
+)
+
+# B pins are only read to determine direction
+GPIO.gpio_claim_input(h, LEFT_B)
 GPIO.gpio_claim_input(h, RIGHT_B)
 
 
@@ -104,6 +113,10 @@ def right_encoder_callback(chip, gpio, level, timestamp):
 
     print("Right ticks:", right_ticks)
 
+
+# ============================================================
+# Register callbacks
+# ============================================================
 
 left_callback = GPIO.callback(
     h,
@@ -156,10 +169,10 @@ def stop():
 try:
 
     print("Starting LEFT motor test...")
-    print("Initial LEFT A:",
+    print("Initial GPIO 5:",
           GPIO.gpio_read(h, LEFT_A))
 
-    # Only move the LEFT motor
+    # Run only left motor
     left_forward(30)
 
     start = time.monotonic()
@@ -169,9 +182,9 @@ try:
         print(
             "GPIO 5:",
             GPIO.gpio_read(h, LEFT_A),
-            " | Left ticks:",
+            "| Left ticks:",
             left_ticks,
-            " | Right ticks:",
+            "| Right ticks:",
             right_ticks
         )
 
@@ -180,10 +193,10 @@ try:
     stop()
 
     print()
-    print("================================")
+    print("==============================")
     print("FINAL LEFT TICKS :", left_ticks)
     print("FINAL RIGHT TICKS:", right_ticks)
-    print("================================")
+    print("==============================")
 
 
 finally:
