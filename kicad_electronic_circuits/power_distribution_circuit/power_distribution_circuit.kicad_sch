@@ -1729,7 +1729,7 @@
 				)
 			)
 		)
-		(property "Description" "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"
+		(property "Description" "tb6612"
 			(at 124.46 106.68 0)
 			(hide yes)
 			(show_name no)
