@@ -1,0 +1,49 @@
+<svg
+  width="10mm"
+  height="12mm"
+  viewBox="0 0 300 360"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Colors -->
+  <defs>
+    <style>
+      .black { fill: #0b0f14; }
+      .dark { fill: #141a22; }
+      .blue { fill: #38bdf8; }
+      .glow { fill: #60a5fa; }
+    </style>
+  </defs>
+
+  <!-- Head -->
+  <rect x="50" y="20" rx="30" ry="30" width="200" height="130" class="black"/>
+  <rect x="65" y="35" rx="22" ry="22" width="170" height="100" class="dark"/>
+
+  <!-- Antenna -->
+  <rect x="145" y="0" width="10" height="25" class="dark"/>
+  <circle cx="150" cy="0" r="10" class="blue"/>
+
+  <!-- Eyes -->
+  <circle cx="120" cy="80" r="10" class="glow"/>
+  <circle cx="180" cy="80" r="10" class="glow"/>
+
+  <!-- Angry Eyebrows -->
+  <path d="M105 60 L135 55" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+  <path d="M165 55 L195 60" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Smile -->
+  <path d="M135 100 Q150 110 165 100" stroke="#38bdf8" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+  <!-- Body -->
+  <rect x="85" y="160" rx="30" ry="30" width="130" height="120" class="black"/>
+
+  <!-- Arms -->
+  <rect x="35" y="180" rx="15" ry="15" width="40" height="90" class="black"/>
+  <rect x="225" y="180" rx="15" ry="15" width="40" height="90" class="black"/>
+
+  <!-- Legs -->
+  <rect x="105" y="285" rx="15" ry="15" width="35" height="60" class="black"/>
+  <rect x="160" y="285" rx="15" ry="15" width="35" height="60" class="black"/>
+
+  <!-- Accent lights -->
+  <rect x="115" y="260" rx="6" ry="6" width="70" height="10" class="blue"/>
+</svg>
