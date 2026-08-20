@@ -1088,6 +1088,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samtec"
+			(at 151.13 116.84 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "TSW-104-14-T-S"
+			(at 151.13 116.84 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "3"
 			(uuid "bce21739-8449-4a1a-9214-8bf08ec130ec")
 		)
@@ -1105,6 +1127,12 @@
 				(path "/1039f1e0-09e8-40f4-910a-54954a83dcbb"
 					(reference "J5")
 					(unit 1)
+					(variant
+						(name "MPN")
+					)
+					(variant
+						(name "Manufacturer")
+					)
 				)
 			)
 		)
@@ -1488,6 +1516,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samtec"
+			(at 151.13 137.16 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "TSW-104-14-T-S"
+			(at 151.13 137.16 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "4"
 			(uuid "8c456411-383f-4712-b96b-04188f39bbfb")
 		)
@@ -1505,6 +1555,12 @@
 				(path "/1039f1e0-09e8-40f4-910a-54954a83dcbb"
 					(reference "J6")
 					(unit 1)
+					(variant
+						(name "MPN")
+					)
+					(variant
+						(name "Manufacturer")
+					)
 				)
 			)
 		)
@@ -1554,7 +1610,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.mouser.com/datasheet/2/16/altech_altc_s_a0009591477_1-1990801.pdf?srsltid=AfmBOoqVMbQ1DYOFPMQLuQ9V3ctO8C82dfTbUvZ0KqI5migAHowVi-z1"
 			(at 149.86 90.17 0)
 			(hide yes)
 			(show_name no)
@@ -1576,6 +1632,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Altech"
+			(at 149.86 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "30.002"
+			(at 149.86 90.17 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "64899f4a-8fba-4837-b810-fff974b50ca1")
 		)
@@ -1587,6 +1665,12 @@
 				(path "/1039f1e0-09e8-40f4-910a-54954a83dcbb"
 					(reference "J4")
 					(unit 1)
+					(variant
+						(name "MPN")
+					)
+					(variant
+						(name "Manufacturer")
+					)
 				)
 			)
 		)
@@ -1636,7 +1720,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.mouser.com/datasheet/2/16/altech_altc_s_a0009591477_1-1990801.pdf?srsltid=AfmBOoqVMbQ1DYOFPMQLuQ9V3ctO8C82dfTbUvZ0KqI5migAHowVi-z1"
 			(at 149.86 69.85 0)
 			(hide yes)
 			(show_name no)
@@ -1658,6 +1742,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Altech"
+			(at 149.86 69.85 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "30.002"
+			(at 149.86 69.85 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "d2003e28-407e-49a9-bc20-13e6de652602")
 		)
@@ -1669,6 +1775,12 @@
 				(path "/1039f1e0-09e8-40f4-910a-54954a83dcbb"
 					(reference "J3")
 					(unit 1)
+					(variant
+						(name "MPN")
+					)
+					(variant
+						(name "Manufacturer")
+					)
 				)
 			)
 		)
@@ -1740,6 +1852,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samtec"
+			(at 124.46 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "TSW-104-14-T-S"
+			(at 124.46 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "af1ec3d3-f825-48b7-bbdc-f1ec50bf98c7")
 		)
@@ -1757,6 +1891,12 @@
 				(path "/1039f1e0-09e8-40f4-910a-54954a83dcbb"
 					(reference "J9")
 					(unit 1)
+					(variant
+						(name "MPN")
+					)
+					(variant
+						(name "Manufacturer")
+					)
 				)
 			)
 		)
@@ -1828,6 +1968,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samtec"
+			(at 151.13 156.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "TSW-102-14-T-S"
+			(at 151.13 156.21 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "9053239e-60e3-4743-9aac-28481f4b6d7c")
 		)
@@ -1839,6 +2001,12 @@
 				(path "/1039f1e0-09e8-40f4-910a-54954a83dcbb"
 					(reference "J7")
 					(unit 1)
+					(variant
+						(name "MPN")
+					)
+					(variant
+						(name "Manufacturer")
+					)
 				)
 			)
 		)
@@ -1910,6 +2078,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samtec"
+			(at 97.79 143.51 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "TSW-104-14-T-S"
+			(at 97.79 143.51 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "4"
 			(uuid "7fcbd3ec-201b-4bea-a64e-fa1168607c8b")
 		)
@@ -1927,6 +2117,12 @@
 				(path "/1039f1e0-09e8-40f4-910a-54954a83dcbb"
 					(reference "J2")
 					(unit 1)
+					(variant
+						(name "MPN")
+					)
+					(variant
+						(name "Manufacturer")
+					)
 				)
 			)
 		)
@@ -1976,7 +2172,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.mouser.com/datasheet/2/16/altech_altc_s_a0009591477_1-1990801.pdf?srsltid=AfmBOoqVMbQ1DYOFPMQLuQ9V3ctO8C82dfTbUvZ0KqI5migAHowVi-z1"
 			(at 95.25 80.01 0)
 			(hide yes)
 			(show_name no)
@@ -1998,6 +2194,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Altech"
+			(at 95.25 80.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "30.002"
+			(at 95.25 80.01 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "2"
 			(uuid "4a43c556-4385-4237-8dd2-b6fa037eb60a")
 		)
@@ -2009,6 +2227,12 @@
 				(path "/1039f1e0-09e8-40f4-910a-54954a83dcbb"
 					(reference "J1")
 					(unit 1)
+					(variant
+						(name "MPN")
+					)
+					(variant
+						(name "Manufacturer")
+					)
 				)
 			)
 		)
@@ -2080,6 +2304,28 @@
 				)
 			)
 		)
+		(property "Manufacturer" "Samtec"
+			(at 151.13 168.91 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "MPN" "TSW-102-14-T-S"
+			(at 151.13 168.91 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
 		(pin "1"
 			(uuid "7753fa7c-8769-4ddc-82cc-70a6832010c5")
 		)
@@ -2091,6 +2337,12 @@
 				(path "/1039f1e0-09e8-40f4-910a-54954a83dcbb"
 					(reference "J8")
 					(unit 1)
+					(variant
+						(name "MPN")
+					)
+					(variant
+						(name "Manufacturer")
+					)
 				)
 			)
 		)

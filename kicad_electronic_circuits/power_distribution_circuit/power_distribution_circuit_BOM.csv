@@ -1,0 +1,4 @@
+Reference,Qty,Value,DNP,Exclude from BOM,Exclude from Board,Exclude from Simulation,Exclude from Position Files,Footprint,Datasheet,Manufacturer,MPN,Type
+"J2,J5,J6,J9",4,Conn_01x04,,,,,${EXCLUDE_FROM_POS_FILES},Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical,,Samtec,TSW-104-14-T-S,THT
+"J7,J8",2,Conn_01x02,,,,,${EXCLUDE_FROM_POS_FILES},Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical,,Samtec,TSW-102-14-T-S,THT
+"J1,J3,J4",3,Conn_01x02,,,,,${EXCLUDE_FROM_POS_FILES},TerminalBlock_Altech:Altech_AK100_1x02_P5.00mm,https://www.mouser.com/datasheet/2/16/altech_altc_s_a0009591477_1-1990801.pdf?srsltid=AfmBOoqVMbQ1DYOFPMQLuQ9V3ctO8C82dfTbUvZ0KqI5migAHowVi-z1,Altech,30.002,THT
