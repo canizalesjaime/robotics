@@ -26,14 +26,15 @@ Licensed under Cults PU (Personal Use) – No commercial use or AI applications.
 
 ### Peripheral Sensors, Motor Drivers Used on Raspberry pi 5
 #### IMU BNO055 
-* VCC -> PCB
-* GND -> PIN 6 (GND)
+* VCC(3.3) -> PCB
+* GND -> PCB
 * SCL -> PCB
 * SDA -> PCB
 
 #### TB6612 Motor Driver 1
-* GND -> LIPO Battery and PIN 9 (GND)
-* +12V -> LIPO Battery
+* GND -> PCB
+* +12V -> PCB
+* VCC(3.3) -> PCB
 * ENA -> PIN 32 (GPIO 12)
 * IN1 -> PIN 11 (GPIO 17)
 * IN2 -> PIN 13 (GPIO 27)
@@ -41,19 +42,30 @@ Licensed under Cults PU (Personal Use) – No commercial use or AI applications.
 * IN4 -> PIN 18 (GPIO 24)
 * ENB -> PIN 33 (GPIO 13)
 * STBY -> PIN 22 (GPIO 25) 
-* VCC -> PIN 17
+
+#### Encoder TT Motor Left
+* VCC(3.3) -> PCB
+* GND -> PCB
+* A -> PIN 29 (GPIO 5)
+* B -> PIN 31 (GPIO 6)
+
+#### Encoder TT Motor Right
+* VCC(3.3) -> PCB
+* GND -> PCB
+* A -> PIN 36 (GPIO 16)
+* B -> PIN 37 (GPIO 26)
+
+#### RPLidar 2D
+* VCC -> PIN 4(5V)
+* RX -> PIN 8 (GPIO 14)
+* TX -> PIN 10(GPIO 15)
+* GND -> PIN 14
 
 #### PCA9685 12-bit PWM controller
 * VCC(3.3) -> PCB
 * SDA -> PCB
 * SCL -> PCB
-* GND -> PIN 34
-
-#### Lunar Lidar 1D
-* VCC -> PIN 4(5V)
-* RX -> PIN 8 (GPIO 14)
-* TX -> PIN 10(GPIO 15)
-* GND -> PIN 14
+* GND -> PCB
 
 
 # Working Setup
@@ -123,6 +135,7 @@ docker exec -it ros2-container bash
 
 # To Do
 1. homebot: 
+  - Finish electrical overview schematic for entire system(when finised take pics of overview and power distribution)
   - install rplidar
   - slam/urdf file for frames and kinematics for arm, differential-drive/odom in rviz(measure wheels in meters from centroids)(action?)
   - fix dockerfile humble_pi on on pi (image on dockerhub works fine (jazzy_pi))
