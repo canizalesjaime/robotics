@@ -61,7 +61,21 @@ Licensed under Cults PU (Personal Use) – No commercial use or AI applications.
 * TX -> PIN 10(GPIO 15)
 * GND -> PIN 14
 
-#### PCA9685 12-bit PWM controller
+
+#### PCB
+* VCC -> PIN 1 (3.3V)
+* SDA -> PIN 3 (SDA)
+* SCL -> PIN 5 (SCL)
+* GND -> PIN 6
+* Connect lithium battery to screw terminal J1
+* Connect J3 to buck converter to power Pi
+* Connect J2 to get as input: 3.3V, SDA, SCL, GND 
+* Connect bno055 to J5
+* J7(left), and J8(right) are for encoders
+* Connect tb6612 to J9, to get 3.3V(logic), 7.4V(power motors), GND  
+
+
+#### PCA9685 12-bit PWM controller(removed for now)
 * VCC(3.3) -> PCB
 * SDA -> PCB
 * SCL -> PCB
@@ -133,19 +147,16 @@ docker exec -it ros2-container bash
 ```
 
 
-# To Do
-1. homebot: 
-  - Finish electrical overview schematic for entire system(when finised take pics of overview and power distribution)
-  - install rplidar
-  - slam/urdf file for frames and kinematics for arm, differential-drive/odom in rviz(measure wheels in meters from centroids)(action?)
-  - fix dockerfile humble_pi on on pi (image on dockerhub works fine (jazzy_pi))
-  - add camera to docker and rviz, maybe get stereo camera
-  - fix tennis navigation
-  - make a better physical build, make your own arm, design pcb board no cables
-  - network between computer, and homebot(ros_ip) for faster rviz. Look into networking and firewalls and other security features.
-2. using pytorch course make an unsupervised grasping model, use jetson orin(check out study material on nvidia(test with olama))   
-3. add flutter app
-4. contribute to ros open source
+# To Do 
+- install rplidar
+- slam/urdf file for frames and kinematics for arm, differential-drive/odom in rviz(measure wheels in meters from centroids)(action?)
+- fix dockerfile humble_pi on on pi (image on dockerhub works fine (jazzy_pi))
+- add camera to docker and rviz, maybe get stereo camera
+- fix tennis navigation
+- make a better physical build, make your own arm, design pcb board no cables
+- network between computer, and homebot(ros_ip) for faster rviz. Look into networking and firewalls and other security features.
+- using pytorch course make an unsupervised grasping model, use jetson orin(check out study material on nvidia(test with olama))   
+- add flutter app
 
 
 [CODE LINK](https://github.com/canizalesjaime/homebot)
