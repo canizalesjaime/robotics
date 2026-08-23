@@ -2617,6 +2617,424 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "homebot_symbols:Power_Distribution_PCB"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "PCB"
+				(at 9.398 -5.588 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "Power_Distribution_PCB_0_1"
+				(rectangle
+					(start -3.81 8.89)
+					(end 13.97 -41.91)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "Power_Distribution_PCB_1_1"
+				(pin power_in line
+					(at -6.35 7.62 0)
+					(length 2.54)
+					(name "7.4V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -6.35 5.08 0)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -6.35 -2.54 0)
+					(length 2.54)
+					(name "3.3V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -6.35 -5.08 0)
+					(length 2.54)
+					(name "SDA"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at -6.35 -7.62 0)
+					(length 2.54)
+					(name "SCL"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -6.35 -10.16 0)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at -6.35 2.54 0)
+					(length 2.54)
+					(name "7.4V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at -6.35 0 0)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at -6.35 -12.7 0)
+					(length 2.54)
+					(name "3.3V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -6.35 -15.24 0)
+					(length 2.54)
+					(name "SDA"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at -6.35 -17.78 0)
+					(length 2.54)
+					(name "SCL"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at -6.35 -20.32 0)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at -6.35 -30.48 0)
+					(length 2.54)
+					(name "3.3V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at -6.35 -33.02 0)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at -6.35 -35.56 0)
+					(length 2.54)
+					(name "3.3V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at -6.35 -38.1 0)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at -6.35 -22.86 0)
+					(length 2.54)
+					(name "7.4V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at -6.35 -25.4 0)
+					(length 2.54)
+					(name "3.3V"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at -6.35 -27.94 0)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "J9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "homebot_symbols:RPLIDAR_USB_ADAPTER"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -3288,6 +3706,16 @@
 	)
 	(wire
 		(pts
+			(xy 217.17 38.1) (xy 217.17 153.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5ad257a4-05dd-441c-948f-b06134853ee9")
+	)
+	(wire
+		(pts
 			(xy 247.65 148.59) (xy 219.71 148.59)
 		)
 		(stroke
@@ -3438,6 +3866,16 @@
 	)
 	(wire
 		(pts
+			(xy 217.17 153.67) (xy 147.32 153.67)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9290ffba-002c-42d9-82bc-487942823fc9")
+	)
+	(wire
+		(pts
 			(xy 44.45 118.11) (xy 52.07 118.11)
 		)
 		(stroke
@@ -3518,6 +3956,16 @@
 	)
 	(wire
 		(pts
+			(xy 147.32 153.67) (xy 147.32 161.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bd836773-11ec-4409-b39b-089437b5ef13")
+	)
+	(wire
+		(pts
 			(xy 88.9 71.12) (xy 93.98 71.12)
 		)
 		(stroke
@@ -3525,6 +3973,16 @@
 			(type default)
 		)
 		(uuid "bebc3f75-6fdb-46af-aea2-84ca804e0a6a")
+	)
+	(wire
+		(pts
+			(xy 160.02 38.1) (xy 217.17 38.1)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c6bf1d52-b684-49c0-89d0-1e0f540a4fa4")
 	)
 	(wire
 		(pts
@@ -4099,6 +4557,138 @@
 			(project "homebot_overview"
 				(path "/58295f61-e891-4a82-bc0b-1c626966d0f9"
 					(reference "U3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "homebot_symbols:Power_Distribution_PCB")
+		(at 149.86 167.64 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "cb2fee7e-2bb3-4e74-91f7-e084f02ac326")
+		(property "Reference" "PCB1"
+			(at 160.02 172.7199 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" ""
+			(at 149.86 167.64 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 149.86 167.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 149.86 167.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 149.86 167.64 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "J2"
+			(uuid "63a6ff0b-2d39-487f-a16e-f4610e4a7f7c")
+		)
+		(pin "J1"
+			(uuid "5343ccf6-ae48-46ef-89de-9b0c0b4f5431")
+		)
+		(pin "J2"
+			(uuid "1f647bc2-2400-4eb6-b432-020025f63380")
+		)
+		(pin "J1"
+			(uuid "77a03c02-f369-4979-b940-ed021feb2655")
+		)
+		(pin "J2"
+			(uuid "44adc3f9-d263-487d-a2ac-e30a87263d1a")
+		)
+		(pin "J2"
+			(uuid "c1499348-43d9-4bad-9292-a078015eb637")
+		)
+		(pin "J3"
+			(uuid "8645a9e5-ed25-406c-8b16-afd1189c943f")
+		)
+		(pin "J3"
+			(uuid "c5302135-a43e-42e7-ad6b-ca551465fdd3")
+		)
+		(pin "J5"
+			(uuid "6d7d5972-92b3-4df0-a37d-1349b9ed6dcc")
+		)
+		(pin "J5"
+			(uuid "69f43dbc-bcca-4ac2-ba64-51e757a5c8a0")
+		)
+		(pin "J7"
+			(uuid "79879d18-12f0-479c-a0af-6485d7b5a407")
+		)
+		(pin "J7"
+			(uuid "4b8c383d-cb86-43ff-a534-97879410f6d0")
+		)
+		(pin "J5"
+			(uuid "4e91dc41-484f-43a3-b595-e4d248769420")
+		)
+		(pin "J8"
+			(uuid "6bf55a2f-c7a1-4c61-861e-0a6ef2c695d7")
+		)
+		(pin "J8"
+			(uuid "79b8570d-61fe-4d24-acb2-77478037330a")
+		)
+		(pin "J9"
+			(uuid "b9e93568-5008-4043-86ec-4f566e5e43db")
+		)
+		(pin "J9"
+			(uuid "986333db-ab0c-4082-9372-c492cb754237")
+		)
+		(pin "J9"
+			(uuid "35113272-2d9d-463c-b290-271a052f25d3")
+		)
+		(pin "J5"
+			(uuid "a6b5fd62-84b1-4c53-b7ed-4fd065280921")
+		)
+		(instances
+			(project "homebot_overview"
+				(path "/58295f61-e891-4a82-bc0b-1c626966d0f9"
+					(reference "PCB1")
 					(unit 1)
 				)
 			)
