@@ -149,7 +149,7 @@ docker exec -it ros2-container bash
 
 # To Do 
 1. fix tennis navigation(test after step 2)
-2. install rplidar, and pcb
+2. install rplidar, and pcb(go hunter and solder shop)
 3. slam/urdf file for frames and kinematics for arm, differential-drive/odom in rviz(measure wheels in meters from centroids)(action?)
 4. fix dockerfile humble_pi on on pi (image on dockerhub works fine (jazzy_pi))
 5. network between computer, and homebot(ros_ip) for faster rviz. Look into networking and firewalls and other security features.
