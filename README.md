@@ -148,7 +148,7 @@ docker exec -it ros2-container bash
 
 
 # To Do 
-1. fix tennis navigation
+1. fix tennis navigation(test after step 2)
 2. install rplidar, and pcb
 3. slam/urdf file for frames and kinematics for arm, differential-drive/odom in rviz(measure wheels in meters from centroids)(action?)
 4. fix dockerfile humble_pi on on pi (image on dockerhub works fine (jazzy_pi))
