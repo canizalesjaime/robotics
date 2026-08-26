@@ -2,27 +2,16 @@ from ultralytics import YOLO
 import cv2
 import time
 import sys
-from pathlib import Path
-
-from picamera2 import Picamera2
-import cv2
 import threading
-import time
 import atexit
+
+from camera_mod import CameraMod
 
 
 class YoloNode():
     def __init__(self):
-        self.picam2 = Picamera2()
-        self.config = self.picam2.create_video_configuration(
-            main={"size": (320, 240), "format": "RGB888"}
-        )
-        self.picam2.configure(self.config)
-        self.picam2.start()
-
-        # Clean shutdown
-        atexit.register(self.picam2.stop)
-
+        self.cam = CameraMod(config="yolo")
+        atexit(self.cam.close) #clean shutdown
         self.frame = None
         self.lock = threading.Lock()
 
@@ -87,7 +76,7 @@ class YoloNode():
     # --- Frame capture thread ---
     def capture_frames(self):
         while True:
-            img = self.picam2.capture_array()
+            img = self.cam.capture_image()
             img = self.run_inference(img)
             _, jpeg = cv2.imencode(".jpg", img, [int(cv2.IMWRITE_JPEG_QUALITY), 50])
             with self.lock:

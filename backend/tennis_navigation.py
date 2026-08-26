@@ -15,12 +15,14 @@
 import cv2
 import numpy as np
 import time
+from camera_mod import CameraMod
 
 
 class TennisNavi():
     def __init__(self):
         self.yellowLower =(30, 150, 100)
         self.yellowUpper = (50, 255, 255)
+        self.cam=CameraMod()
         
 
     def filter_color(self):
@@ -83,50 +85,49 @@ class TennisNavi():
     #             the tennis ball setting the head_camera_depth_frame as its parent.
     #
     #   Return:   None
-    def transform_tennis_coordinates(self,contours):        
-        for c in contours:
-            p_X = 0.0 # x of point p in camera frame
-            p_Y = 0.0 # y of point p 
-            p_Z = 0.0 # z of point p
-            divider = 0
-            distance = 0
-            area = cv2.contourArea(c)
-            perimeter= cv2.arcLength(c, True)
-            ((x, y), radius) = cv2.minEnclosingCircle(c)
-            int_x = int(x)
-            int_y = int(y)
-            #cx, cy = get_contour_center(c)
-            #intrinsic_arr = get_intrinsic_params()
-            for i in range( int_x - 10, int_x + 10 ):
-                for j in range( int_y - 10, int_y + 10 ):
-                    if  (0 <= i < 640 and 0 <= j < 480) and not np.isnan(cv_depth[j][i]):
-                        distance = cv_depth[j][i]
-                        divider += 1
-                        p_X += distance 
-                        p_Y += -(x - intrinsic_arr[0])*distance/intrinsic_arr[2]
-                        #p_Z += -(y - intrinsic_arr[1])*distance/intrinsic_arr[3]
+    # def transform_tennis_coordinates(self,contours):        
+    #     for c in contours:
+    #         p_X = 0.0 # x of point p in camera frame
+    #         p_Y = 0.0 # y of point p 
+    #         p_Z = 0.0 # z of point p
+    #         divider = 0
+    #         distance = 0
+    #         area = cv2.contourArea(c)
+    #         perimeter= cv2.arcLength(c, True)
+    #         ((x, y), radius) = cv2.minEnclosingCircle(c)
+    #         int_x = int(x)
+    #         int_y = int(y)
+    #         #cx, cy = get_contour_center(c)
+    #         #intrinsic_arr = get_intrinsic_params()
+    #         for i in range( int_x - 10, int_x + 10 ):
+    #             for j in range( int_y - 10, int_y + 10 ):
+    #                 if  (0 <= i < 640 and 0 <= j < 480) and not np.isnan(cv_depth[j][i]):
+    #                     distance = cv_depth[j][i]
+    #                     divider += 1
+    #                     p_X += distance 
+    #                     p_Y += -(x - intrinsic_arr[0])*distance/intrinsic_arr[2]
+    #                     #p_Z += -(y - intrinsic_arr[1])*distance/intrinsic_arr[3]
 
-            #rate = rospy.Rate(10.0)
-            if divider > 0 and area > 100:
-                p_X = p_X/divider
-                p_Y = p_Y/divider
-                print("camera_frame:",p_X,p_Y)
+    #         #rate = rospy.Rate(10.0)
+    #         if divider > 0 and area > 100:
+    #             p_X = p_X/divider
+    #             p_Y = p_Y/divider
+    #             print("camera_frame:",p_X,p_Y)
                 
-                map_frame_pt=transform_client.transform_pt("head_camera_depth_frame", 'map', [p_X,p_Y,1])
-                print("map_frame:",map_frame_pt[0],map_frame_pt[1])
-                show_pose_arr(0,'map',map_frame_pt, 0, self.pose_pub)
-                navigation_client.move_to_goal(map_frame_pt[0],map_frame_pt[1],Quaternion(x=0.0, y=0.0, z=0.0, w=1.0))
-                break
+    #             map_frame_pt=transform_client.transform_pt("head_camera_depth_frame", 'map', [p_X,p_Y,1])
+    #             print("map_frame:",map_frame_pt[0],map_frame_pt[1])
+    #             show_pose_arr(0,'map',map_frame_pt, 0, self.pose_pub)
+    #             navigation_client.move_to_goal(map_frame_pt[0],map_frame_pt[1],Quaternion(x=0.0, y=0.0, z=0.0, w=1.0))
+    #             break
 
 
     def process_tennis(self):
-        if self.cv_rgb is not None:
-            self.update_imgs = False
+        frame=self.cam.capture_image()
+        if frame is not None:
             hsv_mask = self.filter_color()
             contours = self.getContours(hsv_mask)
             self.draw_ball_contour(hsv_mask, contours)
             #self.transform_tennis_coordinates(contours)
-            self.update_imgs = True
 
 
 def main():
@@ -137,6 +138,7 @@ def main():
             if(cv2.waitKey(1) == ord('q')):
                 cv2.destroyAllWindows()
                 print("Shutting down")
+                node.cam.close()
                 break
 
     except KeyboardInterrupt:
