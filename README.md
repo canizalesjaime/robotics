@@ -148,11 +148,11 @@ docker exec -it ros2-container bash
 
 
 # To Do 
-1. install rplidar, and pcb(go hunter and solder shop)
+1. install rplidar and test tennis navigation, then pcb and print wrist(hunter,solder shop?) 
 2. slam/urdf file for frames and kinematics for arm, differential-drive/odom in rviz(measure wheels in meters from centroids)(action?)
 3. fix dockerfile humble_pi on on pi (image on dockerhub works fine (jazzy_pi))
 4. network between computer, and homebot(ros_ip) for faster rviz. Look into networking and firewalls and other security features.
-5. add camera to docker and rviz, test tennis navigation, maybe get stereo camera
+5. add camera to docker and rviz, maybe get stereo camera
 6. make a better physical build, make your own arm, design pcb board no cables 
 7. using pytorch course make an unsupervised grasping model, use jetson orin(check out study material on nvidia(test with olama))   
 8. add flutter app
