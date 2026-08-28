@@ -25,8 +25,8 @@ class TennisNavi():
         self.cam=CameraMod()
         
 
-    def filter_color(self):
-        hsv_image = cv2.cvtColor(self.cv_rgb, cv2.COLOR_BGR2HSV)
+    def filter_color(self, cv_rgb):
+        hsv_image = cv2.cvtColor(cv_rgb, cv2.COLOR_BGR2HSV)
         mask = cv2.inRange(hsv_image, self.yellowLower, self.yellowUpper)
         return mask
 
@@ -38,7 +38,7 @@ class TennisNavi():
         return contours
 
 
-    def draw_ball_contour(self,binary_image, contours, img_pub):
+    def draw_ball_contour(self,frame, binary_image, contours):
         black_image = np.zeros([binary_image.shape[0], 
                                 binary_image.shape[1],3],'uint8')
         
@@ -47,18 +47,18 @@ class TennisNavi():
             perimeter= cv2.arcLength(c, True)
             ((x, y), radius) = cv2.minEnclosingCircle(c)
             if (area>100):
-                cv2.drawContours(self.cv_rgb, [c], -1, (150,250,150), 1)
+                cv2.drawContours(frame, [c], -1, (150,250,150), 1)
                 cv2.drawContours(black_image, [c], -1, (150,250,150), 1)
                 cx, cy = self.get_contour_center(c)
-                cv2.circle(self.cv_rgb, (cx,cy),(int)(radius),(0,0,255),1)
+                cv2.circle(frame, (cx,cy),(int)(radius),(0,0,255),1)
                 cv2.circle(black_image, (cx,cy),(int)(radius),(0,0,255),1)
                 cv2.circle(black_image, (cx,cy),5,(150,150,255),-1)
                 print ("Area: {}, Perimeter: {}".format(area, perimeter))
         print ("number of contours: {}".format(len(contours)))
-        cv2.imshow("RGB Image Contours",self.cv_rgb)
+        cv2.imshow("RGB Image Contours",frame)
         cv2.waitKey(0)
-        cv2.imshow("Black Image Contours",black_image)
-        cv2.waitKey(1)
+        #cv2.imshow("Black Image Contours",black_image)
+        #cv2.waitKey(1)
 
 
     def get_contour_center(self,contour):
@@ -124,9 +124,9 @@ class TennisNavi():
     def process_tennis(self):
         frame=self.cam.capture_image()
         if frame is not None:
-            hsv_mask = self.filter_color()
+            hsv_mask = self.filter_color(frame)
             contours = self.getContours(hsv_mask)
-            self.draw_ball_contour(hsv_mask, contours)
+            self.draw_ball_contour(frame, hsv_mask, contours)
             #self.transform_tennis_coordinates(contours)
 
 
