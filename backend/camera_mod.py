@@ -30,8 +30,9 @@ class CameraMod():
     def capture_image(self):     
         #self.picam2.capture_file("test_image.jpg")
         frame = self.picam2.capture_array()  # returns a NumPy array
+        rgb_image =  cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
         #cv2.imwrite("test_image.jpg", frame)
-        return frame
+        return rgb_image
 
     # def open_cv_camera_alternative(self):
     #     if not self.cap.isOpened():
