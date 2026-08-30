@@ -162,11 +162,13 @@ docker exec -it ros2-container bash
 
 
 ## TESTING
-ros2 run tf2_ros static_transform_publisher \
+- ros2 run tf2_ros static_transform_publisher \
   --x 0 --y 0 --z 0 \
   --roll 0 --pitch 0 --yaw 0 \
   --frame-id map \
   --child-frame-id laser
+- launch my_robot_description and ros2 launch rplidar_ros rplidar_c1_launch.py and rviz2 
+
 
 ## Credits
 The robotic arm shown in the video above, is 3D printed using a model created by [FABRI_CREATOR](https://cults3d.com/en/users/FABRI_CREATOR).  

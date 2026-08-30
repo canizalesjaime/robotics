@@ -263,6 +263,15 @@
 
 </joint>
 
+<link name="laser"/>
+
+<joint name="laser_joint" type="fixed">
+    <parent link="rplidar_link"/>
+    <child link="laser"/>
+
+    <origin xyz="0 0 0"
+            rpy="0 0 0"/>
+</joint>
 
 <!-- <link name="lidar_base_link">
 
