@@ -148,7 +148,7 @@ docker exec -it ros2-container bash
 
 
 # To Do 
-1. code rplidar, solder and plug pcb and print wrist(hunter,solder shop?) 
+1. solder and plug pcb and print wrist(hunter,solder shop?) 
 2. slam/urdf file for frames and kinematics for arm, differential-drive/odom in rviz(measure wheels in meters from centroids)(action?), test navigation with tennis
 3. fix dockerfile humble_pi on on pi (image on dockerhub works fine (jazzy_pi))
 4. network between computer, and homebot(ros_ip) for faster rviz. Look into networking and firewalls and other security features.
@@ -167,7 +167,7 @@ docker exec -it ros2-container bash
   --roll 0 --pitch 0 --yaw 0 \
   --frame-id map \
   --child-frame-id laser
-- launch my_robot_description and ros2 launch rplidar_ros rplidar_c1_launch.py and rviz2 
+- launch my_robot_description and ros2 launch rplidar_ros rplidar_c1_launch.py 
 
 
 ## Credits
