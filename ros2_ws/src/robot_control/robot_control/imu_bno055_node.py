@@ -4,7 +4,7 @@ from rclpy.node import Node
 from sensor_msgs.msg import Imu, Temperature
 
 import robot_control.paths
-from imu_sensor import ImuSensor
+from imu_bno055_sensor import ImuSensor
 
 class ImuSensorNode(Node):
     def __init__(self):

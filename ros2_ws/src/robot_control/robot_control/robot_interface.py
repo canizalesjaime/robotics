@@ -16,7 +16,6 @@ from rclpy.node import Node
 from std_msgs.msg import String, Float32, Bool,Int32
 from sensor_msgs.msg import Imu, Temperature, JointState
 from tf_transformations import euler_from_quaternion
-from rclpy.qos import qos_profile_sensor_data, QoSProfile, ReliabilityPolicy
 
 app = FastAPI()
 bridge = None
@@ -47,16 +46,10 @@ class RobotInterface(Node):
         #tt motor
         self.cmd_pub = self.create_publisher(String, 'cmd_motor', 10)
         self.speed_pub = self.create_publisher(Int32, 'cmd_speed', 10)
-        # servo motors for arm
-        #self.arm_pub = self.create_publisher(JointState, 'cmd_arm', 10)
-        self.base_pub = self.create_publisher(Bool, 'cmd_base', 10)
-
-        # mpu6050 accelerometer:imu 
+        
+        # bno055 accelerometer:imu 
         self.create_subscription(Imu,'imu/data_raw',self.imu_callback,10)
-        # lunar lidar
-        self.sensor_qos = QoSProfile(depth=1,reliability=ReliabilityPolicy.BEST_EFFORT)
-        self.create_subscription(Float32,'distance',self.distance_callback,self.sensor_qos)
-
+        
         self.declare_parameter("host", "0.0.0.0")
         self.declare_parameter("port", 8000)
 
@@ -69,13 +62,8 @@ class RobotInterface(Node):
                 "pitch": 0.0,
                 "yaw": 0.0,
             },
-            "lidar": {
-                "distance": 0.0,
-                "strength": -1,
-            },
-            "base_rotating": False,
-            #"battery": 0.0,
             "motor_speed": 30,
+            #"battery": 0.0,
         }
 
     def imu_callback(self, msg):
@@ -89,11 +77,7 @@ class RobotInterface(Node):
         self.robot_state["imu"]["roll"] = roll
         self.robot_state["imu"]["pitch"] = pitch
         self.robot_state["imu"]["yaw"] = yaw
-    
 
-    def distance_callback(self, msg):
-        #print("LIDAR UPDATE:", msg.data)
-        self.robot_state["lidar"]["distance"] = msg.data
 
 @app.get("/robot_state")
 def get_robot_state():

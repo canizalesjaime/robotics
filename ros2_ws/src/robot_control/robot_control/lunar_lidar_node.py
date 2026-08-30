@@ -4,7 +4,7 @@ from std_msgs.msg import Float32
 #from rclpy.qos import qos_profile_sensor_data,QoSProfile, ReliabilityPolicy
 
 import robot_control.paths
-from lunar import LunarNode
+from lunar_lidar import LunarNode
 import time
 
 

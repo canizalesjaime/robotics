@@ -1,7 +1,7 @@
 import lgpio as GPIO
 import time
 
-class UltrasonicNode():
+class Ultrasonic():
     def __init__(self):
         self.TRIG = 5
         self.ECHO = 6
@@ -32,7 +32,7 @@ class UltrasonicNode():
         GPIO.gpiochip_close(self.h)
 
 def main():
-    node = UltrasonicNode()
+    node = Ultrasonic()
     try:
         while(True):
             print(node.get_distance())

@@ -24,15 +24,14 @@ setup(
     entry_points={
         'console_scripts': [
             'teleop = robot_control.teleop_node:main',
-            'motor = robot_control.motor_control_node:main',
+            'ttmotors = robot_control.tt_motors_node:main',
             'ultrasonic = robot_control.ultrasonic_node:main',
             'mpu6050 = robot_control.mpu6050_node:main',
             'picam = robot_control.picam_node:main',
             'arm = robot_control.arm_node:main',
             'lunar = robot_control.lunar_node:main',
-            'tester = robot_control.tester:main',
             'robot_interface = robot_control.robot_interface:main',
-            'imu = robot_control.imu_node:main',
+            'imu_bno055 = robot_control.imu_bno055_node:main',
         ],
     },
 )

@@ -16,9 +16,9 @@ import time
 import atexit
 
 from robot_controller import RobotController
-from mpu6050_node_b import Mpu6050Node
+from mpu6050_a import Mpu6050Node
 from arm import ArmNode
-from lunar import LunarNode
+from lunar_lidar import LunarNode
 
 
 #inputs

@@ -1,8 +1,8 @@
 # Teleop node
 import time
 import threading
-from motor_node import MotorNode
-from ultrasonic import UltrasonicNode
+from tt_motors import TtMotors
+from ultrasonic import Ultrasonic
 
 class RobotController():
     def __init__(self):
@@ -11,8 +11,8 @@ class RobotController():
         self.lock = threading.Lock()
         self.stop_event = threading.Event()
 
-        self.motor = MotorNode()
-        self.ultra = UltrasonicNode()
+        self.motor = TtMotors()
+        self.ultra = Ultrasonic()
 
         self.monitor_thread = threading.Thread(
             target=self.distance_monitor,

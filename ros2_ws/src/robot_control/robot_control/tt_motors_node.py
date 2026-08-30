@@ -4,10 +4,10 @@ from std_msgs.msg import String, Int32
 from sensor_msgs.msg import JointState
 
 import robot_control.paths
-from motor_node import MotorNode
+from tt_motors import TtMotors
 
 
-class MotorRos(Node):
+class TtMotorsNode(Node):
     def __init__(self):
         super().__init__('motor_control_node')
         self.cmd_sub = self.create_subscription(String, 'cmd_motor', self.cmd_callback, 10)
@@ -15,7 +15,7 @@ class MotorRos(Node):
         self.joint_pub = self.create_publisher(JointState,"/wheel_states",10)
 
         self.timer = self.create_timer(0.05,self.publish_joint_states) # 20 Hz
-        self.motors=MotorNode()
+        self.motors=TtMotors()
 
         # 12 PPR × 90 gearbox = 1080 ticks/output revolution
         self.TICK_TO_RAD = (2.0 * 3.14159265359 / 1080.0)
@@ -43,7 +43,7 @@ class MotorRos(Node):
 
 def main():
     rclpy.init()
-    node = MotorRos()
+    node = TtMotorsNode()
     try:
         rclpy.spin(node)
     finally:

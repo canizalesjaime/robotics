@@ -3,14 +3,14 @@ from rclpy.node import Node
 from std_msgs.msg import Float32
 
 import robot_control.paths
-from ultrasonic import UltrasonicNode
+from ultrasonic import Ultrasonic
 
-class UltrasonicRos(Node):
+class UltrasonicNode(Node):
     def __init__(self):
         super().__init__('ultrasonic_node')
         self.publisher_ = self.create_publisher(Float32, 'distance', 10)
         self.timer = self.create_timer(0.2, self.timer_callback)
-        self.sensor = UltrasonicNode()
+        self.sensor = Ultrasonic()
 
 
     def timer_callback(self):
@@ -23,7 +23,7 @@ class UltrasonicRos(Node):
 def main():
     try:
         rclpy.init()
-        node = UltrasonicRos()
+        node = UltrasonicNode()
         rclpy.spin(node)
     
     except KeyboardInterrupt:

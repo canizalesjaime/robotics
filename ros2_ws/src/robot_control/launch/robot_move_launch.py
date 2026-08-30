@@ -6,21 +6,11 @@ def generate_launch_description():
     return LaunchDescription([
         Node(
             package='robot_control',
-            executable='lunar',
-            output='screen',
-            #name='l',
+            executable='imu_bno055',
         ),
         Node(
             package='robot_control',
-            executable='imu',
-        ),
-        Node(
-            package='robot_control',
-            executable='motor',
-        ),
-        Node(
-            package='robot_control',
-            executable='arm',
+            executable='ttmotors',
         ),
         Node(
             package='robot_control',
@@ -32,5 +22,6 @@ def generate_launch_description():
               }
             ],
             output='screen'
+            #name='l',
         ),
         ])

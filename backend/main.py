@@ -6,14 +6,14 @@ from pydantic import BaseModel
 
 from robot_controller import RobotController
 #from yolo_node import YoloNode
-from mpu6050_node_b import Mpu6050Node
-from big_arm import BigArmNode
+from mpu6050_a import Mpu6050Node
+from arm import ArmNode
 
 app = FastAPI()
 robot = RobotController()
 #yolo_node = YoloNode()
 accelerometer = Mpu6050Node()
-arm = BigArmNode()
+arm = ArmNode()
 
 app.add_middleware(
     CORSMiddleware,

@@ -5,7 +5,7 @@ from sensor_msgs.msg import Imu, Temperature
 from tf_transformations import quaternion_from_euler
 
 import robot_control.paths
-from mpu6050_node_b import Mpu6050Node
+from mpu6050_a import Mpu6050Node
 
 class Mpu6050Ros(Node):
     def __init__(self):

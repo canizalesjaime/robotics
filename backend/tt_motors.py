@@ -7,7 +7,7 @@ import gpiod
 import lgpio as GPIO
 
 
-class MotorNode():
+class TtMotors():
     TICKS_PER_WHEEL_REV = 1080 # 12 PPR × 90:1 gearbox
 
     def __init__(self):
@@ -212,7 +212,7 @@ class MotorNode():
 ###############################################################################
 def main():
     try:
-        motor=MotorNode()
+        motor=TtMotors()
         while True:
             cmd=input("enter one of the following - f(forward), b(back), i(increase), d(decrease), rotate_left(rl), rotate_right(rr): ")
             motor.move(cmd)
