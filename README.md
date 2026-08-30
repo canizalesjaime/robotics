@@ -161,6 +161,13 @@ docker exec -it ros2-container bash
 [CODE LINK](https://github.com/canizalesjaime/homebot)
 
 
+## TESTING
+ros2 run tf2_ros static_transform_publisher \
+  --x 0 --y 0 --z 0 \
+  --roll 0 --pitch 0 --yaw 0 \
+  --frame-id map \
+  --child-frame-id laser
+
 ## Credits
 The robotic arm shown in the video above, is 3D printed using a model created by [FABRI_CREATOR](https://cults3d.com/en/users/FABRI_CREATOR).  
 STL file available here: [Mini Robotic Arm on Cults3D](https://cults3d.com/en/3d-model/gadget/mini-robotic-arm)  
