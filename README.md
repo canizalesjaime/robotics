@@ -155,7 +155,7 @@ docker exec -it ros2-container bash
 
 
 # To Do 
-1. solder and plug pcb and print wrist(hunter,solder shop?), submodule rplidar, optimizie modularity of ros2 and fastapi?
+1. solder and plug pcb and print wrist(hunter,solder shop?)
 2. slam/urdf file for frames and kinematics for arm, differential-drive/odom in rviz(measure wheels in meters from centroids)(action?), test navigation with tennis
 3. fix dockerfile humble_pi on on pi (image on dockerhub works fine (jazzy_pi))
 4. network between computer, and homebot(ros_ip) for faster rviz. Look into networking and firewalls and other security features.
