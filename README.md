@@ -1,6 +1,6 @@
 # Project Description 
 * A compact 3D-printed mobile robot with a 4-DOF servo arm and dual TT motors for navigation.
-Integrated LiDAR for obstacle avoidance, a camera with YOLOv8n for real-time object detection, and an MPU6050 IMU for pose estimation.  
+Integrated LiDAR for obstacle avoidance, a camera with YOLOv8n for real-time object detection, and an BNO055 IMU for pose estimation.  
 * A web-based interface for remote control of the robot and arm, featuring
 live video with detection overlays and accelerometer data. Implemented using 
 react and tailwind css to design the frontend and fast api to interact with
