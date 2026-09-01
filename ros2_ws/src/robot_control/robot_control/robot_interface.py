@@ -1,44 +1,19 @@
-# should I separate, ros2 and fastapi?
 # post:publish, get:subscribe
 # you must run this using uvicorn and not ros: 
 # uvicorn robot_interface:app --host 0.0.0.0 --port 8000
 import math
-
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
-from pydantic import BaseModel
-#from contextlib import asynccontextmanager
 import threading
 
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import String, Float32, Bool,Int32
-from sensor_msgs.msg import Imu, Temperature, JointState
+from std_msgs.msg import String,Int32
+from sensor_msgs.msg import Imu #, Temperature, JointState
 from tf_transformations import euler_from_quaternion
 
-app = FastAPI()
+import robot_control.paths
+from fast_models import app, Command, Speed #, ArmAngles
+
 bridge = None
-# stop_event = threading.Event()
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # tighten later
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-class Command(BaseModel):
-    action: str
-
-class Speed(BaseModel):
-    speed: int
-
-# class ArmAngles(BaseModel):
-#     base: int
-#     shoulder: int
-#     elbow: int
-#     gripper: int
 
 class RobotInterface(Node):
     def __init__(self):
@@ -115,24 +90,6 @@ def set_speed(spd: Speed):
 #     bridge.arm_pub.publish(arm_msg)
     
 
-@app.post("/rotate_base")
-def rotate_base():
-    bridge.robot_state["base_rotating"] = True
-    b_msg=Bool()
-    b_msg.data=True
-    bridge.base_pub.publish(b_msg)
-    return {"status": "rotating"}
-
-
-@app.post("/stop_base")
-def stop_base():
-    bridge.robot_state["base_rotating"] = False
-    b_msg=Bool()
-    b_msg.data=False
-    bridge.base_pub.publish(b_msg)
-    return {"status": "not rotating"}
-
-
 def ros_spin():
     while rclpy.ok():
         rclpy.spin_once(bridge,timeout_sec=0.1)
@@ -160,6 +117,9 @@ if __name__ == "__main__":
     main()
 
 # below considers ros2 cleanup, if I want to go hard about that
+#from contextlib import asynccontextmanager
+
+# stop_event = threading.Event()
 
 # def ros_spin():
 #     while rclpy.ok() and not stop_event.is_set():

@@ -1,45 +1,60 @@
 #uvicorn main:app --host 0.0.0.0 --port 8000
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+import cv2
+import threading
+import time
+import atexit
 from fastapi.responses import StreamingResponse
-from pydantic import BaseModel
 
+from imu_bn0055_sensor import ImuSensor
 from robot_controller import RobotController
-#from yolo_node import YoloNode
-from mpu6050_a import Mpu6050Node
 from arm import ArmNode
+from fast_models import app, Command, Speed, ArmAngles
+from yolo_detector import YoloDetector
 
-app = FastAPI()
+#inputs
+accelerometer = ImuSensor()
+yolo_detector = YoloDetector()
+
+#outputs
 robot = RobotController()
-#yolo_node = YoloNode()
-accelerometer = Mpu6050Node()
 arm = ArmNode()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # tighten later
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
-class Command(BaseModel):
-    action: str
+frame = None
+lock = threading.Lock()
 
-class Speed(BaseModel):
-    speed: int
 
-class ArmAngles(BaseModel):
-    base: int
-    shoulder: int
-    elbow: int
-    gripper: int
+def capture_frames():
+    global frame
+    while True:
+        img = yolo_detector.run_inference(yolo_detector.get_image())
+        _, jpeg = cv2.imencode(".jpg", img, [int(cv2.IMWRITE_JPEG_QUALITY), 50])
+        with lock:
+            frame = jpeg.tobytes()
+        time.sleep(0.03)  # ~30 FPS
 
-# @app.get("/camera")
-# def camera():
-#     return StreamingResponse(
-#         yolo_node.mjpeg_stream(),
-#         media_type="multipart/x-mixed-replace; boundary=frame"
-#     )
+threading.Thread(target=capture_frames, daemon=True).start()
+
+# --- MJPEG stream ---
+def mjpeg_stream():
+    while True:
+        with lock:
+            if frame is None:
+                continue
+            yield (
+                b"--frame\r\n"
+                b"Content-Type: image/jpeg\r\n\r\n" +
+                frame +
+                b"\r\n"
+            )
+
+
+@app.get("/camera")
+def camera():
+    return StreamingResponse(
+        mjpeg_stream(),
+        media_type="multipart/x-mixed-replace; boundary=frame"
+    )
 
 @app.post("/command")
 def send_command(cmd: Command):
@@ -59,9 +74,11 @@ def get_status():
 def get_accelerometer_data():
     return accelerometer.sensor_data()
 
+
 @app.post("/set_angles")
 def set_angles(angs: ArmAngles):
     arm.set_angles_api([angs.base,angs.shoulder,angs.elbow,angs.gripper])
+
 
 @app.on_event("shutdown")
 def shutdown():

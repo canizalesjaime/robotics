@@ -26,7 +26,6 @@ class CameraMod():
         self.picam2.start_preview(Preview.QTGL)  # Show video window (requires X11)
         
     
-
     def capture_image(self):     
         #self.picam2.capture_file("test_image.jpg")
         frame = self.picam2.capture_array()  # returns a NumPy array
